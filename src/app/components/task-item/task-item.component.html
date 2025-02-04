@@ -1,3 +1,8 @@
-<p>
-  task-item works!
-</p>
+<div class="task-item">
+  <h4 [class.task-completed]="task.task_Status"></h4>
+  <p>{{task.task_Description}}</p>
+  <p>Priority: {{task.task_Priority}}</p>
+  <p>Due Date: {{task.due_Date | date: 'dd/MM/yyyy'}}</p>
+  <button (click)="completionToggle()">Complete</button>
+  <button (click)="delete()">Delete</button>
+</div>
