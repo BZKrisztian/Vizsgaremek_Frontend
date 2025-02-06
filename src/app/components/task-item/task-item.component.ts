@@ -1,14 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { taskmodel } from '../../models/task.model';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  NgModule,
+  Output,
+} from '@angular/core';
+import { Task } from '../../models/task.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-item',
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.css'],
+  imports: [
+    CommonModule
+  ],
 })
 export class TaskItemComponent {
-  @Input() task!: taskmodel;
-  @Output() updatedTask = new EventEmitter<taskmodel>();
+  @Input() task!: Task;
+  @Output() updatedTask = new EventEmitter<Task>();
   @Output() deleteTask = new EventEmitter<number>();
 
   constructor() {}

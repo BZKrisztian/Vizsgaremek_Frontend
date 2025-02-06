@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { taskmodel } from '../../models/task.model';
+import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { TaskItemComponent } from '../task-item/task-item.component';
 
@@ -10,7 +10,7 @@ import { TaskItemComponent } from '../task-item/task-item.component';
   imports: [TaskItemComponent],
 })
 export class TaskListComponent implements OnInit {
-  tasks: taskmodel[] = [];
+  tasks: Task[] = [];
 
   constructor(private taskService: TaskService) {}
 
@@ -24,7 +24,7 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  onTaskUpdate(updatedTask: taskmodel) {
+  onTaskUpdate(updatedTask: Task) {
     this.taskService.updateTask(updatedTask).subscribe(() => {
       this.loadTasks();
     });
