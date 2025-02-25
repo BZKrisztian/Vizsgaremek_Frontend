@@ -1,4 +1,12 @@
-<div class="task-list">
-  <app-task-item>
-  </app-task-item>
+<div *ngFor="let list of taskLists">
+  <h4>{{list.list_Title}}</h4>
+  <button (click)="onTaskListDeletion(list.list_Id)" >Delete List</button>
+
+  <div *ngFor="let task of tasks[list.list_Id]" >
+    <app-task-item
+      [task]="task"
+      (updatedTask)="onTaskUpdate(list.list_Id,$event)"
+      (deleteTask)="onTaskDeletion(list.list_Id,$event)"
+    ></app-task-item>
+  </div>
 </div>

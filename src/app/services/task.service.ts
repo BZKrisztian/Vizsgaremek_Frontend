@@ -1,73 +1,56 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Task } from '../models/task.model';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Task } from '../models/task.model';
 import { TaskList } from '../models/tasklist.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private tasks: Task[] = [];
-  private tasklist: TaskList[] = [];
+  // private tasks: Task[] = [];
+  // private tasklist: TaskList[] = [];
 
   private apiUrl = '';
 
   constructor(private http: HttpClient) {}
 
 
-
-  getTasks(): Observable<Task[]> {
-    return of(this.tasks);
+  //taskCRUD
+  getTasks(taskList_Id: number): Observable<Task[]> {
+    return this.http.get<Task[]>
+    (`${this.apiUrl}/tasks?taskList_Id=${taskList_Id}`);
   }
-  addTask(task: Task) {
-    task.task_Id = this.tasks.length + 1;
-    task.creation_Date = new Date();
-    task.update_Date = new Date();
-    this.tasks.push(task);
-    return of(task);
+  addTask(taskList_Id: number, task: Task): Observable<Task> {
+    return this.http.post<Task>
+    (`${this.apiUrl}/tasks?taskList_Id=${taskList_Id}`, task);
   }
-  updateTask(updatedTask: Task) {
-    this.tasks = this.tasks.map((task) =>
-      task.task_Id === updatedTask.task_Id
-        ? { ...updatedTask, update_Date: new Date() }
-        : task
-    );
-    return of(updatedTask);
+  updateTask(taskList_Id: number,updatedTask: Task): Observable<Task> {
+    return this.http.put<Task>
+      (`${this.apiUrl}/tasks/${updatedTask.task_Id}?taskList_Id=${taskList_Id}`, updatedTask);
   }
-  deleteTask(task_Id: number) {
-    this.tasks = this.tasks.filter((task) => task.task_Id !== task_Id);
-    return of(task_Id);
+  deleteTask(taskList_Id: number,task_Id: number) {
+    return this.http.delete<void>
+      (`${this.apiUrl}/tasks/${task_Id}?taskList_Id=${taskList_Id}`);
   }
 
 
-
+  //tasklistCRUD
   getTaskLists(): Observable<TaskList[]> {
-    return of(this.tasklist)
+    return this.http.get<TaskList[]>
+      (`${this.apiUrl}/tasklists`);
   }
-  addTaskList(tasklist: TaskList) {
-    tasklist.list_Id = this.tasklist.length + 1;
-    tasklist.creation_Date = new Date();
-    tasklist.update_Date = new Date();
-    this.tasklist.push(tasklist);
-    return of(tasklist);
+  addTaskList(tasklist: TaskList): Observable<TaskList> {
+    return this.http.post<TaskList>
+      (`${this.apiUrl}/tasklists`, tasklist);
   }
-  updateTaskList(updatedTaskList: TaskList) {
-    this.tasklist = this.tasklist.map((tasklist) =>
-      tasklist.list_Id === updatedTaskList.list_Id
-        ? { ...updatedTaskList, update_Date: new Date() }
-        : tasklist
-    );
-    return of(updatedTaskList);
+  updateTaskList(updatedTaskList: TaskList): Observable<TaskList> {
+    return this.http.put<TaskList>
+      (`${this.apiUrl}/tasklists/${updatedTaskList.list_Id}`, updatedTaskList);
   }
-  deleteTaskList(list_Id: number) {
-    this.tasklist = this.tasklist.filter((tasklist) => tasklist.list_Id !== list_Id);
-    return of(list_Id);
+  deleteTaskList(list_Id: number): Observable<void> {
+    return this.http.delete<void>
+      (`${this.apiUrl}/tasklists/${list_Id}`);
   }
 
-
-
-  register(userData: { email: string; password: string }) {
-    return this.http.post(`${this.apiUrl}`, userData);
-  }
 }
