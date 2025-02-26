@@ -31,31 +31,33 @@ export class TaskListComponent implements OnInit {
       }
     )
   }
-  loadTasks(list_Id: number){
+  loadTasks(list_Id: number):void{
     this.taskService.getTasks(list_Id).subscribe(
       (tasks)=>{this.tasks[list_Id]=tasks}
     )
   }
 
 
-  onTaskUpdate(list_Id: number,updatedTask?: Task) {
-    if (updatedTask)
-      {this.taskService.updateTask(list_Id, updatedTask).subscribe(() => {
-      this.loadTasks(list_Id);
-    });
-  }
-  }
-
-  onTaskDeletion(list_Id: number,task_Id: number) {
-    this.taskService.deleteTask(list_Id,task_Id).subscribe(
-      ()=>{this.loadTasks(list_Id)}
+  onTaskUpdate(updatedTask: Task):void {
+    this.taskService.updateTask(updatedTask).subscribe(
+      ()=>{
+        this.loadTasks(updatedTask.taskList_Id);
+      }
     )
   }
-  onTaskListDeletion(list_Id: number){
+
+  onTaskDeletion(list_Id: number,task_Id: number):void {
+    this.taskService.deleteTask(task_Id).subscribe(
+      ()=>{this.tasks[list_Id]=this.tasks[list_Id].filter(
+        (task)=>{task.task_Id!=task_Id}
+      )}
+    )
+  }
+  onTaskListDeletion(list_Id: number):void{
     this.taskService.deleteTaskList(list_Id).subscribe(
       ()=>{
         this.taskLists = this.taskLists.filter(
-          (list)=>{list.list_Id!=list_Id}
+          (list)=>list.list_Id!=list_Id
         )
         delete this.tasks[list_Id];
       }

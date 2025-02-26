@@ -1,0 +1,42 @@
+{
+  "tasklists": [
+    {
+      "list_Id": 1,
+      "list_Title": "My First List",
+      "list_Description": "This is a sample list",
+      "creation_Date": "2025-02-26T00:00:00.000Z",
+      "update_Date": "2025-02-26T00:00:00.000Z",
+      "id": "f9bb"
+    },
+    {
+      "id": "2e6e",
+      "list_Id": 0,
+      "list_Title": "asd",
+      "list_Description": "ssdd",
+      "creation_Date": "2025-02-26T17:42:38.146Z",
+      "update_Date": "2025-02-26T17:42:38.146Z"
+    },
+    {
+      "id": "f935",
+      "list_Id": 0,
+      "list_Title": "ASDASD",
+      "list_Description": "yesn't",
+      "creation_Date": "2025-02-26T18:25:43.447Z",
+      "update_Date": "2025-02-26T18:25:43.447Z"
+    }
+  ],
+  "tasks": [
+    {
+      "task_Id": 1,
+      "taskList_Id": 1,
+      "task_Title": "Sample Task",
+      "task_Description": "This is a sample task description",
+      "task_Status": false,
+      "task_Priority": "medium",
+      "due_Date": "2025-03-01T00:00:00.000Z",
+      "creation_Date": "2025-02-26T00:00:00.000Z",
+      "update_Date": "2025-02-26T00:00:00.000Z",
+      "id": "9bf7"
+    }
+  ]
+}

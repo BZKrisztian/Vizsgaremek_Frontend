@@ -5,8 +5,9 @@
   <div *ngFor="let task of tasks[list.list_Id]" >
     <app-task-item
       [task]="task"
-      (updatedTask)="onTaskUpdate(list.list_Id,$event)"
+      (updatedTask)="onTaskUpdate($event)"
       (deleteTask)="onTaskDeletion(list.list_Id,$event)"
-    ></app-task-item>
+    ></app-task-item> <!-- (list.list_Id,$event) ==> list.list_Id == unnecessary(?) -->
   </div>
 </div>
+

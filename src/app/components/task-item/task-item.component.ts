@@ -23,12 +23,12 @@ export class TaskItemComponent {
 
   constructor() {}
 
-  completionToggle() {
+  completionToggle():void {
     this.task.task_Status = !this.task.task_Status;
     this.updatedTask.emit(this.task);
   }
 
-  delete() {
+  delete():void {
     this.deleteTask.emit(this.task.task_Id);
   }
 }
