@@ -1,0 +1,19 @@
+.register-form{
+    text-align: center;
+}
+.username-div{
+    margin:auto;
+
+}
+.email-div{
+    margin:auto;
+
+}
+.password-div{
+    margin:auto;
+
+}
+.buttons{
+
+    border-radius: 5px;
+}
