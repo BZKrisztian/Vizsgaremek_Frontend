@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
       this.loginForm = this.formbuilderLg.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required, Validators.minLength(6)]
-      });
+      }); // CHECK if i need the validator.minlegth at login if its defined/required at Registration
     }
   
     onSubmit(): void {
@@ -40,7 +40,7 @@ import { CommonModule } from '@angular/common';
           this.authService.saveToken(response.token);
           this.router.navigate(['/homepage']);
         },
-        error: err => {
+        error: (err) => {
           this.errorMessage = 'Login failed. Please check your credentials.';
           console.error(err);
         }
