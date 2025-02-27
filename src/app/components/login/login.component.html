@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form class="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="email">Email:</label>
     <input id="email" formControlName="email" />
@@ -12,3 +12,4 @@
   <button type="submit" [disabled]="loginForm.invalid">Login</button>
   <div *ngIf="errorMessage">{{ errorMessage }}</div>
 </form>
+

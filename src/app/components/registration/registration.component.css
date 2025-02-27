@@ -1,5 +1,9 @@
-.register-form{
+.registration-module{
+    /*display: none;*/
     text-align: center;
+}
+.registration-form{
+    text-justify: auto;
 }
 .username-div{
     margin:auto;

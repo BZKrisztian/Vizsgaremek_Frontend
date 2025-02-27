@@ -2,7 +2,7 @@
 ---
 ###### Beard
 
-
+wrappeld be a logint egy div-be, az error message-et meg tedd át oda
 
 ---
 ###### Jesus
