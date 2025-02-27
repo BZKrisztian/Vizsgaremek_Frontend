@@ -49,12 +49,12 @@ export class TaskListComponent implements OnInit {
   onTaskDeletion(list_Id: number,task_Id: number):void {
     this.taskService.deleteTask(task_Id).subscribe(
       ()=>{this.tasks[list_Id]=this.tasks[list_Id].filter(
-        (task)=>{task.task_Id!=task_Id}
+        (task)=>task.task_Id!=task_Id
       )}
     )
   }
   onTaskListDeletion(list_Id: number):void{
-    this.taskService.deleteTaskList(list_Id).subscribe(
+    this.taskService.Order66(list_Id).subscribe(
       ()=>{
         this.taskLists = this.taskLists.filter(
           (list)=>list.list_Id!=list_Id
