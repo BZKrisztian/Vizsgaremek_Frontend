@@ -48,9 +48,10 @@ export class TaskService {
       updatedTaskList
     );
   }
-  deleteTaskList(list_Id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
-  }
+  // deleteTaskList(list_Id: number): Observable<void> {
+  //   return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
+  // }
+  //we wont need this anymore.
 
   //so, this method is for deleting every task within a list, and then the list itself
   //in case of interest, this method is called 'cascading'

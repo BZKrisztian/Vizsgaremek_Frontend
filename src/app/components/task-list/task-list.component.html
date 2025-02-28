@@ -1,13 +1,35 @@
-<div *ngFor="let list of taskLists">
-  <h4>{{list.list_Title}}</h4>
-  <button (click)="onTaskListDeletion(list.list_Id)" >Delete List</button>
-
-  <div *ngFor="let task of tasks[list.list_Id]" >
-    <app-task-item
-      [task]="task"
-      (updatedTask)="onTaskUpdate($event)"
-      (deleteTask)="onTaskDeletion(list.list_Id,$event)"
-    ></app-task-item> <!-- (list.list_Id,$event) ==> list.list_Id == unnecessary(?) -->
+<div class="task-list">
+  <div *ngFor="let list of taskLists">
+    <div *ngIf="!taskListEditingProc || taskListEditingProc.list_Id != list.list_Id " >
+      <h4>{{list.list_Title}}</h4>
+      <p>{{list.list_Description}}</p>
+      <button (click)="onTaskListDeletion(list.list_Id)" >Delete List</button>
+      <button (click)="onTaskListEdit(list)">Edit List</button>
+    </div>
+  
+    <div *ngFor="let task of tasks[list.list_Id]" >
+      <app-task-item
+        [task]="task"
+        (updatedTask)="onTaskUpdate($event)"
+        (deleteTask)="onTaskDeletion(list.list_Id,$event)"
+      ></app-task-item> <!-- (list.list_Id,$event) ==> list.list_Id == unnecessary(?) -->
+    </div>
+  </div>
+  
+  <!--editing form if edit button is pressed for task-->
+  <div *ngIf="taskEditingProc">
+    <h3>Editing Task: </h3>
+    <form action="saveEditedTask()">
+      <input type="text" [(ngModel)]="taskEditingProc.task_Title"
+        name="title" required="" placeholder="Task Title" >
+      <textarea
+      [(ngModel)]="taskEditingProc.task_Description"
+      name="description"
+      placeholder="Task Description"
+      ></textarea>
+      <!--Dont forget Due-Date and Priority setting-->
+      <button type="submit">Save</button>
+      <button type="button" (click)="taskEditingProc = null">Cancel</button>
+    </form>
   </div>
 </div>
-
