@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task.model';
 import { TaskList } from '../models/tasklist.model';
@@ -23,12 +23,15 @@ export class TaskService {
     );
   }
   addTask(task: Task): Observable<Task> {
+    if(!task.task_Priority){
+      task.task_Priority = 'low';
+    }
     return this.http.post<Task>(`${this.apiUrl}/tasks`, task);
   }
   updateTask(updatedTask: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/tasks`, updatedTask);
+    return this.http.put<Task>(`${this.apiUrl}/tasks/${updatedTask.task_Id}`, updatedTask);
   }
-  deleteTask(task_Id: number) {
+  deleteTask(task_Id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/tasks/${task_Id}`);
   }
 
@@ -45,7 +48,36 @@ export class TaskService {
       updatedTaskList
     );
   }
-  deleteTaskList(list_Id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
+  // deleteTaskList(list_Id: number): Observable<void> {
+  //   return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
+  // }
+  //we wont need this anymore.
+
+  //so, this method is for deleting every task within a list, and then the list itself
+  //in case of interest, this method is called 'cascading'
+  Order66(list_Id: number): Observable<void>{
+    return this.getTasks(list_Id).pipe(
+      switchMap(
+        (tasks)=>{
+          if(tasks.length>0){
+            const purge = tasks.map(
+              task => this.deleteTask(task.task_Id)
+            )
+            return forkJoin(purge).pipe(
+              switchMap(
+                ()=>this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
+              )
+            )
+          }
+          else{
+            return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
+          }
+        }
+      )
+    )
   }
+
+
+
+
 }

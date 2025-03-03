@@ -1,19 +1,22 @@
 # FRONTEND:
 	PROBLEMS/THINGS TO FIX:
-		- set within the models what can be undefined
-			- undefined option(s) within task-list : list-description
-			- undefined option(s) within task-item : task-description, task-priority(def=low),due-date
 		- ensure all functions of lists and tasks work:
 			|-> basic CRUD
 				|-> Create = Lists and within them, Tasks
-				|-> Read = Get them all properly
+					- button and action to create task => form similar to the one when editing
 				|-> Update = function/button to start modification process
 					Defining every optional part of a task or task-list / button to edit whatever part of task/tasklist
-				|-> Delete = delete tasks within a task-list,
-					AND if task-list is deleted, delete all tasks(cascade on backend(?))
-		- ensure task-status works + it can be set after creation as part of 
-		- ensure the task model's taskList_Id is properly bound to tasklist model(tasklist deletion MUST delete all tasks as well)
-
+		- ensure task-status works + it can be set after creation as part of
+			- html drop-down for choosing(?)
+	SOLVED(?):
+		- Models are good(for now?)
+		- Binding(taskList_Id) between tasklist and task is good
+			- ensure the task model's taskList_Id is properly bound to tasklist model(tasklist deletion MUST delete all tasks as well)
+		- CRUD for tasklists+tasks are good
+		- Task status toggle is logically sound
+		|-> basic CRUD:
+			- Read = We got 'em all
+			- Delete = done, cascades when tasklist is deleted
 
 	Things to IMPLEMENT:
 		IMPORTANT:

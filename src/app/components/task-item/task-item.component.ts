@@ -20,12 +20,17 @@ export class TaskItemComponent {
   @Input() task!: Task;
   @Output() updatedTask = new EventEmitter<Task>();
   @Output() deleteTask = new EventEmitter<number>();
+  @Output() editTask = new EventEmitter<Task>();
 
   constructor() {}
 
   completionToggle():void {
     this.task.task_Status = !this.task.task_Status;
     this.updatedTask.emit(this.task);
+  }
+
+  edit():void{
+    this.editTask.emit(this.task);
   }
 
   delete():void {
