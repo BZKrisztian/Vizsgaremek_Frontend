@@ -17,6 +17,27 @@ export class TaskListComponent implements OnInit {
   taskLists: TaskList[] = [];
   tasks: {[taskList_Id: number]:Task[]}={};
 
+  newTask: Task = {
+    task_Id: 0,
+    taskList_Id: 0,
+    task_Title: '',
+    task_Description: '',
+    task_Status: false,
+    task_Priority: 'low',
+    due_Date: undefined,
+    creation_Date: new Date(),
+    update_Date: new Date()
+  }
+
+  newTaskList: TaskList = {
+    list_Id:0,
+    list_Title:'',
+    list_Description:'',
+    creation_Date: new Date(),
+    update_Date: new Date(),
+    tasks:[]
+  }
+
   //ensures the task is being held for edit
   taskEditingProc: Task | null = null;
   //ensures the tasklist is being held for edit
@@ -44,6 +65,27 @@ export class TaskListComponent implements OnInit {
     )
   }
 
+  // Task Creation
+  createTask(list_Id:number):void{
+    this.newTask.taskList_Id= list_Id;
+    this.newTask.creation_Date = new Date();
+    this.newTask.update_Date = new Date();
+    this.taskService.addTask(this.newTask).subscribe(
+      (createdTask)=>{this.loadTasks(list_Id)
+        this.newTask = {
+          task_Id:0,
+          taskList_Id:0,
+          task_Title: '',
+          task_Description: '',
+          task_Status: false,
+          task_Priority: 'low',
+          due_Date: undefined,
+          creation_Date: new Date(),
+          update_Date: new Date(),
+        }
+      }
+    )
+  }
 
   // ===Task update section===
   onTaskEdit(task:Task):void{
@@ -78,6 +120,25 @@ export class TaskListComponent implements OnInit {
       ()=>{this.tasks[list_Id]=this.tasks[list_Id].filter(
         (task)=>task.task_Id!=task_Id
       )}
+    )
+  }
+
+  //TaskList Creation
+  createTaskList():void{
+    this.newTaskList.creation_Date = new Date();
+    this.newTaskList.update_Date = new Date();
+    this.taskService.addTaskList(this.newTaskList).subscribe(
+      (createdList)=>{
+        this.loadTaskLists();
+        this.newTaskList = {
+          list_Id:0,
+          list_Title: '',
+          list_Description:'',
+          creation_Date: new Date(),
+          update_Date: new Date(),
+          tasks:[]
+        }
+      }
     )
   }
 

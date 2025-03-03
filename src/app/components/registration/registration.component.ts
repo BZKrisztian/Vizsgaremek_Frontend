@@ -23,7 +23,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private formBuilderReg: FormBuilder, private authservice: AuthService) {
     this.registrationForm = this.formBuilderReg.group(
       {
-        username: ['', Validators.required],
+        username: ['', [Validators.required,Validators.minLength(6)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]]
       } //for multiple validators, we need them in an array[]

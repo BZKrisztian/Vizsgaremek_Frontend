@@ -1,10 +1,11 @@
 <div class="task-item">
-  <h4 [class.task-completed]="task.task_Status"></h4>
-  <p>{{task.task_Title}}</p>
+  <h4 [class.task-completed]="task.task_Status">{{task.task_Title}}</h4>
   <p>{{task.task_Description}}</p>
   <p>Priority: {{task.task_Priority}}</p>
   <p>Due Date: {{task.due_Date | date: 'dd/MM/yyyy'}}</p>
-  <button (click)="completionToggle()">Complete</button>
+  <p>Created: {{task.creation_Date| date:'short'}}</p>
+  <p>Updated at: {{task.update_Date| date:'short'}}</p>
+  <button (click)="completionToggle()">Toggle Completion</button>
   <button (click)="edit()">Edit Task</button>
   <button (click)="delete()">Delete Task</button>
 </div>
