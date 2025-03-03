@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomepageComponent implements OnInit {
 
+  
+  // Remove/Refactor later, pls
+
+
   newTaskListTitle: string = '';
   newTaskListDescription: string = '';
 

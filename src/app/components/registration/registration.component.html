@@ -21,6 +21,29 @@
           <div class="errormsg" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
             Password is required. It must also be at least 6 characters.
           </div>
+<div>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="registration-username">Username:</label>
+        <input id="registration-username" formControlName="username" type="text" />
+        <div *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
+          <small>Username is required. It must also be at least 6 characters</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="registration-email">Email:</label>
+        <input id="registration-email" formControlName="email" />
+        <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+          <small>Email is required. Ensure it is the correct format.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="registration-password">Password:</label>
+        <input id="registration-password" type="password" formControlName="password" />
+        <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+          <small>Password is required. It must also be at least 6 characters.</small>
         </div>
       </div>
   

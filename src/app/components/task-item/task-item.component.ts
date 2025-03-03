@@ -26,6 +26,7 @@ export class TaskItemComponent {
 
   completionToggle():void {
     this.task.task_Status = !this.task.task_Status;
+    this.task.update_Date = new Date();
     this.updatedTask.emit(this.task);
   }
 
