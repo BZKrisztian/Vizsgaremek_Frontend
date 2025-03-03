@@ -1,26 +1,26 @@
 <div class="registration-module">
   <form class="registration-form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-      <div class="username-div">
-        <label for="registration-username">Username:</label>
-        <input id="registration-username" formControlName="username" type="text" />
-        <div *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
-          Username is required.
+      <div class="personal-data">
+        <div class="username-div">
+          <label for="registration-username">Username:</label>
+          <input id="registration-username" formControlName="username" type="text" />
+          <div *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
+            Username is required.
+          </div>
         </div>
-      </div>
-  
-      <div>
-        <label for="registration-email">Email:</label>
-        <input id="registration-email" formControlName="email" />
-        <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
-          Email is required. Ensure it is the correct format.
+        <div>
+          <label for="registration-email">Email:</label>
+          <input id="registration-email" formControlName="email" />
+          <div class="errormsg" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+            Email is required. Ensure it is the correct format.
+          </div>
         </div>
-      </div>
-  
-      <div>
-        <label for="registration-password">Password:</label>
-        <input id="registration-password" type="password" formControlName="password" />
-        <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
-          Password is required. It must also be at least 6 characters.
+        <div>
+          <label for="registration-password">Password:</label>
+          <input id="registration-password" type="password" formControlName="password" />
+          <div class="errormsg" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+            Password is required. It must also be at least 6 characters.
+          </div>
         </div>
       </div>
   

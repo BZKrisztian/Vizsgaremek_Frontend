@@ -1,0 +1,14 @@
+.entry{
+    display: flex;
+    justify-content: center; /* Horizontally centers content */
+    align-items: center; /* Vertically centers content */
+    height: 100%; /* Make the container fill the height of the page */
+}
+#container{
+
+}
+.app-reg{
+}   
+.app-login{
+}
+

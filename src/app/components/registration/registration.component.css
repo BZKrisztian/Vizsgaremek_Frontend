@@ -1,23 +1,22 @@
 .registration-module{
-    /*display: none;*/
-    text-align: center;
+
+}
+.personal-data{
+    text-align: end;
 }
 .registration-form{
-    text-justify: auto;
 }
 .username-div{
-    margin:auto;
-
 }
 .email-div{
-    margin:auto;
-
 }
 .password-div{
-    margin:auto;
-
 }
 .buttons{
-
+    display: flex;
     border-radius: 5px;
+}
+div{
+    margin-top: 5px;
+    justify-content: space-evenly;
 }
