@@ -47,20 +47,10 @@ export class TaskListComponent implements OnInit {
 
   // ===Task update section===
   onTaskEdit(task:Task):void{
-    this.taskEditingProc=task;
+    this.taskEditingProc={...task};
   }
   cancelEditTask():void{
     this.taskEditingProc = null;
-  }
-  onTaskUpdate(updatedTask: Task):void {
-    this.taskService.updateTask(updatedTask).subscribe(
-      ()=>{
-        this.loadTasks(updatedTask.taskList_Id);
-        if(this.taskEditingProc && this.taskEditingProc.task_Id==updatedTask.task_Id){
-          this.taskEditingProc=null;
-        }
-      }
-    )
   }
   saveEditedTask():void{
     if(this.taskEditingProc){
@@ -71,6 +61,16 @@ export class TaskListComponent implements OnInit {
         }
       );
     }
+  }
+  onTaskUpdate(updatedTask: Task):void {
+    this.taskService.updateTask(updatedTask).subscribe(
+      ()=>{
+        this.loadTasks(updatedTask.taskList_Id);
+        if(this.taskEditingProc && this.taskEditingProc.task_Id==updatedTask.task_Id){
+          this.taskEditingProc=null;
+        }
+      }
+    )
   }
   // ===Task update section END===
   onTaskDeletion(list_Id: number,task_Id: number):void {
