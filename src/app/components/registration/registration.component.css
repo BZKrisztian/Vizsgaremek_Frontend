@@ -20,3 +20,6 @@ div{
     margin-top: 5px;
     justify-content: space-evenly;
 }
+.errormsg{
+    text-align: end;
+}
