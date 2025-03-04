@@ -44,6 +44,7 @@
         [task]="task"
         (updatedTask)="onTaskUpdate($event)"
         (deleteTask)="onTaskDeletion(list.list_Id,$event)"
+        (editTask)="onTaskEdit($event)"
       ></app-task-item> <!-- (list.list_Id,$event) ==> list.list_Id == unnecessary(?) -->
     </div>
   
@@ -52,7 +53,8 @@
       <form (ngSubmit)="onTaskListUpdate()">
         <input type="text" [(ngModel)]="taskListEditingProc.list_Title"
         name="listTitle" required placeholder="List Title">
-        <textarea name="listDescription" placeholder="List Description"
+        <textarea [(ngModel)]="taskListEditingProc.list_Description"
+        name="listDescription" placeholder="List Description"
         ></textarea>
         <button type="submit">Save List</button>
         <button type="button" (click)="cancelTaskListEdit()">Cancel</button>

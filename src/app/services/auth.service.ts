@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,16 +13,28 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(userData: User): Observable<any> {
-    return this.http.post(`${this.registerURL}/register`, userData);
+    return this.http.post<any>(`${this.registerURL}/register`, userData);
   }
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.loginURL}/login`, credentials);
+    return this.http.post<any>(`${this.loginURL}/login`, credentials).pipe(
+      map((res)=>{
+        localStorage.setItem('authToken', res.token);
+        localStorage.setItem('adminToken', res.user.adminToken);
+        return res;
+      })
+    );
   }
   adminLogin(credentials: {
     username: string;
     password: string;
   }): Observable<any> {
-    return this.http.post(`${this.loginURL}/adminlogin`, credentials);
+    return this.http.post<any>(`${this.loginURL}/adminlogin`, credentials).pipe(
+      map((res) => {
+        localStorage.setItem('authToken', res.token);
+        localStorage.setItem('adminToken', 'true');
+        return res;
+      })
+    );
   }
 
   saveToken(token: string): void {
@@ -37,5 +49,6 @@ export class AuthService {
   }
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('adminToken');
   }
 }
