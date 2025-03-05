@@ -11,7 +11,9 @@ const routes: Routes = [
   {path: 'homepage', component: HomepageComponent ,
     // canActivate: [AuthGuard]
   },
-  {path: 'overseer', component: OverseerComponent}
+  {path: 'overseer', component: OverseerComponent, 
+    // canActivate: [AdminGuard]
+  }
 ];
 
 @NgModule({

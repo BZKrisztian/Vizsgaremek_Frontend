@@ -12,11 +12,11 @@ export class AdminGuard implements CanActivate {
 
     canActivate(): boolean {
         const token = this.authService.getToken();
-        const adminToken = localStorage.getItem('adminToken');
-        if (token && adminToken === 'true') {
+        const adminCheck = this.authService.getCurrentAdmin();
+        if (token && adminCheck) {
             return true;
         } else {
-            this.router.navigate(['/entry']);
+            this.router.navigate(['/homepage']);
             return false;
         }
     }

@@ -1,8 +1,8 @@
 # FRONTEND:
 	PROBLEMS/THINGS TO FIX:
-		- put a confirmation message for list deletion as a safety measure
 		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
 			- + ensure admins can create tasklists and tasks, backend binds their data to them(admin users) accordingly
+		- put a confirmation message for list deletion as a safety measure
 		- ensure completed task is different somehow(event for CSS change?)
 		- ensure only admins can go to the Overseer(admin) page(Authguard+separate token? OR check if adminUser_Id exists?)
 			- upon login, automatically go to Overseer page
@@ -55,6 +55,7 @@
 				|-> Notification for password changes(?)
 			- Setting Due Date
 			- Ordering based on importance of list and list-item
+			- switch warning message method for deleting tasklist( current = javascript -> confirm() )
 		OPTIONAL:
 			- Dark-Mode(?) -> make site already be dark??
 			- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )

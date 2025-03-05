@@ -161,7 +161,8 @@ export class TaskListComponent implements OnInit {
   }
   // ===Tasklist update section END===
   onTaskListDeletion(list_Id: number):void{
-    this.taskService.Order66(list_Id).subscribe(
+    if(confirm("Are you sure you want to delete this list? This will also delete all tasks within the list."))
+      {this.taskService.Order66(list_Id).subscribe(
       ()=>{
         this.taskLists = this.taskLists.filter(
           (list)=>list.list_Id!=list_Id
@@ -169,6 +170,7 @@ export class TaskListComponent implements OnInit {
         delete this.tasks[list_Id];
       }
     )
+  }
   }
 
 }

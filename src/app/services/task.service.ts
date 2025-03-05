@@ -13,6 +13,12 @@ export class TaskService {
 
   private apiUrl = 'http://localhost:3000';
   // http://localhost:3000 => url for testing with json server
+  // reminders for the URLS => dont forget to integrate later
+  //  https://localhost:7096
+  //  https://localhost:7096/api/users
+  //  https://localhost:7096/api/adminUsers
+  //  https://localhost:7096/api/tasks
+  //  https://localhost:7096/api/taskLists
 
   constructor(private http: HttpClient) {}
 
