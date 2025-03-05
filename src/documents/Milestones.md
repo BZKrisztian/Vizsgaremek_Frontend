@@ -1,5 +1,6 @@
 # FRONTEND:
 	PROBLEMS/THINGS TO FIX:
+		- put a confirmation message for list deletion as a safety measure
 		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
 			- + ensure admins can create tasklists and tasks, backend binds their data to them(admin users) accordingly
 		- ensure completed task is different somehow(event for CSS change?)
@@ -9,6 +10,16 @@
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
 		- Wrap the Task-item adding form and bind it to appear at the click of a button
+		- canActivate(): boolean {
+			const token = this.authService.getToken();
+			const adminToken = localStorage.getItem('adminToken');
+			if (token && adminToken === 'true') {
+				return true;
+			} else {
+				this.router.navigate(['/entry']);
+				return false;}
+				} ensure that this does not cause problems -> token && adminToken (ensure this is only to ensure that if one is admin, they can go,
+		and if not, they will be seen as regular users and can proceed to homepage)
 	SOLVED(?):
 		- Models are good(for now?)
 		- Binding(taskList_Id) between tasklist and task is good
@@ -39,6 +50,7 @@
 				|-> Create of : daily motivationals / notices(eg.:server maintenance)
 			
 		LESS IMPORTANT:
+			- ensure toggle completion can be clicked again, resetting the state of the task
 			- Email notification upon registration
 				|-> Notification for password changes(?)
 			- Setting Due Date

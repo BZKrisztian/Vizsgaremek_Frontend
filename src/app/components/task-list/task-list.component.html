@@ -23,7 +23,7 @@
 
         <!--Add form for Task-->
         <div>
-          <h4>Add New Task</h4>
+          <!-- <h4>Add New Task</h4> unnecessary? -->
           <form #createTaskForm="ngForm" (ngSubmit)="createTask(list.list_Id)">
             <input type="text" [(ngModel)]="newTask.task_Title"
             name="tasktitle" required placeholder="Task Title">
@@ -45,7 +45,7 @@
         (updatedTask)="onTaskUpdate($event)"
         (deleteTask)="onTaskDeletion(list.list_Id,$event)"
         (editTask)="onTaskEdit($event)"
-      ></app-task-item> <!-- (list.list_Id,$event) ==> list.list_Id == unnecessary(?) -->
+      ></app-task-item>
     </div>
   
     <!--editing form for tasklist-->
