@@ -1,8 +1,14 @@
 # FRONTEND:
 	PROBLEMS/THINGS TO FIX:
+		- {ADMIN_LOGIN}: Setting up admin login => process to create admins(manually, on backend?)
+			-> admin login procedure :
+				|->casual login, recognition of admin upon login ( check email AND password(?) )
+		- Admin side :
+			|-> Read/Update/Delete of: users
+			|-> Create of : daily motivationals / notices(eg.:server maintenance)
+		- GUARDS: ensure AuthGuard and AdminGuard work together( no infinite loops, call-in order(first auth, then admin) etc. )
 		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
 			- + ensure admins can create tasklists and tasks, backend binds their data to them(admin users) accordingly
-		- put a confirmation message for list deletion as a safety measure
 		- ensure completed task is different somehow(event for CSS change?)
 		- ensure only admins can go to the Overseer(admin) page(Authguard+separate token? OR check if adminUser_Id exists?)
 			- upon login, automatically go to Overseer page
@@ -10,17 +16,8 @@
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
 		- Wrap the Task-item adding form and bind it to appear at the click of a button
-		- canActivate(): boolean {
-			const token = this.authService.getToken();
-			const adminToken = localStorage.getItem('adminToken');
-			if (token && adminToken === 'true') {
-				return true;
-			} else {
-				this.router.navigate(['/entry']);
-				return false;}
-				} ensure that this does not cause problems -> token && adminToken (ensure this is only to ensure that if one is admin, they can go,
-		and if not, they will be seen as regular users and can proceed to homepage)
 	SOLVED(?):
+		- put a confirmation message for list deletion as a safety measure
 		- Models are good(for now?)
 		- Binding(taskList_Id) between tasklist and task is good
 			- ensure the task model's taskList_Id is properly bound to tasklist model(tasklist deletion MUST delete all tasks as well)
@@ -41,13 +38,6 @@
 		IMPORTANT:
 			- Ensure userdata is saved, encrypt password
 			- Hungarian language support
-			- {ADMIN_LOGIN}: Setting up admin login => process to create admins(decide)
-				-> admin login procedure :
-					|->continue with admin login component
-					|->casual login, recognition of admin upon login
-			- Admin side :
-				|-> Read/Update/Delete of: users
-				|-> Create of : daily motivationals / notices(eg.:server maintenance)
 			
 		LESS IMPORTANT:
 			- ensure toggle completion can be clicked again, resetting the state of the task

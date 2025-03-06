@@ -8,4 +8,4 @@ export interface TaskList {
     update_Date: Date;
     tasks?: Task[],
     user_Id?: number
-  }
+}

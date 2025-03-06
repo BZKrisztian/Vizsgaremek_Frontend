@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskListComponent } from "../../components/task-list/task-list.component";
-import { TaskService } from '../../services/task.service';
-import { TaskList } from '../../models/tasklist.model';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
-  imports: [TaskListComponent, FormsModule]
+  imports: [TaskListComponent, FormsModule, CommonModule]
 })
 export class HomepageComponent implements OnInit {
 
@@ -19,7 +20,16 @@ export class HomepageComponent implements OnInit {
   newTaskListTitle: string = '';
   newTaskListDescription: string = '';
 
-  constructor(private taskService: TaskService) { }
+  constructor(private authService: AuthService, private router: Router) { }
+
+  isAdmin():boolean{
+    return this.authService.getCurrentAdmin() != null
+  }
+
+  goToOverseer():void{
+    this.router.navigate(['/overseer']);
+  }
+
 
   ngOnInit() {
   }

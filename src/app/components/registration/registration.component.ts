@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {}
 
 
-  onSubmit(){
+  onSubmit():void{
     if(this.registrationForm.valid){
       const newUser: User = {
         user_Id : 0,

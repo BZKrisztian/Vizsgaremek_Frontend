@@ -32,18 +32,24 @@ import { CommonModule } from '@angular/common';
     }
   
     onSubmit(): void {
-      if (this.loginForm.invalid) {
-        return;
+      if (this.loginForm.invalid){
+        return
       }
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (response: any) => {
-          this.authService.saveToken(response.token);
-          this.router.navigate(['/homepage']);
-        },
-        error: (err) => {
-          this.errorMessage = 'Login failed. Please check your credentials.';
-          console.error(err);
+      this.authService.login(this.loginForm.value).subscribe(
+        {
+          next: (res:any)=>{
+            this.authService.saveToken(res.token)
+            if(this.authService.getCurrentAdmin()){
+              this.router.navigate(['/overseer'])
+            }else{
+              this.router.navigate(['/homepage'])
+            }
+          },
+          error: (err)=>{
+            this.errorMessage = "Thou wouldst seem to not belong here. Return from where thou camst."
+            console.log(err)
+          }
         }
-      });
+      )
     }
   }

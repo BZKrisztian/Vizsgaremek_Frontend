@@ -18,6 +18,7 @@ export class AuthService {
   private currentAdmin_BSub: BehaviorSubject<AdminUser|null>;
   public currentAdmin$ : Observable<AdminUser|null>;
 
+  private adminEmails: string[] = [];
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser');
@@ -31,6 +32,18 @@ export class AuthService {
       storedAdmin ? JSON.parse(storedAdmin) : null
     )
     this.currentAdmin$ = this.currentAdmin_BSub.asObservable();
+    this.loadAdminEmails();
+
+  }
+  private loadAdminEmails():void{
+    this.http.get<AdminUser[]>(`${this.apiURL}/adminusers`).subscribe(
+      (admins)=>{
+        this.adminEmails = admins.map((admin)=>admin.adminEmail.toLowerCase())
+      },
+      (err)=>{
+        console.log(err)
+      }
+    )
   }
 
   register(userData: User): Observable<any> {
@@ -39,33 +52,56 @@ export class AuthService {
     }
     return this.http.post<any>(`${this.apiURL}/register`, userData);
   }
+
   login(credentials: { email: string; password: string }): Observable<any> {
     if(!credentials){
-      throw new Error('Please enter your credentials.')
+      throw new Error('Credentials are required.');
     }
-    return this.http.post<any>(`${this.apiURL}/login`, credentials).pipe(
-      map((res)=>{
-        if(res && res.token){
-          localStorage.setItem('authToken', res.token);
-          localStorage.setItem('currentUser', JSON.stringify(res.user));
-          this.currentUser_BSub.next(res.user);
-        }
-        return res;
-      })
-    );
+    if(this.isAdminEmail(credentials.email)){
+      return this.http.post<any>(`${this.apiURL}/adminlogin`,credentials).pipe(
+        map((res)=>{
+          if(res && res.token){
+            localStorage.setItem('authToken', res.token);
+            localStorage.setItem('currentAdmin', JSON.stringify(res.adminuser));
+            localStorage.removeItem('currentUser');
+            this.currentAdmin_BSub.next(res.adminuser);
+            this.currentUser_BSub.next(null);
+          }
+          return res;
+        })
+      )
+    }else{
+      return this.http.post<any>(`${this.apiURL}/login`,credentials).pipe(
+        map((res)=>{
+          if(res && res.token){
+            localStorage.setItem('authToken', res.token);
+            localStorage.setItem('currentUser', JSON.stringify(res.user));
+            localStorage.removeItem('currentAdmin');
+            this.currentUser_BSub.next(res.user);
+            this.currentAdmin_BSub.next(null);
+          }
+          return res;
+        })
+      )
+    }
   }
-  adminLogin(credentials: { username: string; password: string;}): Observable<any> {
-    return this.http.post<any>(`${this.apiURL}/adminlogin`, credentials).pipe(
-      map((res) => {
-        if(res && res.token){
-          localStorage.setItem('authToken', res.token);
-          localStorage.setItem('currentAdmin', JSON.stringify(res.adminuser));
-          this.currentUser_BSub.next(res.adminuser);
-        }
-        return res;
-      })
-    );
+
+  private isAdminEmail(email: string):boolean{
+    return this.adminEmails.includes(email.toLowerCase())
   }
+
+  // adminLogin(credentials: { username: string; password: string;}): Observable<any> {
+  //   return this.http.post<any>(`${this.apiURL}/adminlogin`, credentials).pipe(
+  //     map((res) => {
+  //       if(res && res.token){
+  //         localStorage.setItem('authToken', res.token);
+  //         localStorage.setItem('currentAdmin', JSON.stringify(res.adminuser));
+  //         this.currentUser_BSub.next(res.adminuser);
+  //       }
+  //       return res;
+  //     })
+  //   );
+  // }
   
   getToken(): string | null {
     return localStorage.getItem('authToken');
