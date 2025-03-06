@@ -38,10 +38,13 @@ export class TaskListComponent implements OnInit {
     tasks:[]
   }
 
-  //ensures the task is being held for edit
+  //ensures the task/tasklist is being held for edit
   taskEditingProc: Task | null = null;
-  //ensures the tasklist is being held for edit
   taskListEditingProc: TaskList | null = null;
+
+  //variables for modal toggles
+  showCreateTaskListForm: boolean = false;
+  showCreateTaskForm: {[taskList_Id: number]: boolean}={};
 
   constructor(private taskService: TaskService) {}
 
@@ -65,7 +68,7 @@ export class TaskListComponent implements OnInit {
     )
   }
 
-  // Task Creation
+  // ===Task Creation===
   createTask(list_Id:number):void{
     this.newTask.taskList_Id= list_Id;
     this.newTask.creation_Date = new Date();
@@ -83,10 +86,10 @@ export class TaskListComponent implements OnInit {
           creation_Date: new Date(),
           update_Date: new Date(),
         }
+        this.showCreateTaskForm[list_Id] = false;
       }
     )
   }
-
   // ===Task update section===
   onTaskEdit(task:Task):void{
     this.taskEditingProc={...task};
@@ -123,7 +126,7 @@ export class TaskListComponent implements OnInit {
     )
   }
 
-  //TaskList Creation
+  // ===TaskList Creation===
   createTaskList():void{
     this.newTaskList.creation_Date = new Date();
     this.newTaskList.update_Date = new Date();
@@ -138,10 +141,10 @@ export class TaskListComponent implements OnInit {
           update_Date: new Date(),
           tasks:[]
         }
+        this.showCreateTaskListForm = false;
       }
     )
   }
-
   // ===Tasklist update section===
   onTaskListEdit(taskList:TaskList):void{
     this.taskListEditingProc= {...taskList};
@@ -172,5 +175,14 @@ export class TaskListComponent implements OnInit {
     )
   }
   }
+
+  //Model section
+  toggleCreateTaskListForm():void{
+    this.showCreateTaskListForm = !this.showCreateTaskListForm;
+  }
+  toggleCreateTaskForm(list_Id: number):void{
+    this.showCreateTaskForm[list_Id] = !this.showCreateTaskForm[list_Id];
+  }
+
 
 }

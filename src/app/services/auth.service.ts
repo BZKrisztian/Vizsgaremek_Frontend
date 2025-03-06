@@ -89,19 +89,6 @@ export class AuthService {
   private isAdminEmail(email: string):boolean{
     return this.adminEmails.includes(email.toLowerCase())
   }
-
-  // adminLogin(credentials: { username: string; password: string;}): Observable<any> {
-  //   return this.http.post<any>(`${this.apiURL}/adminlogin`, credentials).pipe(
-  //     map((res) => {
-  //       if(res && res.token){
-  //         localStorage.setItem('authToken', res.token);
-  //         localStorage.setItem('currentAdmin', JSON.stringify(res.adminuser));
-  //         this.currentUser_BSub.next(res.adminuser);
-  //       }
-  //       return res;
-  //     })
-  //   );
-  // }
   
   getToken(): string | null {
     return localStorage.getItem('authToken');
@@ -128,4 +115,14 @@ export class AuthService {
     this.currentUser_BSub.next(null);
     this.currentAdmin_BSub.next(null);
   }
+
+  //(C)R(U)D of Users for Overseer
+  getUsers():Observable<User[]>{
+    return this.http.get<User[]>(`${this.apiURL}/users`)
+  }
+  deleteUser(user_Id: number):Observable<void>{
+    return this.http.delete<void>(`${this.apiURL}/users/${user_Id}`)
+  }
+
+
 }

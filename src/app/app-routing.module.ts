@@ -12,7 +12,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard]
   },
   {path: 'overseer', component: OverseerComponent, 
-    // canActivate: [AdminGuard]
+    // canActivate: [AuthGuard, AdminGuard]
   }
 ];
 
