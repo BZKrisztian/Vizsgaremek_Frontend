@@ -4,19 +4,20 @@
 			-> admin login procedure :
 				|->casual login, recognition of admin upon login ( check email AND password(?) )
 		- Admin side :
-			|-> Read/Update/Delete of: users
-			|-> Create of : daily motivationals / notices(eg.:server maintenance)
+			|-> Read/(Update?)/Delete of: users
+			|-> Create/Delete of : daily motivationals (+ notices later on(eg.:server maintenance))
 		- GUARDS: ensure AuthGuard and AdminGuard work together( no infinite loops, call-in order(first auth, then admin) etc. )
 		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
 			- + ensure admins can create tasklists and tasks, backend binds their data to them(admin users) accordingly
 		- ensure completed task is different somehow(event for CSS change?)
-		- ensure only admins can go to the Overseer(admin) page(Authguard+separate token? OR check if adminUser_Id exists?)
-			- upon login, automatically go to Overseer page
-			- Should admins be able to go to regular user page(Homepage)?
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
-		- Wrap the Task-item adding form and bind it to appear at the click of a button
+			- Wrap the Task-item adding form and bind it to appear at the click of a button
 	SOLVED(?):
+		- ensure only admins can go to the Overseer(admin)page
+			- upon an admin's login, automatically go to Overseer page
+			- Should admins be able to go to regular user page(Homepage)? = yes and done ( CHECK if admins can create lists/tasks and the data is bound&saved to them on backend )
+		- Ensure userdata is saved, encrypt password
 		- put a confirmation message for list deletion as a safety measure
 		- Models are good(for now?)
 		- Binding(taskList_Id) between tasklist and task is good
@@ -36,7 +37,6 @@
 
 	Things to IMPLEMENT:
 		IMPORTANT:
-			- Ensure userdata is saved, encrypt password
 			- Hungarian language support
 			
 		LESS IMPORTANT:
@@ -47,7 +47,7 @@
 			- Ordering based on importance of list and list-item
 			- switch warning message method for deleting tasklist( current = javascript -> confirm() )
 		OPTIONAL:
-			- Dark-Mode(?) -> make site already be dark??
+			- Dark-Mode(?) -> make site already be dark?? // Toggle button for body(CSS)
 			- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )
 			- Timer(Pomodoro) -> locally
 			- Make site sticky on browser(can it even be done?)

@@ -7,12 +7,12 @@ import { CanActivate, Router } from "@angular/router";
 })
 
 export class AdminGuard implements CanActivate {
-    // dont forget to apply/implement it within app-routing
     constructor(private authService: AuthService, private router: Router){}
 
     canActivate(): boolean {
         if(this.authService.isLoggedIn() && this.authService.getCurrentAdmin()){
-            return true
+            this.router.navigate(['/overseer']);
+            return true;
         }
         else {
             this.router.navigate(['/homepage']);

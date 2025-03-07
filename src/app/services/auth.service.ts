@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, of, switchMap, take } from 'rxjs';
 import { AdminUser } from '../models/adminuser.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // private registerURL = '';
-  // private loginURL = '';
   private apiURL = '';
 
   private currentUser_BSub: BehaviorSubject<User|null>;
@@ -19,6 +17,8 @@ export class AuthService {
   public currentAdmin$ : Observable<AdminUser|null>;
 
   private adminEmails: string[] = [];
+  private adminEmailsLoaded: boolean = false;
+  private adminEmailsLoaded_BSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser');
@@ -33,8 +33,9 @@ export class AuthService {
     )
     this.currentAdmin$ = this.currentAdmin_BSub.asObservable();
     this.loadAdminEmails();
-
   }
+
+
   private loadAdminEmails():void{
     this.http.get<AdminUser[]>(`${this.apiURL}/adminusers`).subscribe(
       (admins)=>{
@@ -45,6 +46,17 @@ export class AuthService {
       }
     )
   }
+  private loadAdminEmails_BackCheck():Observable<boolean>{
+    if(this.adminEmailsLoaded){
+      return of(true)
+    }else{
+      return this.adminEmailsLoaded_BSub.pipe(
+        filter((loaded)=>loaded==true),
+        take(1)
+      )
+    }
+  }
+
 
   register(userData: User): Observable<any> {
     if(!userData){
@@ -55,35 +67,39 @@ export class AuthService {
 
   login(credentials: { email: string; password: string }): Observable<any> {
     if(!credentials){
-      throw new Error('Credentials are required.');
+      throw new Error("Credentials are required.");
     }
-    if(this.isAdminEmail(credentials.email)){
-      return this.http.post<any>(`${this.apiURL}/adminlogin`,credentials).pipe(
-        map((res)=>{
-          if(res && res.token){
-            localStorage.setItem('authToken', res.token);
-            localStorage.setItem('currentAdmin', JSON.stringify(res.adminuser));
-            localStorage.removeItem('currentUser');
-            this.currentAdmin_BSub.next(res.adminuser);
-            this.currentUser_BSub.next(null);
-          }
-          return res;
-        })
-      )
-    }else{
-      return this.http.post<any>(`${this.apiURL}/login`,credentials).pipe(
-        map((res)=>{
-          if(res && res.token){
-            localStorage.setItem('authToken', res.token);
-            localStorage.setItem('currentUser', JSON.stringify(res.user));
-            localStorage.removeItem('currentAdmin');
-            this.currentUser_BSub.next(res.user);
-            this.currentAdmin_BSub.next(null);
-          }
-          return res;
-        })
-      )
-    }
+    return this.loadAdminEmails_BackCheck().pipe(
+      switchMap(()=>{
+        if(this.isAdminEmail(credentials.email)){
+          return this.http.post<any>(`${this.apiURL}/adminlogin`, credentials).pipe(
+            switchMap((res)=>{
+              if(res&&res.token){
+                localStorage.setItem('authToken',res.token)
+                localStorage.setItem('currentAdmin',JSON.stringify(res.adminUser))
+                localStorage.removeItem('currentUser')
+                this.currentAdmin_BSub.next(res.adminUser)
+                this.currentUser_BSub.next(null)
+              }
+              return of(res)
+            })
+          )
+        }else{
+          return this.http.post<any>(`${this.apiURL}/login`, credentials).pipe(
+            switchMap((res)=>{
+              if(res&&res.token){
+                localStorage.setItem('authToken',res.token)
+                localStorage.setItem('currentUser',JSON.stringify(res.user))
+                localStorage.removeItem('currentAdmin')
+                this.currentUser_BSub.next(res.user)
+                this.currentAdmin_BSub.next(null)
+              }
+              return of(res)
+            })
+          )
+        }
+      })
+    )
   }
 
   private isAdminEmail(email: string):boolean{
@@ -98,6 +114,17 @@ export class AuthService {
   }
   getCurrentAdmin():AdminUser|null{
     return this.currentAdmin_BSub.value
+  }
+  getCurrentOwner():{id:number, role: "user" | "admin"}|null{
+    const currentUser = this.getCurrentUser();
+    if(currentUser){
+      return { id: currentUser.user_Id, role: "user"};
+    }
+    const currentAdmin = this.getCurrentAdmin();
+    if(currentAdmin){
+      return { id: currentAdmin.adminUser_Id, role: "admin"};
+    }
+    return null
   }
 
   saveToken(token: string): void {

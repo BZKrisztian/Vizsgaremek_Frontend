@@ -7,5 +7,5 @@ export interface TaskList {
     creation_Date: Date;
     update_Date: Date;
     tasks?: Task[],
-    user_Id?: number
+    owner_Id?: number
 }
