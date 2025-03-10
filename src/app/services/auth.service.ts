@@ -40,6 +40,8 @@ export class AuthService {
     this.http.get<AdminUser[]>(`${this.apiURL}/adminusers`).subscribe(
       (admins)=>{
         this.adminEmails = admins.map((admin)=>admin.adminEmail.toLowerCase())
+        this.adminEmailsLoaded = true;
+        this.adminEmailsLoaded_BSub.next(true);
       },
       (err)=>{
         console.log(err)

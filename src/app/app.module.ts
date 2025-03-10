@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
@@ -20,7 +21,7 @@ import { EntryComponent } from './pages/entry/entry.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    
+
     TaskListComponent,
     TaskItemComponent,
     HomepageComponent,
