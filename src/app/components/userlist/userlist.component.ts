@@ -23,25 +23,28 @@ export class UserlistComponent implements OnInit {
   }
 
   loadUsers(){
-    this.authService.getUsers().subscribe(
-      (users) => this.users = users,
-      (err) => {
+    this.authService.getUsers().subscribe({
+      next: (users) => {
+        this.users = users
+      },
+      error: (err) => {
         this.errorMessage = "Could not load users."
         console.log(err)
+    }
       }
     )
   }
   deleteUser(user_Id: number):void{
     if(confirm("Are you sure you want to delete this user?")){
-      this.authService.deleteUser(user_Id).subscribe(
-        ()=>{
-          this.users = this.users.filter(user => user.user_Id != user_Id)
+      this.authService.deleteUser(user_Id).subscribe({
+        next: ()=>{
+          this.users = this.users.filter(user => user.user_Id !== user_Id)
         },
-        (err)=>{
+        error: (err) => {
           this.errorMessage = "Could not delete user."
           console.log(err)
         }
-      )
+      })
     }
   }
 

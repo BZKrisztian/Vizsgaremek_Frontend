@@ -41,7 +41,7 @@
     <div *ngFor="let task of tasks[list.list_Id]" >
       <app-task-item
         [task]="task"
-        (updatedTask)="onTaskUpdate($event)"
+        (updatedTask)="updateTask($event)"
         (deleteTask)="onTaskDeletion(list.list_Id,$event)"
         (editTask)="onTaskEdit($event)"
       ></app-task-item>

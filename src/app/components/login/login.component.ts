@@ -34,21 +34,20 @@ import { CommonModule } from '@angular/common';
       if (this.loginForm.invalid){
         return
       }
-      this.authService.login(this.loginForm.value).subscribe(
-        {
-          next: (res:any)=>{
-            this.authService.saveToken(res.token)
-            if(this.authService.getCurrentAdmin()){
-              this.router.navigate(['/overseer'])
-            }else{
-              this.router.navigate(['/homepage'])
-            }
-          },
-          error: (err)=>{
-            this.errorMessage = "Thou wouldst seem to not belong here. Return from where thou camst."
-            console.log(err)
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          if(res.admin){
+            this.router.navigate(['/overseer']);
+          }else{
+            this.router.navigate(['/homepage']);
           }
+        },
+        error: (err) => {
+          this.errorMessage = "Login failed";
+          console.log(err);
+          this.loginForm.reset();
         }
+      }
       )
     }
   }

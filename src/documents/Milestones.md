@@ -1,4 +1,7 @@
 # FRONTEND:
+	INTEGRATION:
+		- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
+		- ensure no business logic remains on frontend
 	PROBLEMS/THINGS TO FIX:
 		- {ADMIN_LOGIN}: Setting up admin login => process to create admins(manually, on backend?)
 			-> admin login procedure :

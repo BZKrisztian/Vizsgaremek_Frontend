@@ -11,7 +11,7 @@ export class TaskService {
   // private tasks: Task[] = [];
   // private tasklist: TaskList[] = [];
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://localhost:7096/api';
   // http://localhost:3000 => url for testing with json server
   // reminders for the URLS => dont forget to integrate later
   //  https://localhost:7096/api
@@ -29,9 +29,9 @@ export class TaskService {
     );
   }
   addTask(task: Task): Observable<Task> {
-    if(!task.task_Priority){
-      task.task_Priority = 'low';
-    }
+    // if(!task.task_Priority){
+    //   task.task_Priority = 'low';
+    // }
     return this.http.post<Task>(`${this.apiUrl}/tasks`, task);
   }
   updateTask(updatedTask: Task): Observable<Task> {
@@ -54,34 +54,31 @@ export class TaskService {
       updatedTaskList
     );
   }
-  // deleteTaskList(list_Id: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
-  // }
-  //we wont need this anymore.
+   deleteTaskList(list_Id: number): Observable<void> {
+     return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
+   }
 
-  //so, this method is for deleting every task within a list, and then the list itself
-  //in case of interest, this method is called 'cascading'
-  Order66(list_Id: number): Observable<void>{
-    return this.getTasks(list_Id).pipe(
-      switchMap(
-        (tasks)=>{
-          if(tasks.length>0){
-            const purge = tasks.map(
-              task => this.deleteTask(task.task_Id)
-            )
-            return forkJoin(purge).pipe(
-              switchMap(
-                ()=>this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
-              )
-            )
-          }
-          else{
-            return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
-          }
-        }
-      )
-    )
-  }
+  // Order66(list_Id: number): Observable<void>{
+  //   return this.getTasks(list_Id).pipe(
+  //     switchMap(
+  //       (tasks)=>{
+  //         if(tasks.length>0){
+  //           const purge = tasks.map(
+  //             task => this.deleteTask(task.task_Id)
+  //           )
+  //           return forkJoin(purge).pipe(
+  //             switchMap(
+  //               ()=>this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
+  //             )
+  //           )
+  //         }
+  //         else{
+  //           return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
+  //         }
+  //       }
+  //     )
+  //   )
+  // }
 
 
 

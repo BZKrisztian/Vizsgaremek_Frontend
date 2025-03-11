@@ -16,12 +16,15 @@ import * as CryptoJS from 'crypto-js';
 })
 export class RegistrationComponent implements OnInit {
 
-  registrationForm: FormGroup;
+  registrationForm!: FormGroup;
 
   errorMessage: string = '';
   successMessage: string = '';
 
   constructor(private formBuilderReg: FormBuilder, private authservice: AuthService) {
+  }
+
+  ngOnInit(): void {
     this.registrationForm = this.formBuilderReg.group(
       {
         username: ['', [Validators.required,Validators.minLength(6)]],
@@ -30,8 +33,6 @@ export class RegistrationComponent implements OnInit {
       } //for multiple validators, we need them in an array[]
     )
   }
-
-  ngOnInit(): void {}
 
 
   onSubmit():void{
@@ -45,22 +46,20 @@ export class RegistrationComponent implements OnInit {
         acc_CR_D: new Date(),
         acc_UP_D: new Date()
       }
-      this.authservice.register(newUser).subscribe(
-        (res)=>
-          {
-            this.successMessage = "Registration successful! :D"
-            this.errorMessage = ""
-            console.log("Succesfully registered C:",res)
-            this.registrationForm.reset()
-          },
-        (err)=>
-          {
-            this.errorMessage = "Registration failed, maybe try again? :C"
-            this.successMessage = ""
-            console.error(err)
-            this.registrationForm.reset()
-          }
-      )
+      this.authservice.register(newUser).subscribe({
+        next: (res) => {
+          this.successMessage = "Registration successful";
+          console.log(res)
+          this.errorMessage = '';
+          this.registrationForm.reset();
+        },
+        error: (err) => {
+          this.errorMessage = "Registration failed";
+          console.log(err)
+          this.successMessage = '';
+          this.registrationForm.reset();
+        }
+      })
     }
   }
 
