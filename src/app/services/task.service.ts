@@ -58,29 +58,4 @@ export class TaskService {
      return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
    }
 
-  // Order66(list_Id: number): Observable<void>{
-  //   return this.getTasks(list_Id).pipe(
-  //     switchMap(
-  //       (tasks)=>{
-  //         if(tasks.length>0){
-  //           const purge = tasks.map(
-  //             task => this.deleteTask(task.task_Id)
-  //           )
-  //           return forkJoin(purge).pipe(
-  //             switchMap(
-  //               ()=>this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
-  //             )
-  //           )
-  //         }
-  //         else{
-  //           return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`)
-  //         }
-  //       }
-  //     )
-  //   )
-  // }
-
-
-
-
 }

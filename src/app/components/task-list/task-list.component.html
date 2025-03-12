@@ -41,7 +41,7 @@
     <div *ngFor="let task of tasks[list.list_Id]" >
       <app-task-item
         [task]="task"
-        (updatedTask)="updateTask($event)"
+        (updatedTask)="onTaskUpdate()"
         (deleteTask)="onTaskDeletion(list.list_Id,$event)"
         (editTask)="onTaskEdit($event)"
       ></app-task-item>
@@ -66,7 +66,7 @@
   <!--editing form for task-->
   <div *ngIf="taskEditingProc">
     <h3>Editing Task: </h3>
-    <form (ngSubmit)="saveEditedTask()">
+    <form (ngSubmit)="onTaskUpdate()">
       <input type="text" [(ngModel)]="taskEditingProc.task_Title"
         name="title" required placeholder="Task Title" >
       <textarea

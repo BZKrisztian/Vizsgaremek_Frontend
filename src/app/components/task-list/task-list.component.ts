@@ -101,7 +101,7 @@ export class TaskListComponent implements OnInit {
   cancelEditTask():void{
     this.taskEditingProc = null;
   }
-  updateTask():void{
+  onTaskUpdate():void{
     if(this.taskEditingProc){
       this.taskService.updateTask(this.taskEditingProc).subscribe(
         ()=>{

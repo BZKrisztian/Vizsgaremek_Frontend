@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-registration',
@@ -37,12 +36,11 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit():void{
     if(this.registrationForm.valid){
-      const passwordEncrypt = CryptoJS.SHA256(this.registrationForm.value.password).toString()
       const newUser: User = {
         user_Id : 0,
         userName: this.registrationForm.value.username,
         email: this.registrationForm.value.email,
-        password: passwordEncrypt,
+        password: this.registrationForm.value.password,
         acc_CR_D: new Date(),
         acc_UP_D: new Date()
       }
