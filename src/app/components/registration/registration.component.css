@@ -1,7 +1,8 @@
+@import '../general-styling.css';
 .registration-module{
 
 }
-.personal-data{
+.personal-data{ 
     text-align: end;
 }
 .registration-form{

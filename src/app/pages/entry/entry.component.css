@@ -1,14 +1,23 @@
+@import '../../components/general-styling.css';
 .entry{
     display: flex;
     justify-content: center; /* Horizontally centers content */
     align-items: center; /* Vertically centers content */
     height: 100%; /* Make the container fill the height of the page */
 }
-#container{
-
+.entry-card{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(88, 88, 255);
+    width: 20%;
+    border-radius: 1.5rem;
+    height: 40%;
 }
-.app-reg{
+#app-reg{
+    display: none;
 }   
-.app-login{
+#loginElement{
+    display: none;
 }
 
