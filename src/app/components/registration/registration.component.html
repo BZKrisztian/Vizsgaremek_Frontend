@@ -26,7 +26,7 @@
       <div>
         <label for="registration-username">Username:</label>
         <input id="registration-username" formControlName="username" type="text" />
-        <div *ngIf="registrationForm.get('userName')?.invalid && registrationForm.get('userName')?.touched">
+        <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
           <small>Username is required. It must also be at least 6 characters</small>
         </div>
       </div>

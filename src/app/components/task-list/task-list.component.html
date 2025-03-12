@@ -1,6 +1,5 @@
 <div class="task-list">
 
-  <!--place tasklist creation from homepage to here(html+ts)-->
   <div>
     <h3>Create New Task List</h3>
     <form #createTaskListForm="ngForm" (ngSubmit)="createTaskList()">
@@ -23,7 +22,7 @@
 
         <!--Add form for Task-->
         <div>
-          <h4>Add New Task</h4>
+          <!-- <h4>Add New Task</h4> unnecessary? -->
           <form #createTaskForm="ngForm" (ngSubmit)="createTask(list.list_Id)">
             <input type="text" [(ngModel)]="newTask.task_Title"
             name="tasktitle" required placeholder="Task Title">
@@ -44,7 +43,8 @@
         [task]="task"
         (updatedTask)="onTaskUpdate($event)"
         (deleteTask)="onTaskDeletion(list.list_Id,$event)"
-      ></app-task-item> <!-- (list.list_Id,$event) ==> list.list_Id == unnecessary(?) -->
+        (editTask)="onTaskEdit($event)"
+      ></app-task-item>
     </div>
   
     <!--editing form for tasklist-->
@@ -52,7 +52,8 @@
       <form (ngSubmit)="onTaskListUpdate()">
         <input type="text" [(ngModel)]="taskListEditingProc.list_Title"
         name="listTitle" required placeholder="List Title">
-        <textarea name="listDescription" placeholder="List Description"
+        <textarea [(ngModel)]="taskListEditingProc.list_Description"
+        name="listDescription" placeholder="List Description"
         ></textarea>
         <button type="submit">Save List</button>
         <button type="button" (click)="cancelTaskListEdit()">Cancel</button>

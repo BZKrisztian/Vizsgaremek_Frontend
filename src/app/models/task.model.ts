@@ -8,4 +8,5 @@ export interface Task {
   due_Date?: Date;
   creation_Date: Date;
   update_Date: Date;
+  owner_Id?: number;
 }

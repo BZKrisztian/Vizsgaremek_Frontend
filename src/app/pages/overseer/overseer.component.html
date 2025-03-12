@@ -1,3 +1,20 @@
-<div>
+<div class="overseer">
+  <h1>Overseer Dashboard</h1>
+  <h2>User Management</h2>
   <app-userlist></app-userlist>
+
+  <h3>Daily Motivationals</h3>
+  <div>
+    <form (ngSubmit)="addDailyMot()">
+      <textarea type="text" [(ngModel)]="dailyMot"
+      name="dailyMot" required placeholder="Daily Motivational"></textarea>
+      <button type="submit">Add Motivational</button>
+    </form>
+    <ul>
+      <li *ngFor="let dailyMot of dailyMots; let i = index">
+        {{ dailyMot }}
+        <button (click)="removeDailyMot(i)">Remove</button>
+      </li>
+    </ul>
+  </div>
 </div>

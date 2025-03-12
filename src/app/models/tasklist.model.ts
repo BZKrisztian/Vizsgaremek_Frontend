@@ -6,5 +6,6 @@ export interface TaskList {
     list_Description?: string;
     creation_Date: Date;
     update_Date: Date;
-    tasks?: Task[]
-  }
+    tasks?: Task[],
+    owner_Id?: number
+}

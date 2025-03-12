@@ -1,4 +1,26 @@
 {
+  "users": [
+    {
+      "user_Id": 1,
+      "userName": "JohnDoe",
+      "email": "john@example.com",
+      "password": "hashed_password_1"
+    },
+    {
+      "user_Id": 2,
+      "userName": "JaneDoe",
+      "email": "jane@example.com",
+      "password": "hashed_password_2"
+    }
+  ],
+  "adminUsers": [
+    {
+      "adminUser_Id": 99,
+      "adminUserName": "AdminOne",
+      "email": "admin@example.com",
+      "password": "hashed_admin_password"
+    }
+  ],
   "tasklists": [
     {
       "id": "f9bb",
@@ -6,7 +28,8 @@
       "list_Title": "My First List",
       "list_Description": "This is a sample list",
       "creation_Date": "2025-02-26T00:00:00.000Z",
-      "update_Date": "2025-02-26T00:00:00.000Z"
+      "update_Date": "2025-02-26T00:00:00.000Z",
+      "owner_Id": 1
     },
     {
       "id": "2e6e",
@@ -14,7 +37,8 @@
       "list_Title": "asd",
       "list_Description": "ssdd",
       "creation_Date": "2025-02-26T17:42:38.146Z",
-      "update_Date": "2025-02-26T17:42:38.146Z"
+      "update_Date": "2025-02-26T17:42:38.146Z",
+      "owner_Id": 2
     },
     {
       "id": "f935",
@@ -22,15 +46,8 @@
       "list_Title": "ASDASD",
       "list_Description": "yesn't",
       "creation_Date": "2025-02-26T18:25:43.447Z",
-      "update_Date": "2025-02-26T18:25:43.447Z"
-    },
-    {
-      "id": "e43f",
-      "list_Id": 4,
-      "list_Title": "ASDAd",
-      "list_Description": "asdasds",
-      "creation_Date": "2025-02-27T07:30:46.360Z",
-      "update_Date": "2025-02-27T07:30:46.360Z"
+      "update_Date": "2025-02-26T18:25:43.447Z",
+      "owner_Id": 99
     }
   ],
   "tasks": [
@@ -44,7 +61,8 @@
       "due_Date": "2025-03-01T00:00:00.000Z",
       "creation_Date": "2025-02-26T00:00:00.000Z",
       "update_Date": "2025-02-26T00:00:00.000Z",
-      "id": "9bf7"
+      "id": "9bf7",
+      "owner_Id": 1
     },
     {
       "task_Id": 2,
@@ -56,18 +74,8 @@
       "due_Date": "2025-03-01T00:00:00.000Z",
       "creation_Date": "2025-02-26T00:00:00.000Z",
       "update_Date": "2025-02-26T00:00:00.000Z",
-      "id": "9bf7"
-    },
-    {
-      "id": "35ab",
-      "task_Id": 0,
-      "taskList_Id": 1,
-      "task_Title": "Sample 2?",
-      "task_Description": "",
-      "task_Status": false,
-      "task_Priority": "low",
-      "creation_Date": "2025-03-03T10:27:27.655Z",
-      "update_Date": "2025-03-03T10:27:27.655Z"
+      "id": "9bf8",
+      "owner_Id": 2
     }
   ]
 }

@@ -1,43 +1,53 @@
 # FRONTEND:
 	PROBLEMS/THINGS TO FIX:
-		- ensure all functions of lists and tasks work:
-			|-> basic CRUD
-				|-> Create = Lists and within them, Tasks
-					- button and action to create task => form similar to the one when editing
-				|-> Update = function/button to start modification process
-					Defining every optional part of a task or task-list / button to edit whatever part of task/tasklist
-		- ensure task-status works + it can be set after creation as part of
-			- html drop-down for choosing(?)
+		- {ADMIN_LOGIN}: Setting up admin login => process to create admins(manually, on backend?)
+			-> admin login procedure :
+				|->casual login, recognition of admin upon login ( check email AND password(?) )
+		- Admin side :
+			|-> Read/(Update?)/Delete of: users
+			|-> Create/Delete of : daily motivationals (+ notices later on(eg.:server maintenance))
+		- GUARDS: ensure AuthGuard and AdminGuard work together( no infinite loops, call-in order(first auth, then admin) etc. )
+		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
+			- + ensure admins can create tasklists and tasks, backend binds their data to them(admin users) accordingly
+		- ensure completed task is different somehow(event for CSS change?)
+		- {Task-List+Task-Item adding/editing} Wrap the forms
+			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
+			- Wrap the Task-item adding form and bind it to appear at the click of a button
 	SOLVED(?):
+		- ensure only admins can go to the Overseer(admin)page
+			- upon an admin's login, automatically go to Overseer page
+			- Should admins be able to go to regular user page(Homepage)? = yes and done ( CHECK if admins can create lists/tasks and the data is bound&saved to them on backend )
+		- Ensure userdata is saved, encrypt password
+		- put a confirmation message for list deletion as a safety measure
 		- Models are good(for now?)
 		- Binding(taskList_Id) between tasklist and task is good
 			- ensure the task model's taskList_Id is properly bound to tasklist model(tasklist deletion MUST delete all tasks as well)
-		- CRUD for tasklists+tasks are good
 		- Task status toggle is logically sound
-		|-> basic CRUD:
-			- Read = We got 'em all
-			- Delete = done, cascades when tasklist is deleted
+		- CRUD for tasklists+tasks are good
+			|-> basic CRUD:
+				- Read = We got 'em all
+				- Delete = done, cascades when tasklist is deleted
+				- Create = Lists and within them, Tasks
+					- button and action to create task => form similar to the one when editing
+				- Update = function/button to start modification process
+					Defining every optional part of a task or task-list / button to edit whatever part of task/tasklist
+		- ensure task-status works and that it can be set/toggled after its initial creation
+		- Choosing Priority
+		- put a minlength at username at registrationForm, write code for html part too
 
 	Things to IMPLEMENT:
 		IMPORTANT:
-			- Ensure userdata is saved, encrypt password
 			- Hungarian language support
-			- {ADMIN_LOGIN}: Setting up admin login => process to create admins(decide)
-				-> admin login procedure :
-					|->continue with admin login component
-					|->casual login, recognition of admin upon login
-			- Admin side :
-				|-> Read/Update/Delete of: users
-				|-> Create of : daily motivationals / notices(eg.:server maintenance)
 			
 		LESS IMPORTANT:
+			- ensure toggle completion can be clicked again, resetting the state of the task
 			- Email notification upon registration
 				|-> Notification for password changes(?)
-			- Choosing Priority
 			- Setting Due Date
 			- Ordering based on importance of list and list-item
+			- switch warning message method for deleting tasklist( current = javascript -> confirm() )
 		OPTIONAL:
-			- Dark-Mode(?) -> make site already be dark??
+			- Dark-Mode(?) -> make site already be dark?? // Toggle button for body(CSS)
 			- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )
 			- Timer(Pomodoro) -> locally
 			- Make site sticky on browser(can it even be done?)
@@ -52,12 +62,9 @@
 				|-> Update => button to modify existing diary entry's datamodel
 				|-> Delete => delete, lol
 
-	Things to solve within code:
-		- put a minlength at username at registrationForm, write code for html part too
 	
 # CSS/BOOTSTRAP:
 	PROBLEMS/THINGS TO FIX:
-	
 	Things to IMPLEMENT:
 		IMPORTANT:
 		- Page design:

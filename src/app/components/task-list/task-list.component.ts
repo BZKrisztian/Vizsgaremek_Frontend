@@ -6,6 +6,7 @@ import { TaskList } from '../../models/tasklist.model';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-task-list',
@@ -38,21 +39,30 @@ export class TaskListComponent implements OnInit {
     tasks:[]
   }
 
-  //ensures the task is being held for edit
+  //ensures the task/tasklist is being held for edit
   taskEditingProc: Task | null = null;
-  //ensures the tasklist is being held for edit
   taskListEditingProc: TaskList | null = null;
 
-  constructor(private taskService: TaskService) {}
+  //variables for modal toggles
+  showCreateTaskListForm: boolean = false;
+  showCreateTaskForm: {[taskList_Id: number]: boolean}={};
+
+  constructor(private taskService: TaskService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadTaskLists();
   }
 
   loadTaskLists() {
+    const owner = this.authService.getCurrentOwner();
+    if(!owner){
+      console.error("no owner found")
+      return
+    }
+
     this.taskService.getTaskLists().subscribe(
       (lists)=>{
-        this.taskLists=lists;
+        this.taskLists=lists.filter(list => list.owner_Id == owner.id);
         lists.forEach(
           (list)=>{this.loadTasks(list.list_Id)}
         );
@@ -60,18 +70,31 @@ export class TaskListComponent implements OnInit {
     )
   }
   loadTasks(list_Id: number):void{
+    const owner = this.authService.getCurrentOwner();
+    if(!owner){
+      console.error("no owner found")
+      return
+    }
     this.taskService.getTasks(list_Id).subscribe(
-      (tasks)=>{this.tasks[list_Id]=tasks}
+      (tasks)=>{this.tasks[list_Id]=tasks.filter(task => task.owner_Id == owner.id)}
     )
   }
 
-  // Task Creation
+  // ===Task Creation===
   createTask(list_Id:number):void{
     this.newTask.taskList_Id= list_Id;
     this.newTask.creation_Date = new Date();
     this.newTask.update_Date = new Date();
+
+    const owner = this.authService.getCurrentOwner();
+    if(!owner){
+      console.error("no owner found")
+      return
+    }
+    this.newTask.owner_Id = owner.id
+  
     this.taskService.addTask(this.newTask).subscribe(
-      (createdTask)=>{this.loadTasks(list_Id)
+      ()=>{this.loadTasks(list_Id)
         this.newTask = {
           task_Id:0,
           taskList_Id:0,
@@ -82,11 +105,12 @@ export class TaskListComponent implements OnInit {
           due_Date: undefined,
           creation_Date: new Date(),
           update_Date: new Date(),
+          owner_Id: owner.id
         }
+        this.showCreateTaskForm[list_Id] = false;
       }
     )
   }
-
   // ===Task update section===
   onTaskEdit(task:Task):void{
     this.taskEditingProc={...task};
@@ -123,12 +147,20 @@ export class TaskListComponent implements OnInit {
     )
   }
 
-  //TaskList Creation
+  // ===TaskList Creation===
   createTaskList():void{
     this.newTaskList.creation_Date = new Date();
     this.newTaskList.update_Date = new Date();
+
+    const owner = this.authService.getCurrentOwner();
+    if(!owner){
+      console.error("no owner found")
+      return
+    }
+    this.newTaskList.owner_Id = owner.id
+
     this.taskService.addTaskList(this.newTaskList).subscribe(
-      (createdList)=>{
+      ()=>{
         this.loadTaskLists();
         this.newTaskList = {
           list_Id:0,
@@ -136,12 +168,13 @@ export class TaskListComponent implements OnInit {
           list_Description:'',
           creation_Date: new Date(),
           update_Date: new Date(),
-          tasks:[]
+          tasks:[],
+          owner_Id: owner.id
         }
+        this.showCreateTaskListForm = false;
       }
     )
   }
-
   // ===Tasklist update section===
   onTaskListEdit(taskList:TaskList):void{
     this.taskListEditingProc= {...taskList};
@@ -161,7 +194,8 @@ export class TaskListComponent implements OnInit {
   }
   // ===Tasklist update section END===
   onTaskListDeletion(list_Id: number):void{
-    this.taskService.Order66(list_Id).subscribe(
+    if(confirm("Are you sure you want to delete this list? This will also delete all tasks within the list."))
+      {this.taskService.Order66(list_Id).subscribe(
       ()=>{
         this.taskLists = this.taskLists.filter(
           (list)=>list.list_Id!=list_Id
@@ -170,5 +204,15 @@ export class TaskListComponent implements OnInit {
       }
     )
   }
+  }
+
+  //Model section
+  toggleCreateTaskListForm():void{
+    this.showCreateTaskListForm = !this.showCreateTaskListForm;
+  }
+  toggleCreateTaskForm(list_Id: number):void{
+    this.showCreateTaskForm[list_Id] = !this.showCreateTaskForm[list_Id];
+  }
+
 
 }
