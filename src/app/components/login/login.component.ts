@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css'],
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NgIf
   ]
 })
   export class LoginComponent implements OnInit {

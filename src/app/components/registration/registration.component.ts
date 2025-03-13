@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import * as CryptoJS from 'crypto-js';
 
@@ -11,7 +11,8 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./registration.component.css'],
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NgIf
   ],
 })
 export class RegistrationComponent implements OnInit {
