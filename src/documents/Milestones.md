@@ -12,7 +12,6 @@
 		- GUARDS: ensure AuthGuard and AdminGuard work together( no infinite loops, call-in order(first auth, then admin) etc. )
 		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
 			- + ensure admins can create tasklists and tasks, backend binds their data to them(admin users) accordingly
-		- ensure completed task is different somehow(event for CSS change?)
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
 			- Wrap the Task-item adding form and bind it to appear at the click of a button
@@ -20,6 +19,7 @@
 		- ensure only admins can go to the Overseer(admin)page
 			- upon an admin's login, automatically go to Overseer page
 			- Should admins be able to go to regular user page(Homepage)? = yes and done ( CHECK if admins can create lists/tasks and the data is bound&saved to them on backend )
+		- ensure completed task is different somehow(event for CSS change?)
 		- Ensure userdata is saved, encrypt password
 		- put a confirmation message for list deletion as a safety measure
 		- Models are good(for now?)

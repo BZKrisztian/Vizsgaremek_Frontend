@@ -1,3 +1,31 @@
-<p>
-  taskdialog works!
-</p>
+<div class="taskdialog">
+  <div>
+    <h3>{{task? 'Edit Task':'Add Task'}}</h3>
+    <form (ngSubmit)="onSave()">
+      <label for="taskTitle">Title: </label>
+      <input id="taskTitle" type="text"
+        [(ngModel)]="localTask.task_Title" name="tasktitle" required>
+
+      <label for="taskDescription">Description: </label>
+      <textarea name="description" id="taskDescription"
+        [(ngModel)]="localTask.task_Description"></textarea>
+
+      <label for="taskPriority"></label>
+      <select name="priority" id="taskPriority"
+        [(ngModel)]="localTask.task_Priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <label for="dueDate">Due Date: </label>
+      <input id="dueDate" type="date"
+        [(ngModel)]="localTask.due_Date">
+
+      <div class="modal-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

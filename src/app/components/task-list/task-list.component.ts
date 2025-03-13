@@ -7,45 +7,25 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { TaskdialogComponent } from '../dialog-comps/taskdialog/taskdialog.component';
+import { TasklistdialogComponent } from "../dialog-comps/tasklistdialog/tasklistdialog.component";
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
-  imports: [TaskItemComponent,FormsModule, CommonModule],
+  imports: [TaskItemComponent, FormsModule, CommonModule,
+    TaskdialogComponent, TasklistdialogComponent],
 })
 export class TaskListComponent implements OnInit {
   taskLists: TaskList[] = [];
   tasks: {[taskList_Id: number]:Task[]}={};
 
-  newTask: Task = {
-    task_Id: 0,
-    taskList_Id: 0,
-    task_Title: '',
-    task_Description: '',
-    task_Status: false,
-    task_Priority: 'low',
-    due_Date: undefined,
-    creation_Date: new Date(),
-    update_Date: new Date()
-  }
-
-  newTaskList: TaskList = {
-    list_Id:0,
-    list_Title:'',
-    list_Description:'',
-    creation_Date: new Date(),
-    update_Date: new Date(),
-    tasks:[]
-  }
-
-  //ensures the task/tasklist is being held for edit
-  taskEditingProc: Task | null = null;
-  taskListEditingProc: TaskList | null = null;
-
-  //variables for modal toggles
-  showCreateTaskListForm: boolean = false;
-  showCreateTaskForm: {[taskList_Id: number]: boolean}={};
+  showTaskDialog: boolean = false
+  showTaskListDialog: boolean = false
+  currentEditingTask: Task | null = null
+  currentEditingTaskList: TaskList | null = null
+  currentTaskListId: number | null = null
 
   constructor(private taskService: TaskService, private authService: AuthService) {}
 
@@ -72,56 +52,77 @@ export class TaskListComponent implements OnInit {
     )
   }
 
-  // ===Task Creation===
-  createTask(list_Id:number):void{
-    this.newTask.taskList_Id=list_Id;
-    this.newTask.creation_Date=new Date();
-    this.newTask.update_Date=new Date();
-    this.taskService.addTask(this.newTask).subscribe(
-      ()=>{
-        this.loadTasks(list_Id);
-        this.newTask = {
-          task_Id: 0,
-          taskList_Id: 0,
-          task_Title: '',
-          task_Description: '',
-          task_Status: false,
-          task_Priority: 'low',
-          due_Date: undefined,
-          creation_Date: new Date(),
-          update_Date: new Date()
-        }
-      }
-    )
+  // === Task Modal Methods ===
+  openTaskDialog4Edit(task:Task):void{
+    this.currentEditingTask=task;
+    this.showTaskDialog=true
   }
-  // ===Task update section===
-  onTaskEdit(task:Task):void{
-    this.taskEditingProc={...task};
+  openTaskDialog4Add(taskList_Id: number):void{
+    this.currentEditingTask=null;
+    this.currentTaskListId=taskList_Id;
+    this.showTaskDialog=true
   }
-  cancelEditTask():void{
-    this.taskEditingProc = null;
-  }
-  onTaskUpdate():void{
-    if(this.taskEditingProc){
-      this.taskService.updateTask(this.taskEditingProc).subscribe(
+  onTaskDialogSave(task: Task):void{
+    if(this.currentEditingTask){
+      this.taskService.updateTask(task).subscribe(
         ()=>{
-          this.loadTasks(this.taskEditingProc!.taskList_Id);
-          this.taskEditingProc=null;
+          this.loadTasks(task.taskList_Id)
+          this.closeTaskDialog()
         }
-      );
+      )
+    }else if(this.currentTaskListId){
+      task.taskList_Id = this.currentTaskListId;
+      task.creation_Date = new Date();
+      task.update_Date = new Date();
+      this.taskService.addTask(task).subscribe(
+        ()=>{
+          this.loadTasks(task.taskList_Id)
+          this.closeTaskDialog()
+        }
+      )
     }
   }
-  // onTaskUpdate(updatedTask: Task):void {
-  //   this.taskService.updateTask(updatedTask).subscribe(
-  //     ()=>{
-  //       this.loadTasks(updatedTask.taskList_Id);
-  //       if(this.taskEditingProc && this.taskEditingProc.task_Id==updatedTask.task_Id){
-  //         this.taskEditingProc=null;
-  //       }
-  //     }
-  //   )
-  // }
-  // ===Task update section END===
+  closeTaskDialog():void{
+    this.currentEditingTask=null;
+    this.currentTaskListId=null;
+    this.showTaskDialog=false
+  }
+
+  // === TaskList Modal Methods ===
+  openTaskListDialog4Edit(tasklist:TaskList):void{
+    this.currentEditingTaskList=tasklist;
+    this.showTaskListDialog=true
+  }
+  openTaskListDialog4Add():void{
+    this.currentEditingTaskList=null;
+    this.showTaskListDialog=true
+  }
+  onTaskListDialogSave(taskList:TaskList):void{
+    if(this.currentEditingTaskList){
+      taskList.update_Date = new Date();
+      this.taskService.updateTaskList(taskList).subscribe(
+        ()=>{
+          this.loadTaskLists()
+          this.closeTaskListDialog()
+        }
+      )
+    }else{
+      taskList.creation_Date = new Date();
+      taskList.update_Date = new Date();
+      this.taskService.addTaskList(taskList).subscribe(
+        ()=>{
+          this.loadTaskLists()
+          this.closeTaskListDialog()
+        }
+      )
+    }
+  }
+  closeTaskListDialog():void{
+    this.currentEditingTaskList=null;
+    this.showTaskListDialog=false
+  }
+
+
   onTaskDeletion(list_Id: number,task_Id: number):void {
     this.taskService.deleteTask(task_Id).subscribe(
       ()=>{this.tasks[list_Id]=this.tasks[list_Id].filter(
@@ -129,58 +130,12 @@ export class TaskListComponent implements OnInit {
       )}
     )
   }
-
-  // ===TaskList Creation===
-  createTaskList():void{
-    this.newTaskList.creation_Date = new Date();
-    this.newTaskList.update_Date = new Date();
-    this.taskService.addTaskList(this.newTaskList).subscribe(
-      ()=>{
-        this.loadTaskLists();
-        this.newTaskList = {
-          list_Id:0,
-          list_Title:'',
-          list_Description:'',
-          creation_Date: new Date(),
-          update_Date: new Date(),
-          tasks:[]
-        }
-      }
-    )
-  }
-  // ===Tasklist update section===
-  onTaskListEdit(taskList:TaskList):void{
-    this.taskListEditingProc= {...taskList};
-  }
-  cancelTaskListEdit():void{
-    this.taskListEditingProc = null;
-  }
-  onTaskListUpdate():void{
-    if(this.taskListEditingProc){
-      this.taskListEditingProc.update_Date = new Date();
-      this.taskService.updateTaskList(this.taskListEditingProc).subscribe(
-        ()=>{
-          this.loadTaskLists();
-          this.taskListEditingProc = null;
-        }
-      )
-    }
-  }
-  // ===Tasklist update section END===
   onTaskListDeletion(list_Id: number):void{
     if(confirm("Are you sure you want to delete this list? This will also delete all tasks within the list."))
       {this.taskService.deleteTaskList(list_Id).subscribe(
       ()=>{this.loadTaskLists();}
     )
   }
-  }
-
-  //Model section
-  toggleCreateTaskListForm():void{
-    this.showCreateTaskListForm = !this.showCreateTaskListForm;
-  }
-  toggleCreateTaskForm(list_Id: number):void{
-    this.showCreateTaskForm[list_Id] = !this.showCreateTaskForm[list_Id];
   }
 
 

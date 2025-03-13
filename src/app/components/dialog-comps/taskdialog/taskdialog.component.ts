@@ -1,15 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Optional, Output, SimpleChanges } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Task } from '../../../models/task.model';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-taskdialog',
   templateUrl: './taskdialog.component.html',
-  styleUrls: ['./taskdialog.component.css']
+  styleUrls: ['./taskdialog.component.css'],
+  imports:[CommonModule,ReactiveFormsModule,FormsModule]
 })
 export class TaskdialogComponent implements OnInit {
 
-  constructor() { }
+  @Input() task: Task | null = null // IF task = editing, IF nothing = creating
+  @Input() taskListId: number | null = null
+  @Output() save = new EventEmitter<Task>()
+  @Output() cancel = new EventEmitter<void>()
 
-  ngOnInit() {
+  //check when testing = see if when it edits, it loads the data of the task
+
+  constructor( @Optional() public dialogRef: MatDialogRef<TaskdialogComponent>) { }
+
+  localTask: Task ={
+    task_Id: 0,
+    taskList_Id: this.taskListId||0,
+    task_Title: '',
+    task_Description: '',
+    task_Status: false,
+    task_Priority: 'low',
+    due_Date: undefined,
+    creation_Date: new Date(),
+    update_Date: new Date()
   }
+
+  //look up SimpleChanges a bit more
+  ngOnChanges(changes: SimpleChanges): void{
+    if(this.task){ //task cloning for when we edit
+      this.localTask = {...this.task}
+    }else if(this.taskListId){
+      this.localTask.taskList_Id = this.taskListId
+      this.localTask.task_Title = ''
+      this.localTask.task_Description = ''
+    }
+  }
+
+  ngOnInit():void {
+  }
+
+
+  onSave():void{
+    this.localTask.update_Date = new Date();
+    if(!this.task){
+      this.localTask.creation_Date = new Date()
+    }
+    this.save.emit(this.localTask)
+    if(this.dialogRef){
+      this.dialogRef.close();
+    }
+  }
+
+  onCancel():void{
+    this.cancel.emit();
+  }
+  
 
 }

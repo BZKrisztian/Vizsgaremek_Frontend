@@ -1,3 +1,17 @@
-<p>
-  tasklistdialog works!
-</p>
+<div class="tasklistdialog">
+  <h3>{{taskList? 'Edit Task List':'Add Task List'}}</h3>
+  <form (ngSubmit)="onSave()">
+    <label for="listTitle">Title: </label>
+    <input type="text" name="Title" id="listTitle" required
+      [(ngModel)]="localTaskList.list_Title">
+
+    <label for="listDescription">Description: </label>
+    <textarea name="Description" id="listDescription"
+      [(ngModel)]="localTaskList.list_Description"></textarea>
+
+    <div class="modal-buttons">
+      <button type="submit">Save</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

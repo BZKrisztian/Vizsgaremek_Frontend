@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task.model';
 import { TaskList } from '../models/tasklist.model';
@@ -8,30 +8,17 @@ import { TaskList } from '../models/tasklist.model';
   providedIn: 'root',
 })
 export class TaskService {
-  // private tasks: Task[] = [];
-  // private tasklist: TaskList[] = [];
 
   private apiUrl = 'https://localhost:7096/api';
-  // http://localhost:3000 => url for testing with json server
-  // reminders for the URLS => dont forget to integrate later
-  //  https://localhost:7096/api
-  //  https://localhost:7096/api/users
-  //  https://localhost:7096/api/adminUsers
-  //  https://localhost:7096/api/tasks
-  //  https://localhost:7096/api/taskLists
 
   constructor(private http: HttpClient) {}
 
   //taskCRUD
   getTasks(taskList_Id: number): Observable<Task[]> {
     return this.http.get<Task[]>(
-      `${this.apiUrl}/tasks?taskList_Id=${taskList_Id}`
-    );
+      `${this.apiUrl}/tasks?taskList_Id=${taskList_Id}`);
   }
   addTask(task: Task): Observable<Task> {
-    // if(!task.task_Priority){
-    //   task.task_Priority = 'low';
-    // }
     return this.http.post<Task>(`${this.apiUrl}/tasks`, task);
   }
   updateTask(updatedTask: Task): Observable<Task> {
@@ -50,9 +37,7 @@ export class TaskService {
   }
   updateTaskList(updatedTaskList: TaskList): Observable<TaskList> {
     return this.http.put<TaskList>(
-      `${this.apiUrl}/tasklists/${updatedTaskList.list_Id}`,
-      updatedTaskList
-    );
+      `${this.apiUrl}/tasklists/${updatedTaskList.list_Id}`,updatedTaskList);
   }
    deleteTaskList(list_Id: number): Observable<void> {
      return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
