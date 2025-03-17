@@ -38,7 +38,7 @@ export class TaskdialogComponent implements OnInit {
     if(this.task){ //task cloning for when we edit
       this.localTask = {...this.task}
     }else if(this.taskListId){
-      this.localTask.taskList_Id = this.taskListId
+      this.localTask.taskList_Id = this.taskListId || 0
       this.localTask.task_Title = ''
       this.localTask.task_Description = ''
     }

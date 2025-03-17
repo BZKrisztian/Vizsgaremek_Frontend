@@ -55,7 +55,6 @@ export class RegistrationComponent implements OnInit {
           this.errorMessage = "Registration failed";
           console.log(err)
           this.successMessage = '';
-          this.registrationForm.reset();
         }
       })
     }

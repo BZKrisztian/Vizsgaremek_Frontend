@@ -26,8 +26,8 @@ import { CommonModule } from '@angular/common';
     ngOnInit(): void {
       this.loginForm = this.formbuilderLg.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
-      }); // CHECK if i need the validator.minlegth at login if its defined/required at Registration
+        password: ['', [Validators.required]]
+      });
     }
   
     onSubmit(): void {

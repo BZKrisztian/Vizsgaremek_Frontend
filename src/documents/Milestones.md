@@ -3,6 +3,7 @@
 		- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
 		- ensure no business logic remains on frontend
 	PROBLEMS/THINGS TO FIX:
+		- Logout button + process
 		- {ADMIN_LOGIN}: Setting up admin login => process to create admins(manually, on backend?)
 			-> admin login procedure :
 				|->casual login, recognition of admin upon login ( check email AND password(?) )
@@ -15,6 +16,7 @@
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
 			- Wrap the Task-item adding form and bind it to appear at the click of a button
+	
 	SOLVED(?):
 		- ensure only admins can go to the Overseer(admin)page
 			- upon an admin's login, automatically go to Overseer page
