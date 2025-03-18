@@ -10,9 +10,10 @@ import { AdminUser } from '../models/adminuser.model';
 export class AuthService {
   private apiURL = 'https://localhost:7096/api';
 
+  // BehaviorSubject ==> container 4 current user(be it regular or admin = separate containers used depending on user type)
+  // currentXY$ ==> observable 4 current user
   private currentUser_BSub: BehaviorSubject<User|null>;
   public currentUser$ : Observable<User|null>;
-
   private currentAdmin_BSub: BehaviorSubject<AdminUser|null>;
   public currentAdmin$ : Observable<AdminUser|null>;
 
@@ -26,7 +27,7 @@ export class AuthService {
     this.currentAdmin$ = this.currentAdmin_BSub.asObservable();
   }
 
-  //getter 4 comps+guards
+  //getter 4 comps+guards / returns current user
   getCurrentUser(): User|null {
     return this.currentUser_BSub.value;
   }
@@ -34,10 +35,13 @@ export class AuthService {
     return this.currentAdmin_BSub.value
   }
 
+  // post request for backend
   register(userData: User): Observable<any> {
     return this.http.post<any>(`${this.apiURL}/register`, userData);
   }
-
+  // post request for backend ==> if token is received, it is saved to localstorage,
+  // and current user is set by looking at the response
+  // Then, behaviour subjects are updated ==> corresponding one is updated, other one is cleared
   login(credentials:{email:string,password:string}):Observable<any>{
     return this.http.post<any>(`${this.apiURL}/login`,credentials).pipe(
       tap((res)=>{
@@ -58,14 +62,15 @@ export class AuthService {
       })
     )
   }
-  
+  // gets token from localstorage
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
-
+  // checks if token is present, IF yes = logged in
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+  // clears localstorage, resets/nullifies behaviour subjects
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');

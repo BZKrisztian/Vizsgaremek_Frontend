@@ -34,23 +34,9 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
   }
 
-  // addTaskList() {
-  //   if (this.newTaskListTitle.trim()){
-  //     const newTaskList: TaskList = {
-  //       list_Id: 0,
-  //       list_Title: this.newTaskListTitle,
-  //       list_Description: this.newTaskListDescription,
-  //       creation_Date: new Date(),
-  //       update_Date: new Date()
-  //     }
-  //     this.taskService.addTaskList(newTaskList).subscribe(
-  //       ()=>{
-  //         this.newTaskListTitle = '';
-  //         this.newTaskListDescription = '';
-  //       }
-  //     )
-  //   }
-  // }
-
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/entry']);
+  }
 
 }

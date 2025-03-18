@@ -39,6 +39,7 @@ export class TaskService {
     return this.http.put<TaskList>(
       `${this.apiUrl}/tasklists/${updatedTaskList.list_Id}`,updatedTaskList);
   }
+  // specifically, this is/will be a cascading delete executed on backend
    deleteTaskList(list_Id: number): Observable<void> {
      return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
    }
