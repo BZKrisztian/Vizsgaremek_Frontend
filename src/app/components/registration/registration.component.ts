@@ -42,7 +42,8 @@ export class RegistrationComponent implements OnInit {
         email: this.registrationForm.value.email,
         password: this.registrationForm.value.password,
         acc_CR_D: new Date(),
-        acc_UP_D: new Date()
+        acc_UP_D: new Date(),
+        isAdmin: false
       }
       this.authservice.register(newUser).subscribe({
         next: (res) => {

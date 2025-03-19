@@ -36,7 +36,7 @@ import { CommonModule } from '@angular/common';
       }
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          if(res.admin){
+          if(res.user && res.user.isAdmin){
             this.router.navigate(['/overseer']);
           }else{
             this.router.navigate(['/homepage']);

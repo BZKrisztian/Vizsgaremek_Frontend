@@ -23,7 +23,8 @@ export class HomepageComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   isAdmin():boolean{
-    return this.authService.getCurrentAdmin() != null
+    const user = this.authService.getCurrentUser();
+    return user ? user.isAdmin : false;
   }
 
   goToOverseer():void{

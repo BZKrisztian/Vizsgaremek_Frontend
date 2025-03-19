@@ -10,7 +10,8 @@ export class AdminGuard implements CanActivate {
     constructor(private authService: AuthService, private router: Router){}
 
     canActivate(): boolean {
-        if(this.authService.isLoggedIn() && this.authService.getCurrentAdmin()){
+        const user = this.authService.getCurrentUser();
+        if(this.authService.isLoggedIn() && user && user.isAdmin) {
             return true;
         }
         else {
