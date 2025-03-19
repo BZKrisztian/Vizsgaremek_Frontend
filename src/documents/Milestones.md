@@ -3,19 +3,21 @@
 		- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
 		- ensure no business logic remains on frontend
 	PROBLEMS/THINGS TO FIX:
-		- {ADMIN_LOGIN}: Setting up admin login => process to create admins(manually, on backend?)
-			-> admin login procedure :
-				|->casual login, recognition of admin upon login ( check email AND password(?) )
-		- Admin side :
-			|-> Read/(Update?)/Delete of: users
-			|-> Create/Delete of : daily motivationals (+ notices later on(eg.:server maintenance))
+		- adminUser was dropped('isAdmin' boolean for users) => make sure there's no trace of adminUser
+		- {ADMIN RELATED} :
+			- Admin Login:
+				- Setup/process == create admins manually on backend(?)
+				- Login procedure == recognition of admin upon login ( check email AND password from backend )
+			- Admin side :
+				|-> Read/Delete of: users
+					- EXCLUDE admin users so they cannot delete each other
+				|-> CRUD of : daily motivationals to be posted for users at Homepage (+ notices later on(eg.:server maintenance))
+					- Timers for automatic deletion(?)
 		- GUARDS: ensure AuthGuard and AdminGuard work together( no infinite loops, call-in order(first auth, then admin) etc. )
 		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
-			- + ensure admins can create tasklists and tasks, backend binds their data to them(admin users) accordingly
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
 			- Wrap the Task-item adding form and bind it to appear at the click of a button
-	
 	SOLVED:
 		- Logout button + process
 		- ensure only admins can go to the Overseer(admin)page
@@ -66,36 +68,53 @@
 				|-> Update => button to modify existing diary entry's datamodel
 				|-> Delete => delete, lol
 
-	
-# CSS/BOOTSTRAP:
+# STYLING:
 	PROBLEMS/THINGS TO FIX:
-	Things to IMPLEMENT:
-		IMPORTANT:
-		- Page design:
-			|-> Entry
-			|-> Homepage
-			|-> Overseer(OPTIONAL!)
-		- Main components:
-			|-> Task-List
-			|-> Task-Item
-		
-		LESS IMPORTANT:
-		
+		- 
+	IMPORTANT:
+	- Pages:
+		|-> Entry
+		|-> Homepage
+		|-> Overseer(OPTIONAL!)
+	- Main components:
+		|-> Task-List
+		|-> Task-Item
+		- Dialog-Comps:
+			- TaskListDialog
+			- TaskDialog
+	LESS IMPORTANT:
+
 # TESTING:
 	PROBLEMS/THINGS TO FIX/REPORT(?):
-		- Check if CRUD works properly for backend,
-			|-> For now, test with json-server(expect Cors errors)
+		- 
 
-	DOCUMENTS:
-	- MAIN:
-		- Documentation on what the app does
-		- Documentation on how the app works
-	- OTHER(?):
-		- Documentation on what the errors are
-		- Documentation on how the errors were fixed
-
+# DOCUMENTS:
+	Official documentation ( contains everything / finalised ):
+		- 1. Introduction ( What the app is and why we chose it )
+		- 2. User documentation ( How to use it, in layman's terms )
+		- 3. Dev documentation ( Explanation of everything )
+			- Used technologies ( Angular/Typescript, C#, SQL )
+			- Used IDE's ( VsCode, Visual Studio, XAMPP )
+			- Thorough description of all parts of the project ( mainly, the methods )
+				- Frontend = Components(+Pages/Dialogs), Services, Guards
+				- Backend = Endpoints, Models
+					- Database = Structure, Table names/stored data
+		- 4. Tests ( Insomnia, Postman )
+			- Awaited response of functions
+		- 5. Summary
+			- Possibilities for future development
 
 # BACKEND:
 	PROBLEMS/THINGS TO FIX/FORWARD:
-		- Modify datamodels
-		- Set endpoints
+		- Registration:
+			- received from Frontend, correctly formated/hashed, sent to database
+		- Login:
+			- request received from Frontend, check if credentials are correct AND if a user is admin,
+			then generates a token, sends it to Frontend
+		- Cascading deletion for tasklist
+			- checks if there are tasks:
+				- IF YES = deletes every task and then itself
+				- IF NO = simply deletes itself
+		- Set up SQL database
+		- SQL dump file
+			- to help set it up wherever we want
