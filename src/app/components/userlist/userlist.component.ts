@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class UserlistComponent implements OnInit {
 
-  users: User[] = []
+  regularUsers: User[] = []
+  adminUsers: User[] = []
   errorMessage: string = ''
 
   constructor(private authService: AuthService) { }
@@ -25,7 +26,8 @@ export class UserlistComponent implements OnInit {
   loadUsers(){
     this.authService.getUsers().subscribe({
       next: (users) => {
-        this.users = users
+        this.regularUsers = users.filter(user => !user.isAdmin)
+        this.adminUsers = users.filter(user => user.isAdmin)
       },
       error: (err) => {
         this.errorMessage = "Could not load users."
@@ -38,7 +40,7 @@ export class UserlistComponent implements OnInit {
     if(confirm("Are you sure you want to delete this user?")){
       this.authService.deleteUser(user_Id).subscribe({
         next: ()=>{
-          this.users = this.users.filter(user => user.user_Id !== user_Id)
+          this.regularUsers = this.regularUsers.filter(user => user.user_Id !== user_Id)
         },
         error: (err) => {
           this.errorMessage = "Could not delete user."

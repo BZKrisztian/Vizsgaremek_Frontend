@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { BehaviorSubject, filter, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,6 @@ export class AuthService {
   }
   // post request for backend ==> if token is received, it is saved to localstorage,
   // and current user is set by looking at the response
-  // Then, behaviour subjects are updated ==> corresponding one is updated, other one is cleared
   login(credentials:{email:string,password:string}):Observable<any>{
     return this.http.post<any>(`${this.apiURL}/login`,credentials).pipe(
       tap((res)=>{
@@ -51,15 +50,14 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
-  // clears localstorage, resets/nullifies behaviour subjects
+  // clears localstorage, resets/nullifies behaviour subject
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('currentAdmin');
     this.currentUser_BSub.next(null);
   }
 
-  //(C)R(U)D of Users for Overseer
+  //(C)R(U)D of Users for Overseer (includes admins, partitioned at userlist component)
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(`${this.apiURL}/users`)
   }

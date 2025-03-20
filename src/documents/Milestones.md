@@ -3,6 +3,9 @@
 		- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
 		- ensure no business logic remains on frontend
 	PROBLEMS/THINGS TO FIX:
+		- industry standard for guards(1 instead of 2?)
+		- unsubscribe(ngOnDestroy) implementation
+			- takeUntil(?)
 		- adminUser was dropped('isAdmin' boolean for users) => make sure there's no trace of adminUser
 		- {ADMIN RELATED} :
 			- Admin Login:
@@ -12,13 +15,15 @@
 				|-> Read/Delete of: users
 					- EXCLUDE admin users so they cannot delete each other
 				|-> CRUD of : daily motivationals to be posted for users at Homepage (+ notices later on(eg.:server maintenance))
+					- DialogComp for motivationals/notices(?)
+					- ensure its sent to every user for display, can be closed by pressing a button on the side(within the element)
 					- Timers for automatic deletion(?)
 		- GUARDS: ensure AuthGuard and AdminGuard work together( no infinite loops, call-in order(first auth, then admin) etc. )
 		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
+	SOLVED:
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
 			- Wrap the Task-item adding form and bind it to appear at the click of a button
-	SOLVED:
 		- Logout button + process
 		- ensure only admins can go to the Overseer(admin)page
 			- upon an admin's login, automatically go to Overseer page
@@ -48,13 +53,13 @@
 		LESS IMPORTANT:
 			- ensure toggle completion can be clicked again, resetting the state of the task
 			- Ordering based on importance of list and list-item
-			- Setting Due Date
+			- Setting Due Date ( DatePicker? )
+			- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )
 			- switch warning message method for deleting tasklist( current = javascript -> confirm() )
 			- Email notification upon registration
 				|-> Notification for password changes(?)
 		OPTIONAL:
 			- Dark-Mode(?) -> make site already be dark?? // Toggle button for body(CSS)
-			- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )
 			- Timer(Pomodoro) -> locally
 			- Make site sticky on browser(can it even be done?)
 		COMPLEX(only if done with everything else):
