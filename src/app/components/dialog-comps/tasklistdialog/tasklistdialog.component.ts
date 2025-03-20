@@ -23,7 +23,8 @@ export class TasklistdialogComponent implements OnInit {
     list_Description: '',
     creation_Date: new Date(),
     update_Date: new Date(),
-    tasks: []
+    tasks: [],
+    color: '#ffffff'
   }
 
   constructor( @Optional() public dialogRef: MatDialogRef<TasklistdialogComponent>) { }
@@ -34,6 +35,9 @@ export class TasklistdialogComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges):void{
     if(this.taskList){
       this.localTaskList = {...this.taskList};
+      if(!this.localTaskList.color){
+        this.localTaskList.color = '#ffffff'
+      }
     }else{
       this.localTaskList = {
         list_Id: 0,
@@ -41,7 +45,8 @@ export class TasklistdialogComponent implements OnInit {
         list_Description: '',
         creation_Date: new Date(),
         update_Date: new Date(),
-        tasks: []
+        tasks: [],
+        color: '#ffffff'
       }
     }
   }
@@ -52,9 +57,6 @@ export class TasklistdialogComponent implements OnInit {
       this.localTaskList.creation_Date = new Date()
     }
     this.save.emit(this.localTaskList);
-    if(this.dialogRef){
-      this.dialogRef.close();
-    }
   }
 
   onCancel():void{

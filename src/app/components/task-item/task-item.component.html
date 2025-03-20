@@ -1,4 +1,4 @@
-<div class="task-item">
+<div class="task-item" [style.background]="task.color || 'transparent'">
   <h4 [class.task-completed]="task.task_Status">{{task.task_Title}}</h4>
   <p>{{task.task_Description}}</p>
   <p>Priority: {{task.task_Priority}}</p>

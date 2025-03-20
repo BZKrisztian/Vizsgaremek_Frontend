@@ -9,6 +9,9 @@
     <textarea name="Description" id="listDescription"
       [(ngModel)]="localTaskList.list_Description"></textarea>
 
+      <label for="listColor">Color: </label>
+      <input type="color" name="color" id="listColor" [(ngModel)]="localTaskList.color" [value]="localTaskList.color">
+
     <div class="modal-buttons">
       <button type="submit">Save</button>
       <button type="button" (click)="onCancel()">Cancel</button>

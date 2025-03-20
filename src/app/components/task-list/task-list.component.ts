@@ -9,13 +9,17 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { TaskdialogComponent } from '../dialog-comps/taskdialog/taskdialog.component';
 import { TasklistdialogComponent } from "../dialog-comps/tasklistdialog/tasklistdialog.component";
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmdeldialogComponent } from '../dialog-comps/confirmdeldialog/confirmdeldialog.component';
+import { SortbypriorityPipe } from '../../pipes/sortbypriority.pipe';
+
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
   imports: [TaskItemComponent, FormsModule, CommonModule,
-    TaskdialogComponent, TasklistdialogComponent],
+    TaskdialogComponent, TasklistdialogComponent, SortbypriorityPipe],
 })
 export class TaskListComponent implements OnInit {
   taskLists: TaskList[] = [];
@@ -27,7 +31,10 @@ export class TaskListComponent implements OnInit {
   currentEditingTaskList: TaskList | null = null
   currentTaskListId: number | null = null
 
-  constructor(private taskService: TaskService, private authService: AuthService) {}
+  constructor(
+    private taskService: TaskService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.loadTaskLists();
@@ -131,11 +138,19 @@ export class TaskListComponent implements OnInit {
     )
   }
   onTaskListDeletion(list_Id: number):void{
-    if(confirm("Are you sure you want to delete this list? This will also delete all tasks within the list."))
-      {this.taskService.deleteTaskList(list_Id).subscribe(
-      ()=>{this.loadTaskLists();}
-    )
-  }
+    const dialogRef = this.dialog.open(ConfirmdeldialogComponent,{
+      data: {
+        title: 'Delete Task List',
+        message: 'Are you sure you want to delete this task list?'
+      }
+    })
+    dialogRef.afterClosed().subscribe(confirmed =>{
+      if(confirmed){
+        this.taskService.deleteTaskList(list_Id).subscribe(()=>{
+          this.loadTaskLists()
+        })
+      }
+    })
   }
 
 

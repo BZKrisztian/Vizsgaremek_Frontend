@@ -3,14 +3,14 @@
 
   <button (click)="openTaskListDialog4Add()">Add Task List</button>
 
-  <div *ngFor="let list of taskLists">
+  <div *ngFor="let list of taskLists" [style.background]="list.color || '#fff'">
     <h4>{{list.list_Title}}</h4>
     <p>{{list.list_Description}}</p>
     <button (click)="onTaskListDeletion(list.list_Id)">Delete List</button>
     <button (click)="openTaskListDialog4Edit(list)">Edit List</button>
-
+    
     <button (click)="openTaskDialog4Add(list.list_Id)">Add Task</button>
-    <div *ngFor="let task of tasks[list.list_Id]">
+    <div *ngFor="let task of tasks[list.list_Id] | sortbypriority">
       <app-task-item
         [task]="task"
         (updatedTask)="loadTasks(list.list_Id)"

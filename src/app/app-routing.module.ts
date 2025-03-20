@@ -5,20 +5,26 @@ import { EntryComponent } from './pages/entry/entry.component';
 import { OverseerComponent } from './pages/overseer/overseer.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { SortbypriorityPipe } from './pipes/sortbypriority.pipe';
 
 const routes: Routes = [
-  {path: '' , redirectTo: '/entry', pathMatch: 'full'},
-  {path: 'entry', component: EntryComponent},
-  {path: 'homepage', component: HomepageComponent ,
+  { path: '', redirectTo: '/entry', pathMatch: 'full' },
+  { path: 'entry', component: EntryComponent },
+  {
+    path: 'homepage',
+    component: HomepageComponent,
     // canActivate: [AuthGuard]
   },
-  {path: 'overseer', component: OverseerComponent, 
+  {
+    path: 'overseer',
+    component: OverseerComponent,
     // canActivate: [AuthGuard, AdminGuard]
-  }
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes),SortbypriorityPipe],
+  exports: [RouterModule],
+  declarations: [],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

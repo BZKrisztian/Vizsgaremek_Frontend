@@ -27,7 +27,15 @@ export class AuthService {
 
   // post request for backend
   register(userData: User): Observable<any> {
-    return this.http.post<any>(`${this.apiURL}/register`, userData);
+    return this.http.post<any>(`${this.apiURL}/register`, userData)
+    // frontend part of sending email to user when successfully registered
+    .pipe(
+      tap((res)=>{
+        if(res && res.emailNotifSent){
+          console.log(res, "email notification sent");
+        }
+      })
+    );
   }
   // post request for backend ==> if token is received, it is saved to localstorage,
   // and current user is set by looking at the response

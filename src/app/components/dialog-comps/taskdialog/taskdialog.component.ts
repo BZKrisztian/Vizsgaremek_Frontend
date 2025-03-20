@@ -30,13 +30,17 @@ export class TaskdialogComponent implements OnInit {
     task_Priority: 'low',
     due_Date: undefined,
     creation_Date: new Date(),
-    update_Date: new Date()
+    update_Date: new Date(),
+    color: '#ffffff'
   }
 
   //look up SimpleChanges a bit more
   ngOnChanges(changes: SimpleChanges): void{
     if(this.task){ //task cloning for when we edit
       this.localTask = {...this.task}
+      if(!this.localTask.color){
+        this.localTask.color = '#ffffff'
+      }
     }else if(this.taskListId){
       this.localTask.taskList_Id = this.taskListId || 0
       this.localTask.task_Title = ''
@@ -54,9 +58,6 @@ export class TaskdialogComponent implements OnInit {
       this.localTask.creation_Date = new Date()
     }
     this.save.emit(this.localTask)
-    if(this.dialogRef){
-      this.dialogRef.close();
-    }
   }
 
   onCancel():void{

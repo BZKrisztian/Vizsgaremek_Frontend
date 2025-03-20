@@ -19,6 +19,8 @@ import { TasklistdialogComponent } from './components/dialog-comps/tasklistdialo
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ConfirmdeldialogComponent } from './components/dialog-comps/confirmdeldialog/confirmdeldialog.component';
+import { SortbypriorityPipe } from './pipes/sortbypriority.pipe';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -45,6 +47,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     TaskdialogComponent,
     TasklistdialogComponent,
+    ConfirmdeldialogComponent,
+
+    
+    SortbypriorityPipe,
 
     TranslateModule.forRoot({
       loader : {
