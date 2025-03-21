@@ -6,13 +6,6 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   standalone: false,
   styleUrl: './app.component.css',
-  template: `
-  <div>
-    <button (click)="changeLanguage('en')">English</button>
-    <button (click)="changeLanguage('hu')">Magyar</button>
-  </div>
-  <router-outlet></router-outlet>
-  `
 })
 export class AppComponent {
   title = 'frontend';

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationComponent } from "../../components/registration/registration.component";
-import { LoginComponent } from "../../components/login/login.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.css'],
-  imports: [RegistrationComponent, LoginComponent]
+  imports: [RouterModule]
 })
 export class EntryComponent implements OnInit {
 

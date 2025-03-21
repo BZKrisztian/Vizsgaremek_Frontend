@@ -1,0 +1,11 @@
+.entry {
+    text-align: center;
+    padding: 2rem;
+  }
+  .entryPage-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  

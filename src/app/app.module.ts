@@ -21,6 +21,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ConfirmdeldialogComponent } from './components/dialog-comps/confirmdeldialog/confirmdeldialog.component';
 import { SortbypriorityPipe } from './pipes/sortbypriority.pipe';
+import { OverseerComponent } from './pages/overseer/overseer.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LogInComponent } from './pages/log-in/log-in.component';
+import { RouterModule } from '@angular/router';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -34,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
 
     MatDialogModule,
     MatButtonModule,
@@ -42,8 +47,13 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     TaskListComponent,
     TaskItemComponent,
+
     HomepageComponent,
     EntryComponent,
+    OverseerComponent,
+
+    RegisterComponent,
+    LogInComponent,
 
     TaskdialogComponent,
     TasklistdialogComponent,

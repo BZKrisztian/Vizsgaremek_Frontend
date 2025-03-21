@@ -3,6 +3,8 @@
 		- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
 		- ensure no business logic remains on frontend
 	PROBLEMS/THINGS TO FIX:
+		- when color is saved for tasks and tasklists, at the datamodel it is defined as a string
+			- ensure it binds/saves correctly and will load when initialised from backend
 		- industry standard for guards(1 instead of 2?)
 		- unsubscribe(ngOnDestroy) implementation
 			- takeUntil(?)
