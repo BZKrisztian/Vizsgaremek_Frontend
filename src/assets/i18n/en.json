@@ -1,0 +1,13 @@
+{
+    "Welcome":"Welcome to our little application",
+    "Register":"Register",
+    "Login":"Login",
+    "Language":{
+        "EN":"English",
+        "HU":"Hungarian"
+    },
+    "Log-In-Header":"Log In",
+    "Register-Header":"Register",
+    "Email":"Email",
+    "Password":"Password"
+}

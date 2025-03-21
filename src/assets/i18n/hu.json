@@ -1,0 +1,13 @@
+{
+    "Welcome":"Üdvözöljük a kis teendő alkalmazásunkban",
+    "Register":"Regisztráció",
+    "Login":"Bejelentkezés",
+    "Language":{
+        "EN":"Angol",
+        "HU":"Magyar"
+    },
+    "Log-In-Header":"Bejelentkezés",
+    "Register-Header":"Regisztráció",
+    "Email":"Email",
+    "Password":"Jelszó"
+}

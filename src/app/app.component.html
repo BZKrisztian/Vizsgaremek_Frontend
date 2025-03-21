@@ -1,5 +1,5 @@
 <div>
-    <button (click)="switchLanguage('en')">English</button>
-    <button (click)="switchLanguage('hu')">Magyar</button>
+    <button (click)="switchLanguage('en')">{{ 'EN' | translate }}</button>
+    <button (click)="switchLanguage('hu')">{{ 'HU' | translate }}</button>
 </div>
 <router-outlet></router-outlet>
