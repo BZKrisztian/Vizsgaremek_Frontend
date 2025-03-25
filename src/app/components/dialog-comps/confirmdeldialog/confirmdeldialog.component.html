@@ -1,3 +1,8 @@
-<p>
-  confirmdeldialog works!
-</p>
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content>
+  <p>{{data.message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button color="warn" (click)="onDeleteConfirm()">Yes</button>
+  <button mat-button (click)="onCancel()">No</button>
+</mat-dialog-actions>

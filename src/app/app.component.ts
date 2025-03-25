@@ -10,7 +10,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'frontend';
 
-  darkMode: boolean = false
 
   constructor(private translate: TranslateService){
     translate.setDefaultLang('en');
@@ -19,9 +18,6 @@ export class AppComponent {
   switchLanguage(lang: string):void {
     this.translate.use(lang);
   }
-  toggleDarkMode():void{
-    this.darkMode = !this.darkMode
-    document.body.classList.toggle('dark-mode', this.darkMode);
-  }
+
 
 }

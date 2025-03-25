@@ -3,11 +3,7 @@
 		- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
 		- ensure no business logic remains on frontend
 	PROBLEMS/THINGS TO FIX:
-		- when color is saved for tasks and tasklists, at the datamodel it is defined as a string
-			- ensure it binds/saves correctly and will load when initialised from backend
-		- industry standard for guards(1 instead of 2?)
-		- unsubscribe(ngOnDestroy) implementation
-			- takeUntil(?)
+		- Omit dark mode codes
 		- adminUser was dropped('isAdmin' boolean for users) => make sure there's no trace of adminUser
 		- {ADMIN RELATED} :
 			- Admin Login:
@@ -17,12 +13,14 @@
 				|-> Read/Delete of: users
 					- EXCLUDE admin users so they cannot delete each other
 				|-> CRUD of : daily motivationals to be posted for users at Homepage (+ notices later on(eg.:server maintenance))
-					- DialogComp for motivationals/notices(?)
-					- ensure its sent to every user for display, can be closed by pressing a button on the side(within the element)
 					- Timers for automatic deletion(?)
 		- GUARDS: ensure AuthGuard and AdminGuard work together( no infinite loops, call-in order(first auth, then admin) etc. )
-		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
+		- Hungarian language support ( finish making the files )
+		- Ordering based on importance of list and list-item ( done with pipe, when backend finally works check if it works )
+		- ensure toggle completion can be clicked again, resetting the state of the task
+		- switch warning message method for deleting tasklist( check if confirmdeldialog works properly )
 	SOLVED:
+		- set up registration&login => ensure data related to user(tasklists+tasks) bind properly
 		- {Task-List+Task-Item adding/editing} Wrap the forms
 			=> Appearance = when adding/editing is pressed, a pop-up should appear for the form // OR make the Css really good/'transparent'
 			- Wrap the Task-item adding form and bind it to appear at the click of a button
@@ -51,15 +49,11 @@
 
 	Things to IMPLEMENT:
 		IMPORTANT:
-			- Hungarian language support	
-		LESS IMPORTANT:
-			- ensure toggle completion can be clicked again, resetting the state of the task
-			- Ordering based on importance of list and list-item
-			- Setting Due Date ( DatePicker? )
-			- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )
-			- switch warning message method for deleting tasklist( current = javascript -> confirm() )
 			- Email notification upon registration
 				|-> Notification for password changes(?)
+		LESS IMPORTANT:
+			- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )
+			- better error handling -> comprehensive messsages for both devs and user
 		OPTIONAL:
 			- Dark-Mode(?) -> make site already be dark?? // Toggle button for body(CSS)
 			- Timer(Pomodoro) -> locally
@@ -72,16 +66,28 @@
 			- Diary(expand idea if it can happen) -> Methods/buttons to:
 				|-> Create => List name and content
 				|-> Read => get it, lol
-				|-> Update => button to modify existing diary entry's datamodel
+				|-> Update => button to modify existing diary entry
 				|-> Delete => delete, lol
 
 # STYLING:
 	PROBLEMS/THINGS TO FIX:
 		- 
 	IMPORTANT:
+	- CONST:
+		- buttons
+		- header ( include lang-switch buttons )
+			- logout button
+			- IF admin == switch to admin page button
+				- button to switch to homepage
+		- 'card' registration/login
+		- background + opacity check
+			- opacity issue => readability
 	- Pages:
 		|-> Entry
+			- Text
+			- Card for buttons
 		|-> Homepage
+			- notification
 		|-> Overseer(OPTIONAL!)
 	- Main components:
 		|-> Task-List
@@ -89,6 +95,7 @@
 		- Dialog-Comps:
 			- TaskListDialog
 			- TaskDialog
+			- ConfirmdelDialog
 	LESS IMPORTANT:
 
 # TESTING:

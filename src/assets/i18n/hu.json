@@ -1,13 +1,75 @@
 {
-    "Welcome":"Üdvözöljük a kis teendő alkalmazásunkban",
-    "Register":"Regisztráció",
-    "Login":"Bejelentkezés",
-    "Language":{
-        "EN":"Angol",
-        "HU":"Magyar"
+    "General": {
+      "Welcome": "Üdvözöljük a mi kis alkalmazásunkban",
+      "Logout": "Kijelentkezés",
+      "Back": "Vissza"
     },
-    "Log-In-Header":"Bejelentkezés",
-    "Register-Header":"Regisztráció",
-    "Email":"Email",
-    "Password":"Jelszó"
-}
+    "Language": {
+      "EN": "Angol",
+      "HU": "Magyar"
+    },
+    "Auth": {
+      "Register": "Regisztráció",
+      "Login": "Bejelentkezés",
+      "RegisterHeader": "Regisztráció",
+      "LogInHeader": "Bejelentkezés",
+      "Email": "E-mail",
+      "Password": "Jelszó",
+      "Username": "Felhasználónév",
+      "RegistrationSuccess": "Sikeres regisztráció",
+      "RegistrationFailure": "A regisztráció sikertelen",
+      "LoginFailure": "A bejelentkezés sikertelen"
+    },
+    "Pages": {
+      "Entry": {
+        "Title": "Welcome to our application",
+        "Subtitle": "To do, or not to do"
+      },
+      "Homepage": {
+        "Title": "Főoldal",
+        "YourTaskLists": "A teendő listáid",
+        "AddTaskList": "Teendő lista hozzáadása",
+        "SwitchToOverseer": "Switch to Overseer View"
+      }
+    },
+    "Task": {
+      "AddTask": "Teendő hozzáadása",
+      "EditTask": "Teendő szerkesztése",
+      "DeleteTask": "Teendő törlése",
+      "ToggleCompletion": "Kész",
+      "TaskCompleted": "Teendő kész",
+      "Priority": "Prioritás",
+      "High": "Magas",
+      "Medium": "Közepes",
+      "Low": "Alacsony",
+      "DueDate": "Időpont",
+      "CreationDate": "Készítés időpontja",
+      "UpdatedAt": "Frissítés időpontja",
+      "Description": "Leírás",
+      "Title": "Cím"
+    },
+    "TaskList": {
+      "AddTaskList": "Teendő lista hozzáadása",
+      "EditTaskList": "Teendő lista szerkesztése",
+      "DeleteTaskList": "Teendő lista törlése",
+      "Description": "Leírás",
+      "Color": "Szín"
+    },
+    "Dialogs": {
+      "ConfirmDelete": {
+        "Title": "törlés megerősítése",
+        "Message": "Biztos hogy törölni szeretné?"
+      }
+    },
+    "Overseer": {
+      "DailyMotivationals": "Daily Motivationals",
+      "AddMotivational": "Add Motivational",
+      "Remove": "Remove",
+      "UserManagement": "User Management"
+    },
+    "Feedback": {
+      "OperationSuccess": "Operation completed successfully",
+      "OperationFailure": "Operation failed, please try again"
+    }
+  }
+  

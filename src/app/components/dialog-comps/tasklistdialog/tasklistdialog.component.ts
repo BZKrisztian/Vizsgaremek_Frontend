@@ -4,12 +4,13 @@ import { Task } from '../../../models/task.model';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tasklistdialog',
   templateUrl: './tasklistdialog.component.html',
   styleUrls: ['./tasklistdialog.component.css'],
-  imports:[CommonModule,ReactiveFormsModule,FormsModule]
+  imports:[CommonModule,ReactiveFormsModule,FormsModule, TranslateModule]
 })
 export class TasklistdialogComponent implements OnInit {
 

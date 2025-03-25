@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
-  imports: [TaskListComponent, FormsModule, CommonModule]
+  imports: [TaskListComponent, FormsModule, CommonModule, TranslateModule]
 })
 export class HomepageComponent implements OnInit {
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +11,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./registration.component.css'],
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
 })
 export class RegistrationComponent implements OnInit {

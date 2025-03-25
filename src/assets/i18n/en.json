@@ -1,13 +1,75 @@
 {
-    "Welcome":"Welcome to our little application",
-    "Register":"Register",
-    "Login":"Login",
-    "Language":{
-        "EN":"English",
-        "HU":"Hungarian"
+    "General": {
+      "Welcome": "Welcome to our little application",
+      "Logout": "Logout",
+      "Back": "Back"
     },
-    "Log-In-Header":"Log In",
-    "Register-Header":"Register",
-    "Email":"Email",
-    "Password":"Password"
-}
+    "Language": {
+      "EN": "English",
+      "HU": "Hungarian"
+    },
+    "Auth": {
+      "Register": "Register",
+      "Login": "Login",
+      "RegisterHeader": "Register",
+      "LogInHeader": "Log In",
+      "Email": "E-mail",
+      "Password": "Password",
+      "Username": "Username",
+      "RegistrationSuccess": "Registration successful",
+      "RegistrationFailure": "Registration failed",
+      "LoginFailure": "Login failed"
+    },
+    "Pages": {
+      "Entry": {
+        "Title": "Welcome to our application",
+        "Subtitle": "To do, or not to do"
+      },
+      "Homepage": {
+        "Title": "Homepage",
+        "YourTaskLists": "Your Task Lists",
+        "AddTaskList": "Add Task List",
+        "SwitchToOverseer": "Switch to Overseer View"
+      }
+    },
+    "Task": {
+      "AddTask": "Add Task",
+      "EditTask": "Edit Task",
+      "DeleteTask": "Delete Task",
+      "ToggleCompletion": "Toggle Completion",
+      "TaskCompleted": "Task Completed",
+      "Priority": "Priority",
+      "High": "High",
+      "Medium": "Medium",
+      "Low": "Low",
+      "DueDate": "Due Date",
+      "CreationDate": "Creation Date",
+      "UpdatedAt": "Updated at",
+      "Description": "Description",
+      "Title": "Title"
+    },
+    "TaskList": {
+      "AddTaskList": "Add Task List",
+      "EditTaskList": "Edit Task List",
+      "DeleteTaskList": "Delete Task List",
+      "Description": "Description",
+      "Color": "Color"
+    },
+    "Dialogs": {
+      "ConfirmDelete": {
+        "Title": "Confirm Delete",
+        "Message": "Are you sure you want to delete this?"
+      }
+    },
+    "Overseer": {
+      "DailyMotivationals": "Daily Motivationals",
+      "AddMotivational": "Add Motivational",
+      "Remove": "Remove",
+      "UserManagement": "User Management"
+    },
+    "Feedback": {
+      "OperationSuccess": "Operation completed successfully",
+      "OperationFailure": "Operation failed, please try again"
+    }
+  }
+  

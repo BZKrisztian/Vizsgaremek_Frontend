@@ -12,6 +12,7 @@ import { TasklistdialogComponent } from "../dialog-comps/tasklistdialog/tasklist
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmdeldialogComponent } from '../dialog-comps/confirmdeldialog/confirmdeldialog.component';
 import { SortbypriorityPipe } from '../../pipes/sortbypriority.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { SortbypriorityPipe } from '../../pipes/sortbypriority.pipe';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
   imports: [TaskItemComponent, FormsModule, CommonModule,
-    TaskdialogComponent, TasklistdialogComponent, SortbypriorityPipe],
+    TaskdialogComponent, TasklistdialogComponent, SortbypriorityPipe, TranslateModule],
 })
 export class TaskListComponent implements OnInit {
   taskLists: TaskList[] = [];
