@@ -9,7 +9,7 @@ import { TaskList } from '../models/tasklist.model';
 })
 export class TaskService {
 
-  private apiUrl = 'https://localhost:7096/api';
+  private apiUrl = 'http://localhost:7096/api';
 
   constructor(private http: HttpClient) {}
 

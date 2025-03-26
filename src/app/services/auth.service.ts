@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL = 'https://localhost:7096/api';
+  private apiURL = 'http://localhost:7096/api';
 
   // BehaviorSubject ==> container 4 current user(be it regular or admin = separate containers used depending on user type)
   // currentXY$ ==> observable 4 current user
