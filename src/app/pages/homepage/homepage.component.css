@@ -1,0 +1,6 @@
+.homepage {
+    margin-top: 70px;
+    padding: 20px;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}

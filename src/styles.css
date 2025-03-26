@@ -1,4 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    height: 100vh;
+    background: url('/assets/images/wp1933959-pixel-art-wallpapers.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    transition: background 0.3s;
+}
+button:hover{
+    opacity: 0.8;
+}
+
+.scrollable{
+    overflow-y: auto;
+    overflow-x: hidden;
+}

@@ -8,6 +8,12 @@
     color: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 20px;
     z-index: 1000; /* Ensures it stays above all content */
+}
+
+.main-header button {
+    background-color: darkslategray;
+    margin: 0 5px;
 }

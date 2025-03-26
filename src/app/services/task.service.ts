@@ -3,20 +3,21 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task.model';
 import { TaskList } from '../models/tasklist.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
 
-  private apiUrl = 'http://localhost:7096/api';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   //taskCRUD
   getTasks(taskList_Id: number): Observable<Task[]> {
     return this.http.get<Task[]>(
-      `${this.apiUrl}/tasks?taskList_Id=${taskList_Id}`);
+      `${this.apiUrl}/tasks/${taskList_Id}`);
   }
   addTask(task: Task): Observable<Task> {
     return this.http.post<Task>(`${this.apiUrl}/tasks`, task);

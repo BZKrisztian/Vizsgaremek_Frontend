@@ -53,11 +53,13 @@ export class TaskListComponent implements OnInit {
 }
   
   loadTasks(list_Id: number):void{
+    console.log(this.tasks)
     this.taskService.getTasks(list_Id).subscribe(
       (tasks)=>{
         this.tasks[list_Id]=tasks
       }
     )
+    console.log(this.tasks)
   }
 
   // === Task Modal Methods ===

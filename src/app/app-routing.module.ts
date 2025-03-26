@@ -5,7 +5,6 @@ import { EntryComponent } from './pages/entry/entry.component';
 import { OverseerComponent } from './pages/overseer/overseer.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
-import { SortbypriorityPipe } from './pipes/sortbypriority.pipe';
 import { RegisterComponent } from './pages/register/register.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 
@@ -17,12 +16,12 @@ const routes: Routes = [
   {
     path: 'homepage',
     component: HomepageComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'overseer',
     component: OverseerComponent,
-    // canActivate: [AuthGuard, AdminGuard]
+    canActivate: [AuthGuard, AdminGuard]
   },
 ];
 

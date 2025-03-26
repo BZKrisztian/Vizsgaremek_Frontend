@@ -1,13 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL = 'http://localhost:7096/api';
+  private apiURL = environment.apiUrl;
 
   // BehaviorSubject ==> container 4 current user(be it regular or admin = separate containers used depending on user type)
   // currentXY$ ==> observable 4 current user
@@ -47,6 +48,13 @@ export class AuthService {
           localStorage.setItem('currentUser',JSON.stringify(res.user));
           this.currentUser_BSub.next(res.user);
         }
+      }),
+      catchError((error: HttpErrorResponse)=>{
+        if(error.status === 401){
+          console.log(error)
+          console.warn("Token expired or invalid. Logging out...")
+          this.logout();
+        }throw error
       })
     )
   }

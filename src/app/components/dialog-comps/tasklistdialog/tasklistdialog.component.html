@@ -1,4 +1,4 @@
-<div class="tasklistdialog">
+<div class="tasklistdialog-container">
   <h3 *ngIf="taskList; else addMode">{{ 'TaskList.EditTaskList' | translate }}</h3>
   <ng-template #addMode>
     <h3>{{ 'TaskList.AddTaskList' | translate }}</h3>
