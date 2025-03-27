@@ -32,18 +32,22 @@ export class TaskListComponent implements OnInit {
   currentEditingTaskList: TaskList | null = null
   currentTaskListId: number | null = null
 
+  user:any
+
   constructor(
     private taskService: TaskService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private auth:AuthService
   ) {}
 
   ngOnInit(): void {
     this.loadTaskLists();
+    this.user=this.auth.getCurrentUser()
   }
 
   loadTaskLists():void {
     this.taskService.getTaskLists().subscribe(
-      (lists)=>{
+      (lists:any)=>{
         this.taskLists=lists
         this.taskLists.forEach(
           list => this.loadTasks(list.list_Id)
@@ -84,6 +88,8 @@ export class TaskListComponent implements OnInit {
       task.taskList_Id = this.currentTaskListId;
       task.creation_Date = new Date();
       task.update_Date = new Date();
+      task.owner_Id= this.user.id
+      console.log(task)
       this.taskService.addTask(task).subscribe(
         ()=>{
           this.loadTasks(task.taskList_Id)

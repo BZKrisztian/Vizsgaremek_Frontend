@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task.model';
 import { TaskList } from '../models/tasklist.model';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class TaskService {
   //taskCRUD
   getTasks(taskList_Id: number): Observable<Task[]> {
     return this.http.get<Task[]>(
-      `${this.apiUrl}/tasks/${taskList_Id}`);
+      `${this.apiUrl}/tasks?taskList_Id=${taskList_Id}`);
   }
   addTask(task: Task): Observable<Task> {
     return this.http.post<Task>(`${this.apiUrl}/tasks`, task);
@@ -30,8 +30,9 @@ export class TaskService {
   }
 
   //tasklistCRUD
-  getTaskLists(): Observable<TaskList[]> {
-    return this.http.get<TaskList[]>(`${this.apiUrl}/tasklists`);
+  getTaskLists() {
+    let body= {id:3}
+    return this.http.get(`${this.apiUrl}/tasklists/3`);
   }
   addTaskList(tasklist: TaskList): Observable<TaskList> {
     return this.http.post<TaskList>(`${this.apiUrl}/tasklists`, tasklist);

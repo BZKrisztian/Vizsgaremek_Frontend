@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   //getter 4 comps+guards / returns current user
-  getCurrentUser(): User|null {
+  getCurrentUser() {
     return this.currentUser_BSub.value;
   }
 
