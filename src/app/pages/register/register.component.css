@@ -1,0 +1,38 @@
+body {
+    height: 100vh; /* Makes the page exactly as tall as the viewport */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hides scrollbars */
+    width: 100vw; /* Prevents horizontal scrolling */
+  }
+  
+  /* Entry page container */
+  .register {
+    width: 100vw; /* Prevents unwanted horizontal scrolling */
+    height: 100vh; /* Fully covers the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    background: url("/assets/images/wp1933959-pixel-art-wallpapers.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    
+    padding: 0; /* Removes extra space causing scrolling */
+    box-sizing: border-box; /* Ensures padding/margins don’t overflow */
+  }
+  
+  /* Ensure text stays centered */
+  .register h1 {
+    margin: 0; /* Prevents text from pushing content beyond the viewport */
+    padding: 0;
+    color: white;
+  }
+  
+app-registration {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
