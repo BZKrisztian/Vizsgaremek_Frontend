@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 export class TaskItemComponent {
   @Input() task!: Task;
   @Output() updatedTask = new EventEmitter<Task>();
-  @Output() deleteTask = new EventEmitter<number>();
+  @Output() deletedTask = new EventEmitter<number>();
   @Output() editTask = new EventEmitter<Task>();
 
   constructor() {}
@@ -35,6 +35,6 @@ export class TaskItemComponent {
   }
 
   delete():void {
-    this.deleteTask.emit(this.task.task_Id);
+    this.deletedTask.emit(this.task.task_Id);
   }
 }

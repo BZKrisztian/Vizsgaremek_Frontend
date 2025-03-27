@@ -1,23 +1,70 @@
-@import '../../components/general-styling.css';
-body{
-    display: flex;
-    justify-content: center; /* Horizontally centers content */
-    align-items: center; /* Vertically centers content */
-    height: 100%; /* Make the container fill the height of the page */
+html, body {
+  height: 100vh; /* Makes the page exactly as tall as the viewport */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Hides scrollbars */
+  width: 100vw; /* Prevents horizontal scrolling */
 }
-.entry-card{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(88, 88, 255);
-    width: 20%;
-    border-radius: 1.5rem;
-    height: 40%;
+
+/* Entry page container */
+.entry {
+  width: 100vw; /* Prevents unwanted horizontal scrolling */
+  height: 100vh; /* Fully covers the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  background: url("/assets/images/wp1933959-pixel-art-wallpapers.jpg") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  
+  padding: 0; /* Removes extra space causing scrolling */
+  box-sizing: border-box; /* Ensures padding/margins don’t overflow */
 }
-#app-reg{
-    display: none;
-}   
-#loginElement{
-    display: none;
+
+/* Ensure text stays centered */
+.entry h1 {
+  margin: 0; /* Prevents text from pushing content beyond the viewport */
+  padding: 0;
+  font-size: 300%;
+  color: white;
 }
+
+/* Fix button layout */
+.entryPage-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+button{
+  font-size:100%;
+  width: 6rem;
+  height: 2.5rem;
+  padding: 2px 2px;
+  margin: 10px;
+  font-weight: 400;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  border-radius: 10px;
+  border-bottom: 2px solid salmon;
+  border-right: 2px solid salmon;
+  border-top: 2px solid whitesmoke;
+  border-left: 2px solid whitesmoke;
+  transition-duration: 200ms;
+  transition-property: border-top, border-left, border-bottom, border-right,
+  box-shadow;
+}
+button:hover{
+border-top: 3px solid salmon;
+border-left: 3px solid salmon;
+border-bottom: 3px solid rgb(255, 0, 0);
+border-right: 3px solid rgb(255, 0, 0);
+box-shadow: rgba(240, 46, 170, 0.4) 5px 5px,
+}
+
 

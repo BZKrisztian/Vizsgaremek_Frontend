@@ -1,0 +1,24 @@
+<div class="tasklistdialog-container">
+  <h3 *ngIf="taskList; else addMode">{{ 'TaskList.EditTaskList' | translate }}</h3>
+  <ng-template #addMode>
+    <h3>{{ 'TaskList.AddTaskList' | translate }}</h3>
+  </ng-template>
+  <form (ngSubmit)="onSave()">
+    <label for="listTitle">Title: </label>
+    <input type="text" name="Title" id="listTitle" required
+      [(ngModel)]="localTaskList.list_Title">
+
+    <label for="listDescription">Description: </label>
+    <textarea name="Description" id="listDescription"
+      [(ngModel)]="localTaskList.list_Description"></textarea>
+
+      <label for="listColor">Color: </label>
+      <input type="color" name="color" id="listColor"
+      [(ngModel)]="localTaskList.color" [value]="localTaskList.color">
+
+    <div class="modal-buttons">
+      <button type="submit">Save</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

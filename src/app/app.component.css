@@ -1,0 +1,19 @@
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Adjust height as needed */
+    background: rgba(0, 0, 0, 0.7); /* Darkened background for visibility */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000; /* Ensures it stays above all content */
+}
+
+.main-header button {
+    background-color: darkslategray;
+    margin: 0 5px;
+}

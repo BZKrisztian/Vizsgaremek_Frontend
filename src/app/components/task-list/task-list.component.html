@@ -1,83 +1,40 @@
+<div class="task-list-container">
+  <!-- Started over from scratch, got too confused -->
 <div class="task-list">
-
-  <div>
-    <h3>Create New Task List</h3>
-    <form #createTaskListForm="ngForm" (ngSubmit)="createTaskList()">
-      <input type="text" [(ngModel)]="newTaskList.list_Title"
-      name="listTitle" required placeholder="Title of the List">
-      <textarea [(ngModel)]="newTaskList.list_Description"
-      name="listDescription" placeholder="the oh so beautiful description of the list"></textarea>
-      <button type="submit" [disabled]="createTaskListForm.invalid">Add Task List</button>
-    </form>
-  </div>
   
-  <!--rendering tasklist(s)-->
-  <div *ngFor="let list of taskLists">
-    <div *ngIf="!taskListEditingProc || taskListEditingProc.list_Id != list.list_Id " >
+    <button (click)="openTaskListDialog4Add()">{{'TaskList.AddTaskList' | translate}}</button>
+  
+    <div *ngFor="let list of taskLists" [style.background]="list.color || '#fff'">
       <h4>{{list.list_Title}}</h4>
       <p>{{list.list_Description}}</p>
-      <button (click)="onTaskListDeletion(list.list_Id)" >Delete List</button>
-      <button (click)="onTaskListEdit(list)">Edit List</button>
-    </div>
-
-        <!--Add form for Task-->
-        <div>
-          <!-- <h4>Add New Task</h4> unnecessary? -->
-          <form #createTaskForm="ngForm" (ngSubmit)="createTask(list.list_Id)">
-            <input type="text" [(ngModel)]="newTask.task_Title"
-            name="tasktitle" required placeholder="Task Title">
-            <textarea [(ngModel)]="newTask.task_Description"
-            name="taskdescription" placeholder="Description of the task"></textarea>
-            <select [(ngModel)]="newTask.task_Priority" name="priority">
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-            <button type="submit" [disabled]="createTaskForm.invalid">Add Task</button>
-          </form>
-        </div>
-
-    <!--rendering task(s)-->
-    <div *ngFor="let task of tasks[list.list_Id]" >
-      <app-task-item
-        [task]="task"
-        (updatedTask)="onTaskUpdate($event)"
-        (deleteTask)="onTaskDeletion(list.list_Id,$event)"
-        (editTask)="onTaskEdit($event)"
-      ></app-task-item>
+      <button (click)="onTaskListDeletion(list.list_Id)">{{'TaskList.DeleteTaskList' | translate}}</button>
+      <button (click)="openTaskListDialog4Edit(list)">{{'TaskList.EditTaskList' | translate}}</button>
+  
+      <button (click)="openTaskDialog4Add(list.list_Id)">{{'TaskList.AddTask' | translate}}</button>
+      <div *ngFor="let task of tasks[list.list_Id] | sortbypriority">
+        <app-task-item
+          [task]="task"
+          (updatedTask)="loadTasks(list.list_Id)"
+          (deletedTask)="onTaskDeletion(list.list_Id,task.task_Id)"
+          (editTask)="openTaskDialog4Edit(task)">
+        </app-task-item>
+      </div>
     </div>
   
-    <!--editing form for tasklist-->
-    <div *ngIf="taskListEditingProc && taskListEditingProc.list_Id===list.list_Id">
-      <form (ngSubmit)="onTaskListUpdate()">
-        <input type="text" [(ngModel)]="taskListEditingProc.list_Title"
-        name="listTitle" required placeholder="List Title">
-        <textarea [(ngModel)]="taskListEditingProc.list_Description"
-        name="listDescription" placeholder="List Description"
-        ></textarea>
-        <button type="submit">Save List</button>
-        <button type="button" (click)="cancelTaskListEdit()">Cancel</button>
-      </form>
-    </div>
-
-
-  </div>
+    <app-taskdialog
+      *ngIf="showTaskDialog"
+      [task]="currentEditingTask"
+      [taskListId]="currentTaskListId"
+      (save)="onTaskDialogSave($event)"
+      (cancel)="closeTaskDialog()">
+    </app-taskdialog>
+    <app-tasklistdialog
+      *ngIf="showTaskListDialog"
+      [taskList]="currentEditingTaskList"
+      (save)="onTaskListDialogSave($event)"
+      (cancel)="closeTaskListDialog()">
+    </app-tasklistdialog>
   
-  <!--editing form for task-->
-  <div *ngIf="taskEditingProc">
-    <h3>Editing Task: </h3>
-    <form (ngSubmit)="saveEditedTask()">
-      <input type="text" [(ngModel)]="taskEditingProc.task_Title"
-        name="title" required placeholder="Task Title" >
-      <textarea
-      [(ngModel)]="taskEditingProc.task_Description"
-      name="taskdescription"
-      placeholder="Task Description"
-      ></textarea>
-      <!--Dont forget Due-Date and Priority setting-->
-      <button type="submit">Save Task</button>
-      <button type="button" (click)="cancelEditTask()">Cancel</button>
-    </form>
-  </div>
+</div>
 
 </div>
