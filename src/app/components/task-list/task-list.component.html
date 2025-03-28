@@ -14,7 +14,7 @@
       <div *ngFor="let task of tasks[list.list_Id] | sortbypriority">
         <app-task-item
           [task]="task"
-          (updatedTask)="loadTasks(list.list_Id)"
+          (updatedTask)="onTaskToggle(task,list.list_Id)"
           (deletedTask)="onTaskDeletion(list.list_Id,task.task_Id)"
           (editTask)="openTaskDialog4Edit(task)">
         </app-task-item>

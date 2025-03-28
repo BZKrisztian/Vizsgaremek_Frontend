@@ -6,9 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  opacity: 0.5s ease-out;
   }
   
   .completed {
     text-decoration: line-through;
-    color: gray;
+    opacity: 0.4;
   }  

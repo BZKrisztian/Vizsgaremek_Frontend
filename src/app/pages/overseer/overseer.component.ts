@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserlistComponent } from "../../components/userlist/userlist.component";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-overseer',
@@ -14,13 +16,21 @@ export class OverseerComponent implements OnInit {
   dailyMot: string = "";
   dailyMots: string[] = [];
 
-  constructor() { }
+  constructor(private route: Router, private authService: AuthService) { }
 
   ngOnInit():void {
     const storedMots = localStorage.getItem('dailyMots')
     if(storedMots){
       this.dailyMots = JSON.parse(storedMots);
     }
+  }
+
+  gotoHomepage(){
+    this.route.navigate(['/homepage']);
+  }
+  logout(): void {
+    this.authService.logout();
+    this.route.navigate(['/entry']);
   }
 
   addDailyMot():void{

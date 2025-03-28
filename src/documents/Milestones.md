@@ -15,8 +15,6 @@ PRIMARY:
 			|-> CRUD of : daily motivationals to be posted for users at Homepage (+ notices later on(eg.:server maintenance))
 				- Timers for automatic deletion of motivationals/notices(?)
 	- Hungarian language support ( finish making the files )
-	- ensure toggle completion can be clicked again, resetting the state of the task
-	- furthermore, an error is displayed by google chrome : {insert photo later}
 	- notification to email upon registering
 		- check if email is valid
 			- CHECKS:
@@ -27,11 +25,6 @@ PRIMARY:
 				- is it already used within our database?
 					- IF YES = deny registration and inform user that the email is already in use and to try a different one
 				- send registration confirmation to email??
-	- task completion:
-		- does not change color
-			- ( how to overwrite written/saved(to database) color property )
-		- task completion(task_Status) is not saved to backend
-		- ensure it can be toggled back into active='not finished' state
 	- ensure due date is implemented properly
 		- check if backend saves it
 		- send 'notification' from backend to frontend if the due date is today
@@ -69,6 +62,11 @@ COMPLEX / Future implementations:
 	- Shared tasklists/tasks
 
 SOLVED:
+	- task completion:
+		- does not change color
+			- ( how to overwrite written/saved(to database) color property )
+		- task completion(task_Status) is not saved to backend
+		- ensure it can be toggled back into active='not finished' state
 	- sorting list priority
 	- admin setting (on database, manually?)
 	- when registering as a different user, and then logging in, other user's list are still shown!

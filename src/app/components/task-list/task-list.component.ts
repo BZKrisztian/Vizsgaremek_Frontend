@@ -61,6 +61,11 @@ export class TaskListComponent implements OnInit {
     )
     console.log(this.tasks)
   }
+  onTaskToggle(task: Task, list_Id: number):void{
+    this.taskService.updateTask(task).subscribe(()=>{
+      this.loadTasks(list_Id)
+    })
+  }
 
   // === Task Modal Methods ===
   openTaskDialog4Edit(task:Task):void{
