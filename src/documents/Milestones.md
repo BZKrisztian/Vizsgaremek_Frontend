@@ -4,6 +4,7 @@ INTEGRATION:
 	- ensure no business logic remains on frontend
 
 PRIMARY:
+	- Switch from http to https for apiUrl
 	- {ADMIN RELATED} :
 		- Admin Login:
 			- Setup/process == create admins manually on backend(?)
@@ -15,10 +16,7 @@ PRIMARY:
 				- Timers for automatic deletion of motivationals/notices(?)
 	- Hungarian language support ( finish making the files )
 	- ensure toggle completion can be clicked again, resetting the state of the task
-	- when registering as a different user, and then logging in, other user's list are still shown!
 	- furthermore, an error is displayed by google chrome : {insert photo later}
-	- admin setting (on database, manually?)
-	- sorting list priority
 	- notification to email upon registering
 		- check if email is valid
 			- CHECKS:
@@ -28,10 +26,12 @@ PRIMARY:
 					- IF NO = deny registration? // OR dont bother, since there's no need for confirmation of registration
 				- is it already used within our database?
 					- IF YES = deny registration and inform user that the email is already in use and to try a different one
+				- send registration confirmation to email??
 	- task completion:
 		- does not change color
 			- ( how to overwrite written/saved(to database) color property )
 		- task completion(task_Status) is not saved to backend
+		- ensure it can be toggled back into active='not finished' state
 	- ensure due date is implemented properly
 		- check if backend saves it
 		- send 'notification' from backend to frontend if the due date is today
@@ -41,6 +41,7 @@ SECONDARY:
 	- user account update:
 		- update username / email / password
 		- delete own account
+	- admin side => configure the userlist => dont show all users(will clutter the website), implement scrolling + a search bar
 	- configuration => make a pipe that sorts based on update
 	- if a logged in, regular user tries to go to overseer through url, redirect to homepage instead of entry
 	- upon successful registration, aside from message the login button should appear
@@ -55,7 +56,7 @@ TETRIARY:
 	- Timer(Pomodoro) -> locally
 	- Make site sticky on browser(can it even be done?)
 
-COMPLEX(only if done with everything else):
+COMPLEX / Future implementations:
 	- License free:
 		- Music ( Lo-Fi )
 		- Ambiance/White-Noise ( Rain )
@@ -65,8 +66,12 @@ COMPLEX(only if done with everything else):
 		|-> Read => get it, lol
 		|-> Update => button to modify existing diary entry
 		|-> Delete => delete, lol
+	- Shared tasklists/tasks
 
 SOLVED:
+	- sorting list priority
+	- admin setting (on database, manually?)
+	- when registering as a different user, and then logging in, other user's list are still shown!
 	- adminUser was dropped('isAdmin' boolean for users) => make sure there's no trace of adminUser
 	- switch warning message method for deleting tasklist( check if confirmdeldialog works properly )
 	- Ordering based on importance of list and list-item ( done with pipe, when backend finally works check if it works )
