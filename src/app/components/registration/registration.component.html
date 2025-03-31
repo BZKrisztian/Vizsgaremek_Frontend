@@ -20,7 +20,7 @@
         <label for="registration-password">{{'Auth.Password' | translate}}</label>
         <input id="registration-password" type="password" formControlName="password" />
         <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
-          <small>Password is required. It must also be at least 6 characters.</small>
+          <small>Password is required. It must be at least 8 characters, and contain one upper case letter and one number.</small>
         </div>
       </div>
   

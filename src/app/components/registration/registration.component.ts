@@ -4,6 +4,7 @@ import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registration',
@@ -22,44 +23,49 @@ export class RegistrationComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private formBuilderReg: FormBuilder, private authservice: AuthService) {
-  }
+  constructor(
+    private formBuilderReg: FormBuilder,
+    private authservice: AuthService,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.registrationForm = this.formBuilderReg.group(
       {
         username: ['', [Validators.required,Validators.minLength(6)]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        password: ['',[
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern('^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{6,}$')
+        ]]
       } //for multiple validators, we need them in an array[]
     )
   }
 
 
-  onSubmit():void{
+  onSubmit(): void {
     if(this.registrationForm.valid){
       const newUser: User = {
-        user_Id : 0,
+        user_Id: 0,
         userName: this.registrationForm.value.username,
         email: this.registrationForm.value.email,
         password: this.registrationForm.value.password,
         acc_CR_D: new Date(),
         acc_UP_D: new Date(),
         isAdmin: false
-      }
+      };
       this.authservice.register(newUser).subscribe({
         next: (res) => {
-          this.successMessage = "Registration successful";
-          console.log(res)
+          this.successMessage = "Registration successful"; //drop
+          this.snackBar.open('Registration successful', 'Close', { duration: 3000 });
           this.errorMessage = '';
           this.registrationForm.reset();
         },
         error: (err) => {
-          this.errorMessage = "Registration failed";
-          console.log(err)
-          this.successMessage = '';
+          this.errorMessage = err.error.message || "Registration failed";
+          this.snackBar.open('Registration failed: ' + this.errorMessage, 'Close', { duration: 3000 });
         }
-      })
+      });
     }
   }
 

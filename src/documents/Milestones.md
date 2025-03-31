@@ -4,31 +4,33 @@ INTEGRATION:
 	- ensure no business logic remains on frontend
 
 PRIMARY:
-	- Switch from http to https for apiUrl
+	- Full responsivity!
+	- Mobile app/port??
+	- Switch from http to https?
 	- {ADMIN RELATED} :
 		- Admin Login:
-			- Setup/process == create admins manually on backend(?)
-			- Login procedure == recognition of admin upon login ( check email AND password from backend )
+			- Setup/process == create admins manually on backend?(where else to define, sql dump, environment on backend?)
 		- Admin side :
-			|-> Read/Delete of: users
-				- EXCLUDE admin users so they cannot delete each other
-			|-> CRUD of : daily motivationals to be posted for users at Homepage (+ notices later on(eg.:server maintenance))
-				- Timers for automatic deletion of motivationals/notices(?)
-	- Hungarian language support ( finish making the files )
-	- notification to email upon registering
-		- check if email is valid
-			- CHECKS:
-				- does it exist as an email
-					- IF YES = CHECK if it exists already within database
+			|-> CRUD of : daily motivationals to be posted for users at Homepage (+CRUD of separate notices later on(eg.:server maintenance))
+				- Timers for automatic deletion of motivationals/notices?
+				- ability for user to X out the motivational/notice so they do not see it( resets on logout, upon login it shows again )
+	- notification
+		- notification to email upon registering
+			- check if email is valid
+				- CHECKS:
+					- does it exist as an email
+						- IF YES = CHECK if it exists already within database
+							- IF YES = deny registration and inform user that the email is already in use and to try a different one
+						- IF NO = deny registration? // OR dont bother, since there's no need for confirmation of registration
+					- is it already used within our database?
 						- IF YES = deny registration and inform user that the email is already in use and to try a different one
-					- IF NO = deny registration? // OR dont bother, since there's no need for confirmation of registration
-				- is it already used within our database?
-					- IF YES = deny registration and inform user that the email is already in use and to try a different one
-				- send registration confirmation to email??
+					- send registration confirmation to email??
 	- ensure due date is implemented properly
 		- check if backend saves it
 		- send 'notification' from backend to frontend if the due date is today
 			- make pipe to overwrite every other pipe's sorting and place due date pipe's tasks to front
+	- Better registration requirement of password ( minlength, unique characters )
+	- Better pop-up messages for errors during registration and login
 
 SECONDARY:
 	- user account update:
@@ -42,6 +44,7 @@ SECONDARY:
 	- button to hide all tasklists(+their tasks) 
 	- ability to choose wallpaper (homepage/overseer only, set only to local session for now, dont save setting to backend)
 	- better error handling -> comprehensive messsages for both devs and user
+	- Hungarian language support ( finish making the files )
 
 TETRIARY:
 	- save chosen language to backend
@@ -62,6 +65,9 @@ COMPLEX / Future implementations:
 	- Shared tasklists/tasks
 
 SOLVED:
+			|-> Read of: users
+				- differentiation of user and adminUser
+			- Login procedure == recognition of admin upon login ( check email AND password from backend )
 	- task completion:
 		- does not change color
 			- ( how to overwrite written/saved(to database) color property )

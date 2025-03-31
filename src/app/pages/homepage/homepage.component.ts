@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-homepage',
@@ -14,14 +15,34 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class HomepageComponent implements OnInit {
 
-  
-  // Remove/Refactor later, pls
-
-
   newTaskListTitle: string = '';
   newTaskListDescription: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  hasTasksDue4Today: boolean = false;
+
+  constructor(
+    private authService: AuthService,
+    private taskService: TaskService,
+    private router: Router) { }
+
+  ngOnInit() {
+    }
+
+  check4TasksDueToday():void{
+    this.taskService.getTaskLists().subscribe(lists=>{
+      lists.forEach(list=>{
+        this.taskService.getTasks(list.list_Id).subscribe(tasks=>{
+          tasks.forEach(task=>{
+            if(task.due_Date && new Date(task.due_Date).toDateString() === new Date().toDateString()){
+              this.hasTasksDue4Today = true
+            }
+          })
+        })
+      })
+    })
+  }
+
+
 
   isAdmin():boolean{
     const user = this.authService.getCurrentUser();
@@ -33,8 +54,7 @@ export class HomepageComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-  }
+
 
   logout(): void {
     this.authService.logout();

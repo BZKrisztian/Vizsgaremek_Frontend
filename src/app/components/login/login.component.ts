@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    TranslateModule
+    TranslateModule,
   ]
 })
   export class LoginComponent implements OnInit {
@@ -22,7 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     constructor(
       private formbuilderLg: FormBuilder,
       private authService: AuthService,
-      private router: Router
+      private router: Router,
+      private snackBar: MatSnackBar
     ) {}
   
     ngOnInit(): void {
@@ -45,7 +47,8 @@ import { TranslateModule } from '@ngx-translate/core';
           }
         },
         error: (err) => {
-          this.errorMessage = "Login failed";
+          // this.errorMessage = "Login failed";
+          this.snackBar.open('Login failed ' + this.errorMessage, 'Close', { duration: 3000 });
           console.log(err);
           this.loginForm.reset();
         }

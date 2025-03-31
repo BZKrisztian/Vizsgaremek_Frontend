@@ -1,6 +1,8 @@
 <div class="homepage">
   <button (click)="logout()">{{'General.Logout' | translate}}</button>
   <button *ngIf="isAdmin()" (click)="goToOverseer()">Switch to Overseer</button>
+
+  
   <h1>{{'Pages.Homepage.Title' | translate}}</h1>
   <h4>{{'Pages.Homepage.YourTaskLists' | translate}}</h4>
   <app-task-list></app-task-list>

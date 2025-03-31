@@ -70,6 +70,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('Messagedismissed');
     this.currentUser_BSub.next(null);
   }
 
