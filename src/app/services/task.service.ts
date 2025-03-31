@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task.model';
 import { TaskList } from '../models/tasklist.model';
-import { environment } from '../../environment/environment';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root',

@@ -4,3 +4,55 @@
     height: calc(100vh - 70px);
     overflow-y: auto;
 }
+
+app-task-list {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Example shadow */
+    border-radius: 8px; /* Optional: makes it look smoother */
+    padding: 10px; /* Optional: prevents shadow from being too close */
+  }
+
+.homepage h1 {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.homepage h4{
+    color: white;
+}
+
+.header-btn{
+    position: absolute; /* or fixed */
+    top: 0px;
+    right: 0;
+    z-index: 1001;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+button{
+    font-size:100%;
+    width: 6rem;
+    min-width: fit-content;
+    height: 2.5rem;
+    padding: 2px 2px;
+    margin: 10px;
+    font-weight: 400;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    border-radius: 10px;
+    border-bottom: 2px solid salmon;
+    border-right: 2px solid salmon;
+    border-top: 2px solid whitesmoke;
+    border-left: 2px solid whitesmoke;
+    transition-duration: 200ms;
+    transition-property: border-top, border-left, border-bottom, border-right,
+    box-shadow;
+}
+button:hover{
+  border-top: 3px solid salmon;
+  border-left: 3px solid salmon;
+  border-bottom: 3px solid rgb(255, 0, 0);
+  border-right: 3px solid rgb(255, 0, 0);
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px,
+}

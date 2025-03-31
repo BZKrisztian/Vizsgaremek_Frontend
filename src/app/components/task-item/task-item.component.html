@@ -4,8 +4,8 @@
   <p>Priority: {{task.task_Priority}}</p>
   <p>Due Date: {{task.due_Date | date: 'dd/MM/yyyy'}}</p>
   <p>Created: {{task.creation_Date| date:'short'}}</p>
-  <p>Updated at: {{task.update_Date| date:'short'}}</p>
-  <button (click)="completionToggle()">Toggle Completion</button>
-  <button (click)="edit()">Edit Task</button>
-  <button (click)="delete()">Delete Task</button>
+  <p>Updated: {{task.update_Date| date:'short'}}</p>
+  <button (click)="completionToggle()">Complete</button>
+  <button (click)="edit()">Edit</button>
+  <button (click)="delete()">Delete</button>
 </div>

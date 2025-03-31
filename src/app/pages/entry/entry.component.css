@@ -28,7 +28,7 @@ html, body {
 .entry h1 {
   margin: 0; /* Prevents text from pushing content beyond the viewport */
   padding: 0;
-  font-size: 300%;
+  font-size: 200%;
   color: white;
 }
 
@@ -43,6 +43,7 @@ html, body {
 button{
   font-size:100%;
   width: 6rem;
+  min-width: fit-content;
   height: 2.5rem;
   padding: 2px 2px;
   margin: 10px;

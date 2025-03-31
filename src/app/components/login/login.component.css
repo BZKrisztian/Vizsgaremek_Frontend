@@ -1,8 +1,8 @@
-.login {
+.login-form {
     display: flex;
     justify-content: center;
     background-color: rgb(197, 126, 176, 0.6);
-    padding: 2.5rem;
+    padding: 2rem;
     border-radius: 15px;
     margin-bottom: 1rem;
     color: white;
@@ -10,7 +10,7 @@
     font-size: 120%;
   }
 
-.login .loginForm div {
+.login-form div {
     display: grid;
     grid-template-columns: 1fr 2fr; /* Adjust label width vs. input width */
     align-items: center;
@@ -18,7 +18,7 @@
     margin-bottom: 15px;
 }
 
-.login label {
+.login-form label {
     text-align: right; /* Align labels to the right */
     padding-right: 10px;
 }
@@ -34,6 +34,7 @@ input{
 button{
     font-size:100%;
     width: 6rem;
+    min-width: fit-content;
     height: 2.5rem;
     padding: 2px 2px;
     margin: 10px;
@@ -56,4 +57,10 @@ button:hover{
   border-bottom: 3px solid rgb(255, 0, 0);
   border-right: 3px solid rgb(255, 0, 0);
   box-shadow: rgba(240, 46, 170, 0.4) 5px 5px,
+}
+
+.login-form div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

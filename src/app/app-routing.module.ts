@@ -16,12 +16,12 @@ const routes: Routes = [
   {
     path: 'homepage',
     component: HomepageComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'overseer',
     component: OverseerComponent,
-    canActivate: [AuthGuard, AdminGuard]
+    // canActivate: [AuthGuard, AdminGuard]
   },
 ];
 

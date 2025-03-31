@@ -1,4 +1,12 @@
-  /* login page container */
+body {
+  height: 100vh; /* Makes the page exactly as tall as the viewport */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Hides scrollbars */
+  width: 100vw; /* Prevents horizontal scrolling */
+}
+
+/* login page container */
   .log-in {
     width: 100vw; /* Prevents unwanted horizontal scrolling */
     height: 100vh; /* Fully covers the viewport */
@@ -14,6 +22,8 @@
     
     padding: 0; /* Removes extra space causing scrolling */
     box-sizing: border-box; /* Ensures padding/margins don’t overflow */
+    
+    color: white;
   }
    
   /* Ensure text stays centered */
@@ -22,3 +32,7 @@
     padding: 0;
     color: white;
   }
+app-login{
+  margin-top: 2rem;
+}
+
