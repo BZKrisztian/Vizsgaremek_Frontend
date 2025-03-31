@@ -9,4 +9,5 @@ export interface Task {
   creation_Date: Date;
   update_Date: Date;
   owner_Id?: number;
+  color?: string
 }

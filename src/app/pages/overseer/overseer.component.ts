@@ -17,16 +17,22 @@ export class OverseerComponent implements OnInit {
   constructor() { }
 
   ngOnInit():void {
+    const storedMots = localStorage.getItem('dailyMots')
+    if(storedMots){
+      this.dailyMots = JSON.parse(storedMots);
+    }
   }
 
   addDailyMot():void{
     if(this.dailyMot.trim()){
       this.dailyMots.push(this.dailyMot);
       this.dailyMot = "";
+      localStorage.setItem('dailyMots', JSON.stringify(this.dailyMots));
     }
   }
   removeDailyMot(index: number):void{
     this.dailyMots.splice(index, 1);
+    localStorage.setItem('dailyMots', JSON.stringify(this.dailyMots));
   }
 
 }

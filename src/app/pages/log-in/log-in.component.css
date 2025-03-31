@@ -15,7 +15,7 @@
     padding: 0; /* Removes extra space causing scrolling */
     box-sizing: border-box; /* Ensures padding/margins don’t overflow */
   }
-  
+   
   /* Ensure text stays centered */
   .log-in h1 {
     margin: 0; /* Prevents text from pushing content beyond the viewport */

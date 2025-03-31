@@ -12,9 +12,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(): boolean {
         if
-        (this.authService.isLoggedIn() &&
-        (this.authService.getCurrentUser() ||
-        this.authService.getCurrentAdmin())
+        (this.authService.isLoggedIn()
         ) {
             return true;
         } else {

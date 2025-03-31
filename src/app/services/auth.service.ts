@@ -1,151 +1,79 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { BehaviorSubject, filter, map, Observable, of, switchMap, take } from 'rxjs';
-import { AdminUser } from '../models/adminuser.model';
+import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiURL = '';
+  private apiURL = environment.apiUrl;
 
+  // BehaviorSubject ==> container 4 current user(be it regular or admin = separate containers used depending on user type)
+  // currentXY$ ==> observable 4 current user
   private currentUser_BSub: BehaviorSubject<User|null>;
   public currentUser$ : Observable<User|null>;
 
-  private currentAdmin_BSub: BehaviorSubject<AdminUser|null>;
-  public currentAdmin$ : Observable<AdminUser|null>;
-
-  private adminEmails: string[] = [];
-  private adminEmailsLoaded: boolean = false;
-  private adminEmailsLoaded_BSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('currentUser');
-    this.currentUser_BSub = new BehaviorSubject<User|null>(
-      storedUser ? JSON.parse(storedUser) : null
-    )
+    const storedUser = localStorage.getItem('currentUser')
+    this.currentUser_BSub = new BehaviorSubject<User|null>(storedUser ? JSON.parse(storedUser) : null)
     this.currentUser$ = this.currentUser_BSub.asObservable();
-
-    const storedAdmin = localStorage.getItem('currentAdmin');
-    this.currentAdmin_BSub = new BehaviorSubject<AdminUser|null>(
-      storedAdmin ? JSON.parse(storedAdmin) : null
-    )
-    this.currentAdmin$ = this.currentAdmin_BSub.asObservable();
-    this.loadAdminEmails();
   }
 
-
-  private loadAdminEmails():void{
-    this.http.get<AdminUser[]>(`${this.apiURL}/adminusers`).subscribe(
-      (admins)=>{
-        this.adminEmails = admins.map((admin)=>admin.adminEmail.toLowerCase())
-        this.adminEmailsLoaded = true;
-        this.adminEmailsLoaded_BSub.next(true);
-      },
-      (err)=>{
-        console.log(err)
-      }
-    )
-  }
-  private loadAdminEmails_BackCheck():Observable<boolean>{
-    if(this.adminEmailsLoaded){
-      return of(true)
-    }else{
-      return this.adminEmailsLoaded_BSub.pipe(
-        filter((loaded)=>loaded==true),
-        take(1)
-      )
-    }
+  //getter 4 comps+guards / returns current user
+  getCurrentUser() {
+    return this.currentUser_BSub.value;
   }
 
-
+  // post request for backend
   register(userData: User): Observable<any> {
-    if(!userData){
-      throw new Error('User data is required.');
-    }
-    return this.http.post<any>(`${this.apiURL}/register`, userData);
-  }
-
-  login(credentials: { email: string; password: string }): Observable<any> {
-    if(!credentials){
-      throw new Error("Credentials are required.");
-    }
-    return this.loadAdminEmails_BackCheck().pipe(
-      switchMap(()=>{
-        if(this.isAdminEmail(credentials.email)){
-          return this.http.post<any>(`${this.apiURL}/adminlogin`, credentials).pipe(
-            switchMap((res)=>{
-              if(res&&res.token){
-                localStorage.setItem('authToken',res.token)
-                localStorage.setItem('currentAdmin',JSON.stringify(res.adminUser))
-                localStorage.removeItem('currentUser')
-                this.currentAdmin_BSub.next(res.adminUser)
-                this.currentUser_BSub.next(null)
-              }
-              return of(res)
-            })
-          )
-        }else{
-          return this.http.post<any>(`${this.apiURL}/login`, credentials).pipe(
-            switchMap((res)=>{
-              if(res&&res.token){
-                localStorage.setItem('authToken',res.token)
-                localStorage.setItem('currentUser',JSON.stringify(res.user))
-                localStorage.removeItem('currentAdmin')
-                this.currentUser_BSub.next(res.user)
-                this.currentAdmin_BSub.next(null)
-              }
-              return of(res)
-            })
-          )
+    return this.http.post<any>(`${this.apiURL}/register`, userData)
+    // frontend part of sending email to user when successfully registered
+    .pipe(
+      tap((res)=>{
+        if(res && res.emailNotifSent){
+          console.log(res, "email notification sent");
         }
+      })
+    );
+  }
+  // post request for backend ==> if token is received, it is saved to localstorage,
+  // and current user is set by looking at the response
+  login(credentials:{email:string,password:string}):Observable<any>{
+    return this.http.post<any>(`${this.apiURL}/login`,credentials).pipe(
+      tap((res)=>{
+        if(res&&res.token){
+          localStorage.setItem('authToken',res.token);
+          localStorage.setItem('currentUser',JSON.stringify(res.user));
+          this.currentUser_BSub.next(res.user);
+        }
+      }),
+      catchError((error: HttpErrorResponse)=>{
+        if(error.status === 401){
+          console.log(error)
+          console.warn("Token expired or invalid. Logging out...")
+          this.logout();
+        }throw error
       })
     )
   }
-
-  private isAdminEmail(email: string):boolean{
-    return this.adminEmails.includes(email.toLowerCase())
-  }
-  
+  // gets token from localstorage
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
-  getCurrentUser():User|null{
-    return this.currentUser_BSub.value
-  }
-  getCurrentAdmin():AdminUser|null{
-    return this.currentAdmin_BSub.value
-  }
-  getCurrentOwner():{id:number, role: "user" | "admin"}|null{
-    const currentUser = this.getCurrentUser();
-    if(currentUser){
-      return { id: currentUser.user_Id, role: "user"};
-    }
-    const currentAdmin = this.getCurrentAdmin();
-    if(currentAdmin){
-      return { id: currentAdmin.adminUser_Id, role: "admin"};
-    }
-    return null
-  }
-
-  saveToken(token: string): void {
-     localStorage.setItem('authToken', token);
-  }
-
-
+  // checks if token is present, IF yes = logged in
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
+  // clears localstorage, resets/nullifies behaviour subject
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('currentAdmin');
     this.currentUser_BSub.next(null);
-    this.currentAdmin_BSub.next(null);
   }
 
-  //(C)R(U)D of Users for Overseer
+  //(C)R(U)D of Users for Overseer (includes admins, partitioned at userlist component)
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(`${this.apiURL}/users`)
   }

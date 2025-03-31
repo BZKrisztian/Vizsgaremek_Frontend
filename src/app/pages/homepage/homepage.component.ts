@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
-  imports: [TaskListComponent, FormsModule, CommonModule]
+  imports: [TaskListComponent, FormsModule, CommonModule, TranslateModule]
 })
 export class HomepageComponent implements OnInit {
 
@@ -23,7 +24,8 @@ export class HomepageComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   isAdmin():boolean{
-    return this.authService.getCurrentAdmin() != null
+    const user = this.authService.getCurrentUser();
+    return user ? user.isAdmin : false;
   }
 
   goToOverseer():void{
@@ -34,23 +36,9 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
   }
 
-  // addTaskList() {
-  //   if (this.newTaskListTitle.trim()){
-  //     const newTaskList: TaskList = {
-  //       list_Id: 0,
-  //       list_Title: this.newTaskListTitle,
-  //       list_Description: this.newTaskListDescription,
-  //       creation_Date: new Date(),
-  //       update_Date: new Date()
-  //     }
-  //     this.taskService.addTaskList(newTaskList).subscribe(
-  //       ()=>{
-  //         this.newTaskListTitle = '';
-  //         this.newTaskListDescription = '';
-  //       }
-  //     )
-  //   }
-  // }
-
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/entry']);
+  }
 
 }

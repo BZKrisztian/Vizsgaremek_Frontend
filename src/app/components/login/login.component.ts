@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { CommonModule, NgIf } from '@angular/common';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    NgIf
+    TranslateModule
   ]
 })
   export class LoginComponent implements OnInit {
@@ -27,29 +28,28 @@ import { CommonModule, NgIf } from '@angular/common';
     ngOnInit(): void {
       this.loginForm = this.formbuilderLg.group({
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
-      }); // CHECK if i need the validator.minlegth at login if its defined/required at Registration
+        password: ['', [Validators.required]]
+      });
     }
   
     onSubmit(): void {
       if (this.loginForm.invalid){
         return
       }
-      this.authService.login(this.loginForm.value).subscribe(
-        {
-          next: (res:any)=>{
-            this.authService.saveToken(res.token)
-            if(this.authService.getCurrentAdmin()){
-              this.router.navigate(['/overseer'])
-            }else{
-              this.router.navigate(['/homepage'])
-            }
-          },
-          error: (err)=>{
-            this.errorMessage = "Thou wouldst seem to not belong here. Return from where thou camst."
-            console.log(err)
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          if(res.user && res.user.isAdmin){
+            this.router.navigate(['/overseer']);
+          }else{
+            this.router.navigate(['/homepage']);
           }
+        },
+        error: (err) => {
+          this.errorMessage = "Login failed";
+          console.log(err);
+          this.loginForm.reset();
         }
+      }
       )
     }
   }

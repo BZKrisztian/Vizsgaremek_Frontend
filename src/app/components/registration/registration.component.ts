@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { User } from '../../models/user.model';
 import { CommonModule, NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import * as CryptoJS from 'crypto-js';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registration',
@@ -12,17 +12,20 @@ import * as CryptoJS from 'crypto-js';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    NgIf
+    TranslateModule
   ],
 })
 export class RegistrationComponent implements OnInit {
 
-  registrationForm: FormGroup;
+  registrationForm!: FormGroup;
 
   errorMessage: string = '';
   successMessage: string = '';
 
   constructor(private formBuilderReg: FormBuilder, private authservice: AuthService) {
+  }
+
+  ngOnInit(): void {
     this.registrationForm = this.formBuilderReg.group(
       {
         username: ['', [Validators.required,Validators.minLength(6)]],
@@ -32,36 +35,31 @@ export class RegistrationComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void {}
-
 
   onSubmit():void{
     if(this.registrationForm.valid){
-      const passwordEncrypt = CryptoJS.SHA256(this.registrationForm.value.password).toString()
       const newUser: User = {
         user_Id : 0,
         userName: this.registrationForm.value.username,
         email: this.registrationForm.value.email,
-        password: passwordEncrypt,
+        password: this.registrationForm.value.password,
         acc_CR_D: new Date(),
-        acc_UP_D: new Date()
+        acc_UP_D: new Date(),
+        isAdmin: false
       }
-      this.authservice.register(newUser).subscribe(
-        (res)=>
-          {
-            this.successMessage = "Registration successful! :D"
-            this.errorMessage = ""
-            console.log("Succesfully registered C:",res)
-            this.registrationForm.reset()
-          },
-        (err)=>
-          {
-            this.errorMessage = "Registration failed, maybe try again? :C"
-            this.successMessage = ""
-            console.error(err)
-            this.registrationForm.reset()
-          }
-      )
+      this.authservice.register(newUser).subscribe({
+        next: (res) => {
+          this.successMessage = "Registration successful";
+          console.log(res)
+          this.errorMessage = '';
+          this.registrationForm.reset();
+        },
+        error: (err) => {
+          this.errorMessage = "Registration failed";
+          console.log(err)
+          this.successMessage = '';
+        }
+      })
     }
   }
 
