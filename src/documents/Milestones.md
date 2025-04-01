@@ -4,12 +4,10 @@ INTEGRATION:
 	- ensure no business logic remains on frontend
 
 PRIMARY:
-	- Full responsivity!
-	- Mobile app/port??
-	- Switch from http to https?
+	- Full responsivity! (not me)
+	- Mobile app/port?? (not me)
+	- Switch from http to https? (no domain, not yet)
 	- {ADMIN RELATED} :
-		- Admin Login:
-			- Setup/process == create admins manually on backend?(where else to define, sql dump, environment on backend?)
 		- Admin side :
 			|-> CRUD of : daily motivationals to be posted for users at Homepage (+CRUD of separate notices later on(eg.:server maintenance))
 				- Timers for automatic deletion of motivationals/notices?
@@ -30,7 +28,14 @@ PRIMARY:
 		- send 'notification' from backend to frontend if the due date is today
 			- make pipe to overwrite every other pipe's sorting and place due date pipe's tasks to front
 	- Better registration requirement of password ( minlength, unique characters )
-	- Better pop-up messages for errors during registration and login
+	- Better pop-up messages for errors during registration and login (pop-up does not show on registration error?)
+	- Search bar?
+		- For Tasklist to find tasks
+		- For Userlist to find user(username or email)
+			- ensure the table does not load in a way that it takes up the whole screen => implement scrolling
+	- Button to turn users to admin ( + confirmation )
+		- have a superadmin?
+	- unsubscribe everywhere to not cause bloating for devices/pc's?
 
 SECONDARY:
 	- user account update:
@@ -65,6 +70,8 @@ COMPLEX / Future implementations:
 	- Shared tasklists/tasks
 
 SOLVED:
+		- Admin Login:
+			- Setup/process == create admins manually on backend?(where else to define, sql dump, environment on backend?)
 			|-> Read of: users
 				- differentiation of user and adminUser
 			- Login procedure == recognition of admin upon login ( check email AND password from backend )
