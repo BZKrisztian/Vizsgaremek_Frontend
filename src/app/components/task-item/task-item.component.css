@@ -10,7 +10,9 @@
   */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   /* This above is the new part, should change the layout of the task list depending on text and such */
   /*This could be a bad idea but we will see, it stretches to fit the container, otherwise tone the % down on width*/
@@ -26,7 +28,7 @@
   
   button{
     font-size:100%;
-    width: 6rem;
+    width: 5rem;
     min-width: fit-content;
     height: 2.5rem;
     padding: 2px 2px;
@@ -51,7 +53,11 @@ button:hover{
   border-right: 3px solid rgb(255, 0, 0);
   box-shadow: rgba(240, 46, 170, 0.4) 5px 5px,
 }
-
+.task-item button{
+  width: 80%;
+  max-width: 5rem;
+  margin: 5px;
+}
 
 /* Button part might not be needed since the buttens worked well so far */
 @media (max-width: 600px) {
@@ -66,7 +72,7 @@ button:hover{
 /*This is because im paranoid that the site will look weird on a larger screen*/
 @media (min-width: 900px) {
   .task-item {
-    max-width: 600px; /* Keeps tasks from getting too wide */
+    max-width: 90%; /* Keeps tasks from getting too wide */
     margin: 10px auto; /* Centers them */
   }
 }
