@@ -27,6 +27,8 @@ import { LogInComponent } from './pages/log-in/log-in.component';
 import { RouterModule } from '@angular/router';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,6 +63,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TaskdialogComponent,
     TasklistdialogComponent,
     ConfirmdeldialogComponent,
+
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
 
     
     SortbypriorityPipe,

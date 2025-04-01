@@ -1,34 +1,37 @@
 <div class="taskdialog-container">
-  <div>
-    <h3>{{task? 'Edit Task':'Add Task'}}</h3>
-    <form (ngSubmit)="onSave()">
-      <label for="taskTitle">Title: </label>
-      <input id="taskTitle" type="text"
-        [(ngModel)]="localTask.task_Title" name="tasktitle" required>
+  <form (ngSubmit)="onSave()">
+    
+    <label for="taskTitle">Title:</label>
+    <input id="taskTitle" type="text" [(ngModel)]="localTask.task_Title" name="title" required />
 
-      <label for="taskDescription">Description: </label>
-      <textarea name="description" id="taskDescription"
-        [(ngModel)]="localTask.task_Description"></textarea>
+    <label for="taskDesc">Description:</label>
+    <textarea id="taskDesc" [(ngModel)]="localTask.task_Description" name="description"></textarea>
 
-      <label for="taskPriority"></label>
-      <select name="priority" id="taskPriority"
-        [(ngModel)]="localTask.task_Priority">
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
+    <mat-form-field appearance="fill">
+      <mat-label>Due Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="localTask.due_Date"
+        name="dueDate"
+        required
+        readonly
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-      <label for="dueDate">Due Date: </label>
-      <input id="dueDate" type="date" name="dueDate"
-        [(ngModel)]="localTask.due_Date">
+    <label for="priority">Priority:</label>
+    <select id="priority" [(ngModel)]="localTask.task_Priority" name="priority" required>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
 
-      <label for="taskColor">Color: </label>
-      <input type="color" name="color" id="taskColor" [(ngModel)]="localTask.color" [value]="localTask.color">
+    <label for="color">Color:</label>
+    <input id="color" type="color" [(ngModel)]="localTask.color" name="color" />
 
-      <div class="modal-buttons">
-        <button type="submit">Save</button>
-        <button type="button" (click)="onCancel()">Cancel</button>
-      </div>
-    </form>
-  </div>
+    <button type="submit">Save</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </form>
 </div>

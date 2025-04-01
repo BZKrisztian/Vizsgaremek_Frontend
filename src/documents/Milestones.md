@@ -2,7 +2,7 @@
 
 INTEGRATION:
 	- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
-	- ensure no business logic remains on frontend
+		- ensure no business logic remains on frontend
 	- Refactor method names for clarity
 	- Concise comments for each method and key properties (e.g., BehaviorSubjects, dialog toggles)
 
@@ -10,7 +10,7 @@ PRIMARY:
 	- Full responsivity! (not me)
 	- Mobile app/port?? (not me)
 	- Switch from http to https? (no domain, not yet)
-	
+
 	- {ADMIN RELATED} : {{ SCRAPPED FOR NOW }}
 		- Admin side :
 			- Message system (admin CRUD + homepage display)
@@ -32,29 +32,15 @@ PRIMARY:
 			- (Not yet implemented): email verification step via click link
 			- Ensure email does not land in spam
 			- Configure sender label
-
-	- ensure due date is implemented properly
-		- check if backend saves it
-		- send 'notification' from backend to frontend if the due date is today
-		- make pipe to overwrite every other pipe's sorting and place due date pipe's tasks to front
-		- expired tasks should trigger alert
-		- completed tasks should not trigger alerts
-		- alerts auto-refresh
-
-	- Better registration requirement of password ( minlength, unique characters )
-	- Better pop-up messages for errors during registration and login (pop-up does not show on registration error?)
 	- Search bar?
-		- For Tasklist to find tasks (supports partial match)
 		- For Userlist to find user (username or email)
 			- ensure the table does not load in a way that it takes up the whole screen => implement scrolling
 	- Button to turn users to admin ( + confirmation )
 		- have a superadmin?
 	- unsubscribe everywhere to not cause bloating for devices/pc's?
-	- put every necessary button to main header ( at app.component.html )
-		- logout button (if logged in)
-		- language switch
-		- if admin: switch to homepage/overseer button
-	- replace current date picker with a more convenient one
+
+	- 2D array to view user's tasklists on overseer table??( 3D to view tasks?? )
+		- IF implemented: how to ensure it does not bloat the page in case we have too many users
 
 SECONDARY:
 	- user account update:
@@ -137,6 +123,14 @@ SOLVED:
 	- Due date detection + alerts (today + expired) + auto-refresh when tasks change
 	- Completed tasks move to bottom (via pipe)
 	- Task border color set based on priority
+	- Better registration requirement of password ( minlength, unique characters )
+	- Better pop-up messages for errors during registration and login (pop-up does not show on registration error?)
+	- put every necessary button to main header ( at app.component.html )
+		- logout button (if logged in)
+		- language switch
+		- if admin: switch to homepage/overseer button
+	- replace current date picker with a more convenient one
+	- For Tasklist to find tasks (supports partial match)
 
 # STYLING:
 PROBLEMS/THINGS TO FIX:

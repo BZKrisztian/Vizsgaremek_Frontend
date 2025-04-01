@@ -3,12 +3,18 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Task } from '../../../models/task.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-taskdialog',
   templateUrl: './taskdialog.component.html',
   styleUrls: ['./taskdialog.component.css'],
-  imports:[CommonModule,ReactiveFormsModule,FormsModule]
+  imports:[
+    CommonModule,ReactiveFormsModule,FormsModule,
+    MatFormFieldModule,MatInputModule,MatDatepickerModule,MatNativeDateModule]
 })
 export class TaskdialogComponent implements OnInit {
 

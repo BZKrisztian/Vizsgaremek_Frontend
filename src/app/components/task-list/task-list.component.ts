@@ -15,6 +15,7 @@ import { SortbypriorityPipe } from '../../pipes/sortbypriority.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { DuedatePipe } from "../../pipes/duedate.pipe";
 import { CompletionstatusPipe } from "../../pipes/completionstatus.pipe";
+import { TaskFilterPipe } from '../../pipes/taskFilter.pipe';
 
 
 @Component({
@@ -22,9 +23,12 @@ import { CompletionstatusPipe } from "../../pipes/completionstatus.pipe";
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
   imports: [TaskItemComponent, FormsModule, CommonModule,
-    TaskdialogComponent, TasklistdialogComponent, SortbypriorityPipe, TranslateModule, DuedatePipe, CompletionstatusPipe],
+    TaskdialogComponent, TasklistdialogComponent, TranslateModule,
+    SortbypriorityPipe, DuedatePipe, CompletionstatusPipe, TaskFilterPipe],
 })
 export class TaskListComponent implements OnInit {
+
+  searchTerms:{[listId:number]:string}={};
 
   @Output() taskListGotUpdate = new EventEmitter<void>();
 
@@ -46,16 +50,18 @@ export class TaskListComponent implements OnInit {
     this.loadTaskLists();
   }
 
-  loadTaskLists():void {
-    this.taskService.getTaskLists().subscribe(
-      (lists)=>{
-        this.taskLists=lists
-        this.taskLists.forEach(
-          list => this.loadTasks(list.list_Id)
-        )
-      }
-    )
-}
+  loadTaskLists(): void {
+    this.taskService.getTaskLists().subscribe(lists => {
+      this.taskLists = lists;
+  
+      this.taskLists.forEach(list => {
+        this.loadTasks(list.list_Id);
+        if (!(list.list_Id in this.searchTerms)) {
+          this.searchTerms[list.list_Id] = '';
+        }
+      });
+    });
+  }
   
   loadTasks(list_Id: number):void{
     console.log(this.tasks)

@@ -11,7 +11,18 @@
       <button (click)="openTaskListDialog4Edit(list)">{{'TaskList.EditTaskList' | translate}}</button>
   
       <button (click)="openTaskDialog4Add(list.list_Id)">{{'TaskList.AddTask' | translate}}</button>
-      <div *ngFor="let task of tasks[list.list_Id] | sortbypriority | duedate | completionstatus">
+      <input
+      type="text"
+      placeholder="Search for tasks"
+      [(ngModel)]="searchTerms[list.list_Id]"
+      />
+      <div
+      *ngFor="let task of tasks[list.list_Id]
+        | sortbypriority
+        | duedate
+        | completionstatus
+        | taskFilter:searchTerms[list.list_Id]"
+      >
         <app-task-item
           [task]="task"
           (updatedTask)="onTaskToggle(task,list.list_Id)"
@@ -21,6 +32,7 @@
       </div>
     </div>
   
+
     <app-taskdialog
       *ngIf="showTaskDialog"
       [task]="currentEditingTask"
