@@ -1,5 +1,6 @@
 .task-item {
   border-radius: 5px;
+  border: 2px solid transparent;
   padding: 10px;
   margin: 10px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -9,7 +10,16 @@
   opacity: 0.5s ease-out;
   }
   
-  .completed {
+.completed {
     text-decoration: line-through;
     opacity: 0.4;
-  }  
+}
+.priority-high{
+  border-color: red;
+}
+.priority-medium{
+  border-color: orange;
+}
+.priority-low{
+  border-color: green;
+}

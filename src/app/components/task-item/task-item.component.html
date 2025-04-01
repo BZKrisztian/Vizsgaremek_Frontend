@@ -1,5 +1,10 @@
 <div class="task-item" [style.background]="task.color || 'transparent'"
-  [ngClass]="{'completed': task.task_Status}">
+  [ngClass]="{
+    'completed': task.task_Status,
+    'priority-high': task.task_Priority === 'high',
+    'priority-medium': task.task_Priority === 'medium',
+    'priority-low': task.task_Priority === 'low'
+    }">
   <h4 [class.task-completed]="task.task_Status">{{task.task_Title}}</h4>
   <p>{{task.task_Description}}</p>
   <p>Priority: {{task.task_Priority}}</p>

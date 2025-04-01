@@ -1,7 +1,4 @@
 <div class="homepage">
-  <button (click)="logout()">{{'General.Logout' | translate}}</button>
-  <button *ngIf="isAdmin()" (click)="goToOverseer()">Switch to Overseer</button>
-
   <div *ngIf="hasTasksDue4Today" class="task-alert">
     <p>You have task(s) due today!</p>
   </div>

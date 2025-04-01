@@ -89,6 +89,7 @@ export class TaskListComponent implements OnInit {
         ()=>{
           this.loadTasks(task.taskList_Id)
           this.closeTaskDialog()
+          this.taskListGotUpdate.emit()
         }
       )
     }else if(this.currentTaskListId){
@@ -99,6 +100,7 @@ export class TaskListComponent implements OnInit {
         ()=>{
           this.loadTasks(task.taskList_Id)
           this.closeTaskDialog()
+          this.taskListGotUpdate.emit()
         }
       )
     }
@@ -148,7 +150,9 @@ export class TaskListComponent implements OnInit {
     this.taskService.deleteTask(task_Id).subscribe(
       ()=>{this.tasks[list_Id]=this.tasks[list_Id].filter(
         (task)=>task.task_Id!=task_Id
-      )}
+      )
+      this.taskListGotUpdate.emit()
+    }
     )
   }
   onTaskListDeletion(list_Id: number):void{

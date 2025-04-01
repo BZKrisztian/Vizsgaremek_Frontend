@@ -57,23 +57,4 @@ export class HomepageComponent implements OnInit {
       });
     }
 
-
-
-  isAdmin():boolean{
-    const user = this.authService.getCurrentUser();
-    return user ? user.isAdmin : false;
-  }
-
-  goToOverseer():void{
-    this.router.navigate(['/overseer']);
-  }
-
-
-
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/entry']);
-  }
-
 }

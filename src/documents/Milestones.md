@@ -1,42 +1,60 @@
 # FRONTEND:
+
 INTEGRATION:
 	- Refactor codes on frontend to ensure it only contains code related to frontend responsibilities
 	- ensure no business logic remains on frontend
+	- Refactor method names for clarity
+	- Concise comments for each method and key properties (e.g., BehaviorSubjects, dialog toggles)
 
 PRIMARY:
 	- Full responsivity! (not me)
 	- Mobile app/port?? (not me)
 	- Switch from http to https? (no domain, not yet)
-
+	
 	- {ADMIN RELATED} : {{ SCRAPPED FOR NOW }}
 		- Admin side :
-			|-> CRUD of : daily motivationals to be posted for users at Homepage (+CRUD of separate notices later on(eg.:server maintenance))
+			- Message system (admin CRUD + homepage display)
+				- Only one message may be active at a time
+				- Dismissible until next login
 				- ability for user to X out the motivational/notice so they do not see it( resets on logout, upon login it shows again )
+
 	- notification
 		- notification to email upon registering
 			- check if email is valid
 				- CHECKS:
-					- does it exist as an email
+					- does it exist as an email (unverified)
 						- IF YES = CHECK if it exists already within database
 							- IF YES = deny registration and inform user that the email is already in use and to try a different one
 						- IF NO = deny registration? // OR dont bother, since there's no need for confirmation of registration
 					- is it already used within our database?
 						- IF YES = deny registration and inform user that the email is already in use and to try a different one
-					- send registration confirmation to email??
+					- send registration confirmation to email (done)
+			- (Not yet implemented): email verification step via click link
+			- Ensure email does not land in spam
+			- Configure sender label
+
 	- ensure due date is implemented properly
 		- check if backend saves it
 		- send 'notification' from backend to frontend if the due date is today
-			- make pipe to overwrite every other pipe's sorting and place due date pipe's tasks to front
+		- make pipe to overwrite every other pipe's sorting and place due date pipe's tasks to front
+		- expired tasks should trigger alert
+		- completed tasks should not trigger alerts
+		- alerts auto-refresh
+
 	- Better registration requirement of password ( minlength, unique characters )
 	- Better pop-up messages for errors during registration and login (pop-up does not show on registration error?)
 	- Search bar?
-		- For Tasklist to find tasks
-		- For Userlist to find user(username or email)
+		- For Tasklist to find tasks (supports partial match)
+		- For Userlist to find user (username or email)
 			- ensure the table does not load in a way that it takes up the whole screen => implement scrolling
 	- Button to turn users to admin ( + confirmation )
 		- have a superadmin?
 	- unsubscribe everywhere to not cause bloating for devices/pc's?
 	- put every necessary button to main header ( at app.component.html )
+		- logout button (if logged in)
+		- language switch
+		- if admin: switch to homepage/overseer button
+	- replace current date picker with a more convenient one
 
 SECONDARY:
 	- user account update:
@@ -47,7 +65,7 @@ SECONDARY:
 	- if a logged in, regular user tries to go to overseer through url, redirect to homepage instead of entry
 	- upon successful registration, aside from message the login button should appear
 	- create some css to blend in the custom color with the background a bit more
-	- button to hide all tasklists(+their tasks) 
+	- button to hide all tasklists(+their tasks)
 	- ability to choose wallpaper (homepage/overseer only, set only to local session for now, dont save setting to backend)
 	- better error handling -> comprehensive messsages for both devs and user
 	- Hungarian language support ( finish making the files )
@@ -71,11 +89,11 @@ COMPLEX / Future implementations:
 	- Shared tasklists/tasks
 
 SOLVED:
-		- Admin Login:
-			- Setup/process == create admins manually on backend?(where else to define, sql dump, environment on backend?)
-			|-> Read of: users
-				- differentiation of user and adminUser
-			- Login procedure == recognition of admin upon login ( check email AND password from backend )
+	- Admin Login:
+		- Setup/process == create admins manually on backend?(where else to define, sql dump, environment on backend?)
+		|-> Read of: users
+			- differentiation of user and adminUser
+		- Login procedure == recognition of admin upon login ( check email AND password from backend )
 	- task completion:
 		- does not change color
 			- ( how to overwrite written/saved(to database) color property )
@@ -116,6 +134,9 @@ SOLVED:
 	- Choosing Priority
 	- put a minlength at username at registrationForm, write code for html part too
 	- Coloring of -> task-lists and tasks ( save to backend(?) + update datamodel to store color(?) )
+	- Due date detection + alerts (today + expired) + auto-refresh when tasks change
+	- Completed tasks move to bottom (via pipe)
+	- Task border color set based on priority
 
 # STYLING:
 PROBLEMS/THINGS TO FIX:

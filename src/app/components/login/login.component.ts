@@ -35,24 +35,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     }
   
     onSubmit(): void {
-      if (this.loginForm.invalid){
-        return
+      if (this.loginForm.invalid) {
+        this.snackBar.open('Please fill in your email and password.', 'Close', { duration: 3000 });
+        return;
       }
+    
       this.authService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          if(res.user && res.user.isAdmin){
+          this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+          if (res.user && res.user.isAdmin) {
             this.router.navigate(['/overseer']);
-          }else{
+          } else {
             this.router.navigate(['/homepage']);
           }
         },
         error: (err) => {
-          // this.errorMessage = "Login failed";
-          this.snackBar.open('Login failed ' + this.errorMessage, 'Close', { duration: 3000 });
-          console.log(err);
+          const message = err.error?.message || 'Login failed. Check your credentials.';
+          this.snackBar.open(message, 'Close', { duration: 3000 });
           this.loginForm.reset();
         }
-      }
-      )
+      });
     }
   }

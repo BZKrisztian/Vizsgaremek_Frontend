@@ -20,9 +20,6 @@ export class RegistrationComponent implements OnInit {
 
   registrationForm!: FormGroup;
 
-  errorMessage: string = '';
-  successMessage: string = '';
-
   constructor(
     private formBuilderReg: FormBuilder,
     private authservice: AuthService,
@@ -35,8 +32,8 @@ export class RegistrationComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         password: ['',[
           Validators.required,
-          Validators.minLength(6),
-          Validators.pattern('^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{6,}$')
+          Validators.minLength(8),
+          Validators.pattern('^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$')
         ]]
       } //for multiple validators, we need them in an array[]
     )
@@ -55,15 +52,13 @@ export class RegistrationComponent implements OnInit {
         isAdmin: false
       };
       this.authservice.register(newUser).subscribe({
-        next: (res) => {
-          this.successMessage = "Registration successful"; //drop
+        next: () => {
           this.snackBar.open('Registration successful', 'Close', { duration: 3000 });
-          this.errorMessage = '';
           this.registrationForm.reset();
         },
         error: (err) => {
-          this.errorMessage = err.error.message || "Registration failed";
-          this.snackBar.open('Registration failed: ' + this.errorMessage, 'Close', { duration: 3000 });
+          const message = err.error?.message || 'Registration failed';
+          this.snackBar.open(`Registration failed: ${message}`, 'Close', { duration: 3000 });
         }
       });
     }
