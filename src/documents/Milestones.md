@@ -7,10 +7,10 @@ PRIMARY:
 	- Full responsivity! (not me)
 	- Mobile app/port?? (not me)
 	- Switch from http to https? (no domain, not yet)
-	- {ADMIN RELATED} :
+
+	- {ADMIN RELATED} : {{ SCRAPPED FOR NOW }}
 		- Admin side :
 			|-> CRUD of : daily motivationals to be posted for users at Homepage (+CRUD of separate notices later on(eg.:server maintenance))
-				- Timers for automatic deletion of motivationals/notices?
 				- ability for user to X out the motivational/notice so they do not see it( resets on logout, upon login it shows again )
 	- notification
 		- notification to email upon registering
@@ -36,6 +36,7 @@ PRIMARY:
 	- Button to turn users to admin ( + confirmation )
 		- have a superadmin?
 	- unsubscribe everywhere to not cause bloating for devices/pc's?
+	- put every necessary button to main header ( at app.component.html )
 
 SECONDARY:
 	- user account update:

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { TaskItemComponent } from '../task-item/task-item.component';
@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmdeldialogComponent } from '../dialog-comps/confirmdeldialog/confirmdeldialog.component';
 import { SortbypriorityPipe } from '../../pipes/sortbypriority.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { DuedatePipe } from "../../pipes/duedate.pipe";
+import { CompletionstatusPipe } from "../../pipes/completionstatus.pipe";
 
 
 @Component({
@@ -20,9 +22,12 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
   imports: [TaskItemComponent, FormsModule, CommonModule,
-    TaskdialogComponent, TasklistdialogComponent, SortbypriorityPipe, TranslateModule],
+    TaskdialogComponent, TasklistdialogComponent, SortbypriorityPipe, TranslateModule, DuedatePipe, CompletionstatusPipe],
 })
 export class TaskListComponent implements OnInit {
+
+  @Output() taskListGotUpdate = new EventEmitter<void>();
+
   taskLists: TaskList[] = [];
   tasks: {[taskList_Id: number]:Task[]}={};
 
@@ -64,6 +69,7 @@ export class TaskListComponent implements OnInit {
   onTaskToggle(task: Task, list_Id: number):void{
     this.taskService.updateTask(task).subscribe(()=>{
       this.loadTasks(list_Id)
+      this.taskListGotUpdate.emit()
     })
   }
 

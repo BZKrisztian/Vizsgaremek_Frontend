@@ -19,6 +19,7 @@ export class HomepageComponent implements OnInit {
   newTaskListDescription: string = '';
 
   hasTasksDue4Today: boolean = false;
+  hasExpiredTasks: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -26,21 +27,35 @@ export class HomepageComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.check4TasksDueToday();
     }
 
-  check4TasksDueToday():void{
-    this.taskService.getTaskLists().subscribe(lists=>{
-      lists.forEach(list=>{
-        this.taskService.getTasks(list.list_Id).subscribe(tasks=>{
-          tasks.forEach(task=>{
-            if(task.due_Date && new Date(task.due_Date).toDateString() === new Date().toDateString()){
-              this.hasTasksDue4Today = true
-            }
-          })
-        })
-      })
-    })
-  }
+    check4TasksDueToday(): void {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      this.hasTasksDue4Today = false;
+      this.hasExpiredTasks = false;
+    
+      this.taskService.getTaskLists().subscribe(lists => {
+        lists.forEach(list => {
+          this.taskService.getTasks(list.list_Id).subscribe(tasks => {
+            tasks.forEach(task => {
+              if (task.task_Status === false && task.due_Date) {
+                const dueDate = new Date(task.due_Date);
+                dueDate.setHours(0, 0, 0, 0);
+    
+                if (dueDate.getTime() === today.getTime()) {
+                  this.hasTasksDue4Today = true;
+                } else if (dueDate.getTime() < today.getTime()) {
+                  this.hasExpiredTasks = true;
+                }
+              }
+            });
+          });
+        });
+      });
+    }
 
 
 

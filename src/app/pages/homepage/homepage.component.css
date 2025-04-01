@@ -4,3 +4,15 @@
     height: calc(100vh - 70px);
     overflow-y: auto;
 }
+
+.task-alert {
+    background-color: #ffcccc;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid red;
+    border-radius: 5px;
+    color: #900;
+    font-weight: bold;
+    text-align: center;
+  }
+  

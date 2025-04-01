@@ -11,7 +11,7 @@
       <button (click)="openTaskListDialog4Edit(list)">{{'TaskList.EditTaskList' | translate}}</button>
   
       <button (click)="openTaskDialog4Add(list.list_Id)">{{'TaskList.AddTask' | translate}}</button>
-      <div *ngFor="let task of tasks[list.list_Id] | sortbypriority">
+      <div *ngFor="let task of tasks[list.list_Id] | sortbypriority | duedate | completionstatus">
         <app-task-item
           [task]="task"
           (updatedTask)="onTaskToggle(task,list.list_Id)"

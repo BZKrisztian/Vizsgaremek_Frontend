@@ -2,8 +2,14 @@
   <button (click)="logout()">{{'General.Logout' | translate}}</button>
   <button *ngIf="isAdmin()" (click)="goToOverseer()">Switch to Overseer</button>
 
+  <div *ngIf="hasTasksDue4Today" class="task-alert">
+    <p>You have task(s) due today!</p>
+  </div>
+  <div *ngIf="hasExpiredTasks" class="task-alert">
+    <p>You have expired task(s)!</p>
+  </div>
   
   <h1>{{'Pages.Homepage.Title' | translate}}</h1>
   <h4>{{'Pages.Homepage.YourTaskLists' | translate}}</h4>
-  <app-task-list></app-task-list>
+  <app-task-list (taskListGotUpdate)="check4TasksDueToday()"></app-task-list>
 </div>

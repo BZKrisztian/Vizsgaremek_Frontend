@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'frontend';
 
 
-  constructor(private translate: TranslateService){
+  constructor(private translate: TranslateService, private authService: AuthService){
     translate.setDefaultLang('en');
     translate.use('en');
   }
@@ -19,5 +20,8 @@ export class AppComponent {
     this.translate.use(lang);
   }
 
+  logoutFromSite():void{
+    this.authService.logout();
+  }
 
 }
