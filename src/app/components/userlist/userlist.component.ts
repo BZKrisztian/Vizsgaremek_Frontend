@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-userlist',
   templateUrl: './userlist.component.html',
   styleUrls: ['./userlist.component.css'],
   imports: [
-    CommonModule
+    CommonModule, FormsModule
   ]
 })
 export class UserlistComponent implements OnInit {
@@ -16,6 +17,7 @@ export class UserlistComponent implements OnInit {
   regularUsers: User[] = []
   adminUsers: User[] = []
   errorMessage: string = ''
+  searchTerm: string = ''
 
   constructor(private authService: AuthService) { }
 
@@ -48,6 +50,40 @@ export class UserlistComponent implements OnInit {
         }
       })
     }
+  }
+
+  toggleAdminState(user_Id: number):void{
+    this.authService.toggleAdmin(user_Id).subscribe({
+      next:()=>{
+        this.loadUsers()
+
+        const currentUser = this.authService.getCurrentUser()
+        if(currentUser?.user_Id === user_Id){
+          this.authService.refreshCurrentUser()
+        }
+      },
+      error:(err)=>{
+        this.errorMessage = err.error?.message || "Could not toggle admin state."
+        console.log(err)
+      }
+    })
+  }
+
+  filteredAdmins():User[]{
+    return this.adminUsers.filter(
+      user => this.matchesSearchTerm(user)
+      )
+  }
+  filteredRegularUsers():User[]{
+    return this.regularUsers.filter(
+      user => this.matchesSearchTerm(user)
+    )
+  }
+
+  private matchesSearchTerm(user:User):boolean{
+    const term = this.searchTerm.toLowerCase();
+    return user.userName.toLowerCase().includes(term) ||
+    user.email.toLowerCase().includes(term)
   }
 
 }

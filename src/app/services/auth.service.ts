@@ -25,6 +25,17 @@ export class AuthService {
   getCurrentUser(): User|null {
     return this.currentUser_BSub.value;
   }
+  refreshCurrentUser():void{
+    this.http.get<User>(`${this.apiURL}/users/me`).subscribe({
+      next:(user)=>{
+        localStorage.setItem('currentUser',JSON.stringify(user));
+        this.currentUser_BSub.next(user);
+      },
+      error:(err)=>{
+        console.error('COuld not refresh user state', err)
+      }
+    })
+  }
 
   // post request for backend
   register(userData: User): Observable<any> {
@@ -79,6 +90,10 @@ export class AuthService {
   }
   deleteUser(user_Id: number):Observable<void>{
     return this.http.delete<void>(`${this.apiURL}/users/${user_Id}`)
+  }
+
+  toggleAdmin(user_Id: number):Observable<User>{
+    return this.http.patch<User>(`${this.apiURL}/users/${user_Id}/toggle-admin`,{})
   }
 
 

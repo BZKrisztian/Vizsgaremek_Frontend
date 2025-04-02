@@ -1,6 +1,12 @@
 <div class="userlist-container">
+  <h3>Search Users</h3>
+  <input
+    type="text"
+    placeholder="Search by username or email"
+    [(ngModel)]="searchTerm"
+  />
 
-  <div class="admin-users">
+  <div class="admin-users scrollable-table">
     <h4>Admin List</h4>
     <p *ngIf="errorMessage">{{errorMessage}}</p>
     <table>
@@ -10,20 +16,24 @@
           <th>Username</th>
           <th>Email</th>
           <th>Creation Date</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of adminUsers">
+        <tr *ngFor="let user of filteredAdmins()">
           <td>{{user.user_Id}}</td>
           <td>{{user.userName}}</td>
           <td>{{user.email}}</td>
           <td>{{user.acc_CR_D | date:'short'}}</td>
+          <td>
+            <button (click)="toggleAdminState(user.user_Id)">Demote</button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="regular-users">
+  <div class="regular-users scrollable-table">
     <h4>User List</h4>
     <p *ngIf="errorMessage">{{errorMessage}}</p>
     <table>
@@ -37,18 +47,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of regularUsers">
+        <tr *ngFor="let user of filteredRegularUsers()">
           <td>{{user.user_Id}}</td>
           <td>{{user.userName}}</td>
           <td>{{user.email}}</td>
           <td>{{user.acc_CR_D | date:'short'}}</td>
           <td>
             <button (click)="deleteUser(user.user_Id)">Delete</button>
-            <!--update button too maybe? decide if we do updates-->
+            <button (click)="toggleAdminState(user.user_Id)">Promote</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-
 </div>
