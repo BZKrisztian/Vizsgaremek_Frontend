@@ -18,6 +18,15 @@ PRIMARY:
 				- Dismissible until next login
 				- ability for user to X out the motivational/notice so they do not see it( resets on logout, upon login it shows again )
 
+	- Registration:
+		- ensure selected username does not already exist
+		- configure email upon registration ==> instead of simple notification, ensure it's also a verification step by clicking something
+		- how to ensure the received email does not land within spam folder?
+			- how to configure and ensure that the receiver sees a set name from the sender?
+		- Account management
+			- change username / password / email
+			- within homepage / separate component? / selectable 'button', reveals menu upon clicking => changing == new modal dialog? OR some alternative? maybe new page? choose easier solution
+			- ensure backend security ( same as for tasklists, failsafe to make sure others can try to modify if the id doesnt match )
 	- notification
 		- notification to email upon registering
 			- check if email is valid
@@ -33,16 +42,17 @@ PRIMARY:
 			- Ensure email does not land in spam
 			- Configure sender label
 	- Search bar?
-		- For Userlist to find user (username or email)
+		- For Userlist to find user (username OR email)
 			- ensure the table does not load in a way that it takes up the whole screen => implement scrolling
 	- Button to turn users to admin ( + confirmation )
-		- have a superadmin?
+		- have a superadmin?(done, technically)
 	- unsubscribe everywhere to not cause bloating for devices/pc's?
 
 	- 2D array to view user's tasklists on overseer table??( 3D to view tasks?? )
 		- IF implemented: how to ensure it does not bloat the page in case we have too many users
 
 SECONDARY:
+	- Merge styling dev's css changes
 	- user account update:
 		- update username / email / password
 		- delete own account
@@ -50,11 +60,11 @@ SECONDARY:
 	- configuration => make a pipe that sorts based on update
 	- if a logged in, regular user tries to go to overseer through url, redirect to homepage instead of entry
 	- upon successful registration, aside from message the login button should appear
-	- create some css to blend in the custom color with the background a bit more
-	- button to hide all tasklists(+their tasks)
+	- create some css to blend in the custom colors of tasklists and tasks with the background a bit more
+	- button to hide all tasklists(so that they may gaze upon the background?)
 	- ability to choose wallpaper (homepage/overseer only, set only to local session for now, dont save setting to backend)
 	- better error handling -> comprehensive messsages for both devs and user
-	- Hungarian language support ( finish making the files )
+	- Hungarian language support ( finish making the files / rework json file structure / implement when all features are set )
 
 TETRIARY:
 	- save chosen language to backend
@@ -75,6 +85,9 @@ COMPLEX / Future implementations:
 	- Shared tasklists/tasks
 
 SOLVED:
+	- replace current date picker with a more convenient one
+	- ensure the main header to behave as a navbar
+	- hold relevant buttons( language switch buttons / logout button IF logged in / gotoadminpage IF admin )
 	- Admin Login:
 		- Setup/process == create admins manually on backend?(where else to define, sql dump, environment on backend?)
 		|-> Read of: users
