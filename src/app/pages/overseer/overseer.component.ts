@@ -20,10 +20,6 @@ export class OverseerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  gotoHomepage(): void {
-    this.router.navigate(['/homepage']);
-  }
-
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/entry']);

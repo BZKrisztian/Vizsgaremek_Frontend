@@ -1,15 +1,21 @@
-<div class="login-form">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="email">{{'Auth.Email' | translate}}</label>
-      <input id="email" formControlName="email" />
-    </div>
-  
-    <div>
-      <label for="password">{{'Auth.Password' | translate}}</label>
-      <input id="password" type="password" formControlName="password" />
-    </div>
-  
-    <button type="submit" [disabled]="loginForm.invalid">{{'Auth.Login' | translate}}</button>
-      </form>
-</div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+  <h1>Login</h1>
+
+  <div>
+    <label for="login-email">Email</label>
+    <input id="login-email" formControlName="email" type="email" />
+    <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+      Please enter a valid email.
+    </small>
+  </div>
+
+  <div>
+    <label for="login-password">Password</label>
+    <input id="login-password" formControlName="password" type="password" />
+    <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      Password is required.
+    </small>
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+</form>

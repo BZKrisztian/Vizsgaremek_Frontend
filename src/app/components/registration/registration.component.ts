@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -34,9 +34,24 @@ export class RegistrationComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
           Validators.pattern('^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$')
-        ]]
-      } //for multiple validators, we need them in an array[]
+        ]],
+        confirmPassword:['',Validators.required]
+      }, //for multiple validators, we need them in an array[]
+      {
+        validators: this.passMustMatch('password', 'confirmPassword')
+      }
     )
+  }
+  passMustMatch(passwordKey:string, confirmPasswordKey:string){
+    return (formGroup:FormGroup)=>{
+      const password = formGroup.get(passwordKey);
+      const confirmPassword = formGroup.get(confirmPasswordKey);
+      if(password && confirmPassword && password.value !== confirmPassword.value){
+        confirmPassword!.setErrors({mismatch:true})
+      }else(
+        confirmPassword!.setErrors(null)
+      )
+    }
   }
 
 

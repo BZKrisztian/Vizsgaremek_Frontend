@@ -1,11 +1,21 @@
 <header class="main-header">
+  <!-- LEFT ZONE: Back Button -->
+  <div class="header-left">
+    <button *ngIf="showBackButton" (click)="goBack()">Back</button>
+  </div>
 
+  <!-- RIGHT ZONE: Auth & Language -->
+  <div class="header-right">
     <button *ngIf="LogInCheck()" (click)="logoutFromSite()">Log Out</button>
+
     <button *ngIf="AdminCheck()" (click)="switchPage()">
-        {{ currentRoute.includes('overseer') ? 'Go to Homepage' : 'Go to Overseer' }}
+      {{ currentRoute.includes('overseer') ? 'Go to Homepage' : 'Go to Overseer' }}
     </button>
 
-    <button (click)="switchLanguage('en')">{{ 'EN' | translate }}</button>
-    <button (click)="switchLanguage('hu')">{{ 'HU' | translate }}</button>
+    <button (click)="switchLanguage('en')">EN</button>
+    <button (click)="switchLanguage('hu')">HU</button>
+  </div>
 </header>
+
+<!-- Routed page views -->
 <router-outlet></router-outlet>

@@ -4,5 +4,40 @@
     background: rgba(255, 255, 255, 0.9);
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-}
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
+    overflow-x: auto;
+  }
+  
+  /* Responsive table layout */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-break: break-word;
+  }
+  
+  thead {
+    background-color: #f0f0f0;
+  }
+  
+  .scrollable-table {
+    overflow-x: auto;
+  }
+  
+  /* Ensure mobile compatibility */
+  @media (max-width: 768px) {
+    table {
+      font-size: 14px;
+    }
+  
+    th, td {
+      padding: 6px;
+    }
+  }
+  
