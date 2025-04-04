@@ -64,7 +64,8 @@ export class RegistrationComponent implements OnInit {
         password: this.registrationForm.value.password,
         acc_CR_D: new Date(),
         acc_UP_D: new Date(),
-        isAdmin: false
+        isAdmin: false,
+        isEmailVerified: false
       };
       this.authservice.register(newUser).subscribe({
         next: () => {
@@ -72,8 +73,13 @@ export class RegistrationComponent implements OnInit {
           this.registrationForm.reset();
         },
         error: (err) => {
-          const message = err.error?.message || 'Registration failed';
-          this.snackBar.open(`Registration failed: ${message}`, 'Close', { duration: 3000 });
+          let message = 'Registration failed'
+          if(err.error?.message==='Email already in use'){
+            message = 'The email is already in use. Please choose another one.'
+          }else if(err.error?.message==='Username is already in use'){
+            message = 'The username is already taken. Please choose another.'
+          }
+          this.snackBar.open(message,'Close',{duration:3000})
         }
       });
     }

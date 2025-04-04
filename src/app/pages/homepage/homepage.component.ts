@@ -21,6 +21,9 @@ export class HomepageComponent implements OnInit {
   hasTasksDue4Today: boolean = false;
   hasExpiredTasks: boolean = false;
 
+  currentUsername: string = '';
+
+
   constructor(
     private authService: AuthService,
     private taskService: TaskService,
@@ -28,6 +31,11 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     this.check4TasksDueToday();
+
+    const currentUser = this.authService.getCurrentUser()
+    if(currentUser){
+      this.currentUsername = currentUser.userName
+    }
     }
 
     check4TasksDueToday(): void {

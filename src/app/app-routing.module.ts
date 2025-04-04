@@ -7,12 +7,16 @@ import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/entry', pathMatch: 'full' },
   { path: 'entry', component: EntryComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'log-in', component: LogInComponent},
+  {path: 'verify-email', component: VerifyEmailComponent},
+  {path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]},
   {
     path: 'homepage',
     component: HomepageComponent,

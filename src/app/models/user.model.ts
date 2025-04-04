@@ -6,4 +6,5 @@ export interface User {
     acc_CR_D: Date;
     acc_UP_D: Date;
     isAdmin: boolean;
+    isEmailVerified: boolean;
 }

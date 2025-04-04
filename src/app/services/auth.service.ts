@@ -96,5 +96,9 @@ export class AuthService {
     return this.http.patch<User>(`${this.apiURL}/users/${user_Id}/toggle-admin`,{})
   }
 
+  updateSelf(data: {userName:string, email:string, password?:string}){
+    return this.http.patch<any>(`${this.apiURL}/users/profile`, data)
+  }
+
 
 }

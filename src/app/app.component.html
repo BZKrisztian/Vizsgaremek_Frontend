@@ -7,10 +7,12 @@
   <!-- RIGHT ZONE: Auth & Language -->
   <div class="header-right">
     <button *ngIf="LogInCheck()" (click)="logoutFromSite()">Log Out</button>
+    <button *ngIf="LogInCheck() && currentRoute.includes('profile')" routerLink="/homepage">Back to Homepage</button>
 
     <button *ngIf="AdminCheck()" (click)="switchPage()">
       {{ currentRoute.includes('overseer') ? 'Go to Homepage' : 'Go to Overseer' }}
     </button>
+    <button *ngIf="LogInCheck()" routerLink="/profile">My Profile</button>
 
     <button (click)="switchLanguage('en')">EN</button>
     <button (click)="switchLanguage('hu')">HU</button>

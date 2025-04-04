@@ -1,4 +1,7 @@
 <div class="homepage">
+  <div class="user-greeting">
+    <h2>Welcome, {{currentUsername}} :D</h2>
+  </div>
   <div *ngIf="hasTasksDue4Today" class="task-alert">
     <p>You have task(s) due today!</p>
   </div>
