@@ -52,3 +52,19 @@ button:hover{
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+/* This will ensure that any Angular Material overlay will be
+ on top of modal dialogs instead of behind */
+ .cdk-overlay-container {
+  z-index: 1200 !important;
+  position: fixed !important;
+}
+
+.cdk-overlay-pane {
+  z-index: 2100 !important;
+}
+
+.mat-datepicker-content {
+  z-index: 2110 !important;
+}
+/* experiment for now, Could be deleted later */

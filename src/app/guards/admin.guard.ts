@@ -11,13 +11,19 @@ export class AdminGuard implements CanActivate {
 
     canActivate(): boolean {
         const user = this.authService.getCurrentUser();
+
         if(this.authService.isLoggedIn() && user && user.isAdmin) {
             return true;
         }
-        else {
+
+        if(this.authService.isLoggedIn()){
+            this.router.navigate(['/homepage'])
+        }else{
             this.router.navigate(['/entry']);
-            return false;
         }
+
+        return false
+
     }
 
 }

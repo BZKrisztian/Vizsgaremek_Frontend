@@ -31,6 +31,14 @@
     border-radius: 0.5rem;
     cursor: pointer;
   }
+  .danger-btn {
+    background-color: crimson;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+  }  
+
   small {
     color: red;
     font-size: 0.8rem;

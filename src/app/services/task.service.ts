@@ -44,7 +44,5 @@ export class TaskService {
      return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
    }
 
-   //messageCRUD(from-adminSide)
-
 
 }

@@ -16,17 +16,16 @@ PRIMARY:
 	- Registration:
 		- how to ensure the received email does not land within spam folder?
 			- how to configure and ensure that the receiver sees a set name from the sender?
-	- Button to turn users to admin(done) => basic js confirmation
 	- unsubscribe everywhere to not cause bloating for devices/pc's?
 
 	- 2D array to view user's tasklists on overseer table??( 3D to view tasks?? )
 		- IF implemented: how to ensure it does not bloat the page in case we have too many users
 
 SECONDARY:
+	- Cut up the my-profile page to adhere to structure
+		- My-profile -> static 'page', merely hosts component
+			- New component -> 'profile'
 	- configure the datepicker's overlay to not be behind the modal dialog component when it pops up
-	- if a logged in, regular user tries to go to overseer through url, redirect to homepage instead of entry
-	- user may delete their own account
-	- upon successful registration, aside from message the user should be taken to entry page
 	- create some css to blend in the custom colors of tasklists and tasks with the background a bit more
 	- button to hide all tasklists(so that they may gaze upon the background?)
 	- ability to choose wallpaper (homepage/overseer only, set only to local session for now, dont save setting to backend)
@@ -58,6 +57,10 @@ COMPLEX / Future implementations:
 	- Shared tasklists/tasks
 
 SOLVED:
+	- Button to turn users to admin(done) => add basic js confirmation
+	- upon successful registration, aside from pop-up message the user should be taken to entry page
+	- if a logged in, regular user tries to go to overseer through url, redirect to homepage instead of entry
+	- user may delete their own account --> double confirmation
 	- ensure selected username does not already exist
 	- configure email upon registration ==> instead of simple notification, ensure it's also a verification step by clicking something
 	- have a superadmin?(done, technically)

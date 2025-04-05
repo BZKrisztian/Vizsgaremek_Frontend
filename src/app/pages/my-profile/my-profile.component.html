@@ -24,5 +24,10 @@
 
     <button type="submit" [disabled]="profileForm.invalid || !profileForm.dirty">Update Profile</button>
 
+    <hr>
+    <button type="button" (click)="onClickDeleteAccount()" class="delete-account-button">
+      Delete My Account
+    </button>
+
   </form>
 </div>

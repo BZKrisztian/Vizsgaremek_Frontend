@@ -91,6 +91,9 @@ export class AuthService {
   deleteUser(user_Id: number):Observable<void>{
     return this.http.delete<void>(`${this.apiURL}/users/${user_Id}`)
   }
+  harakiri():Observable<void>{
+    return this.http.delete<void>(`${this.apiURL}/users/self`)
+  }
 
   toggleAdmin(user_Id: number):Observable<User>{
     return this.http.patch<User>(`${this.apiURL}/users/${user_Id}/toggle-admin`,{})

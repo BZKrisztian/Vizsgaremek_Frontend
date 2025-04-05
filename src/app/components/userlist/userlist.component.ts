@@ -52,21 +52,29 @@ export class UserlistComponent implements OnInit {
     }
   }
 
-  toggleAdminState(user_Id: number):void{
+  toggleAdminState(user_Id: number): void {
+    const user = [...this.regularUsers, ...this.adminUsers].find(u => u.user_Id === user_Id);
+    if (!user) return;
+  
+    const isCurrentlyAdmin = user.isAdmin;
+    const action = isCurrentlyAdmin ? 'demote' : 'promote';
+    const confirmed = confirm(`Are you sure you want to ${action} this user?`);
+  
+    if (!confirmed) return;
+  
     this.authService.toggleAdmin(user_Id).subscribe({
-      next:()=>{
-        this.loadUsers()
-
-        const currentUser = this.authService.getCurrentUser()
-        if(currentUser?.user_Id === user_Id){
-          this.authService.refreshCurrentUser()
+      next: () => {
+        this.loadUsers();
+        const currentUser = this.authService.getCurrentUser();
+        if (currentUser?.user_Id === user_Id) {
+          this.authService.refreshCurrentUser();
         }
       },
-      error:(err)=>{
-        this.errorMessage = err.error?.message || "Could not toggle admin state."
-        console.log(err)
+      error: (err) => {
+        this.errorMessage = err.error?.message || "Could not toggle admin state.";
+        console.log(err);
       }
-    })
+    });
   }
 
   filteredAdmins():User[]{

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -23,7 +24,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private formBuilderReg: FormBuilder,
     private authservice: AuthService,
-    private snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.registrationForm = this.formBuilderReg.group(
@@ -69,8 +71,11 @@ export class RegistrationComponent implements OnInit {
       };
       this.authservice.register(newUser).subscribe({
         next: () => {
-          this.snackBar.open('Registration successful', 'Close', { duration: 3000 });
+          this.snackBar.open('Registration successful, please check your email :D', 'Close', { duration: 3000 });
           this.registrationForm.reset();
+          setTimeout(() => {
+            this.router.navigate(['/entry']);
+          })
         },
         error: (err) => {
           let message = 'Registration failed'

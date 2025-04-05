@@ -71,5 +71,27 @@ export class MyProfileComponent implements OnInit {
 
   }
 
+  onClickDeleteAccount():void{
+    const firstConfirm = confirm("Are you sure you want to delete your account?")
+    if(!firstConfirm)
+      return
+
+    const secondConfirm = confirm("This action cannot be undone. Are you sure you want to delete your account?")
+    if(!secondConfirm)
+      return
+
+    this.authService.harakiri().subscribe({
+      next:()=>{
+        this.snackBar.open("Account deleted successfully", "Close", {duration: 3000})
+        this.authService.logout();
+        this.router.navigate(['/entry']);
+      },
+      error:(err)=>{
+        console.error(err)
+        this.snackBar.open("Failed to delete account.", "Close", {duration: 3000})
+      }
+    })
+  }
+
 
 }
