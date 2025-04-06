@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     TranslateModule,
   ]
 })
-  export class LoginComponent implements OnInit {
+  export class LoginComponent implements OnInit, OnDestroy {
+
+    private destroy$ = new Subject<void>();
+
     loginForm!: FormGroup;
     errorMessage: string = "";
   
@@ -33,27 +37,33 @@ import { MatSnackBar } from '@angular/material/snack-bar';
         password: ['', [Validators.required]]
       });
     }
+    ngOnDestroy(): void {
+      this.destroy$.next();
+      this.destroy$.complete();
+    }
   
     onSubmit(): void {
       if (this.loginForm.invalid) {
         this.snackBar.open('Please fill in your email and password.', 'Close', { duration: 3000 });
         return;
       }
-    
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (res) => {
-          this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
-          if (res.user && res.user.isAdmin) {
-            this.router.navigate(['/overseer']);
-          } else {
-            this.router.navigate(['/homepage']);
+  
+      this.authService.login(this.loginForm.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (res) => {
+            this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+            if (res.user && res.user.isAdmin) {
+              this.router.navigate(['/overseer']);
+            } else {
+              this.router.navigate(['/homepage']);
+            }
+          },
+          error: (err) => {
+            const message = err.error?.message || 'Login failed. Check your credentials.';
+            this.snackBar.open(message, 'Close', { duration: 3000 });
+            this.loginForm.reset();
           }
-        },
-        error: (err) => {
-          const message = err.error?.message || 'Login failed. Check your credentials.';
-          this.snackBar.open(message, 'Close', { duration: 3000 });
-          this.loginForm.reset();
-        }
-      });
+        });
     }
   }

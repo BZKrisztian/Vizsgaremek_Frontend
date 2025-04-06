@@ -16,7 +16,9 @@ PRIMARY:
 	- Registration:
 		- how to ensure the received email does not land within spam folder?
 			- how to configure and ensure that the receiver sees a set name from the sender?
+
 	- unsubscribe everywhere to not cause bloating for devices/pc's?
+		- almost done, input into 'profile' component when 'my-profile' is reworked
 
 	- 2D array to view user's tasklists on overseer table??( 3D to view tasks?? )
 		- IF implemented: how to ensure it does not bloat the page in case we have too many users

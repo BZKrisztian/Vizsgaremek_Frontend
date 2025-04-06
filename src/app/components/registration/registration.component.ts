@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,9 @@ import { Router } from '@angular/router';
     TranslateModule
   ],
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
+
+  private destroy$ = new Subject<void>();
 
   registrationForm!: FormGroup;
 
@@ -44,21 +47,24 @@ export class RegistrationComponent implements OnInit {
       }
     )
   }
-  passMustMatch(passwordKey:string, confirmPasswordKey:string){
-    return (formGroup:FormGroup)=>{
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  passMustMatch(passwordKey: string, confirmPasswordKey: string) {
+    return (formGroup: FormGroup) => {
       const password = formGroup.get(passwordKey);
       const confirmPassword = formGroup.get(confirmPasswordKey);
-      if(password && confirmPassword && password.value !== confirmPassword.value){
-        confirmPassword!.setErrors({mismatch:true})
-      }else(
-        confirmPassword!.setErrors(null)
-      )
-    }
+      if (password && confirmPassword && password.value !== confirmPassword.value) {
+        confirmPassword!.setErrors({ mismatch: true });
+      } else {
+        confirmPassword!.setErrors(null);
+      }
+    };
   }
 
-
   onSubmit(): void {
-    if(this.registrationForm.valid){
+    if (this.registrationForm.valid) {
       const newUser: User = {
         user_Id: 0,
         userName: this.registrationForm.value.username,
@@ -69,24 +75,26 @@ export class RegistrationComponent implements OnInit {
         isAdmin: false,
         isEmailVerified: false
       };
-      this.authservice.register(newUser).subscribe({
-        next: () => {
-          this.snackBar.open('Registration successful, please check your email :D', 'Close', { duration: 3000 });
-          this.registrationForm.reset();
-          setTimeout(() => {
-            this.router.navigate(['/entry']);
-          })
-        },
-        error: (err) => {
-          let message = 'Registration failed'
-          if(err.error?.message==='Email already in use'){
-            message = 'The email is already in use. Please choose another one.'
-          }else if(err.error?.message==='Username is already in use'){
-            message = 'The username is already taken. Please choose another.'
+      this.authservice.register(newUser)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.snackBar.open('Registration successful, please check your email :D', 'Close', { duration: 3000 });
+            this.registrationForm.reset();
+            setTimeout(() => {
+              this.router.navigate(['/entry']);
+            });
+          },
+          error: (err) => {
+            let message = 'Registration failed';
+            if (err.error?.message === 'Email already in use') {
+              message = 'The email is already in use. Please choose another one.';
+            } else if (err.error?.message === 'Username is already in use') {
+              message = 'The username is already taken. Please choose another.';
+            }
+            this.snackBar.open(message, 'Close', { duration: 3000 });
           }
-          this.snackBar.open(message,'Close',{duration:3000})
-        }
-      });
+        });
     }
   }
 

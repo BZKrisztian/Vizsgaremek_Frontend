@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { TaskItemComponent } from '../task-item/task-item.component';
 import { TaskList } from '../../models/tasklist.model';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { TaskdialogComponent } from '../dialog-comps/taskdialog/taskdialog.component';
@@ -26,7 +26,9 @@ import { TaskFilterPipe } from '../../pipes/taskFilter.pipe';
     TaskdialogComponent, TasklistdialogComponent, TranslateModule,
     SortbypriorityPipe, DuedatePipe, CompletionstatusPipe, TaskFilterPipe],
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, OnDestroy {
+
+  private destroy$ = new Subject<void>();
 
   searchTerms:{[listId:number]:string}={};
 
@@ -49,28 +51,31 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.loadTaskLists();
   }
+  ngOnDestroy():void{
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   loadTaskLists(): void {
-    this.taskService.getTaskLists().subscribe(lists => {
-      this.taskLists = lists;
-  
-      this.taskLists.forEach(list => {
-        this.loadTasks(list.list_Id);
-        if (!(list.list_Id in this.searchTerms)) {
-          this.searchTerms[list.list_Id] = '';
-        }
+    this.taskService.getTaskLists()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(lists => {
+        this.taskLists = lists;
+        this.taskLists.forEach(list => {
+          this.loadTasks(list.list_Id);
+          if (!(list.list_Id in this.searchTerms)) {
+            this.searchTerms[list.list_Id] = '';
+          }
+        });
       });
-    });
   }
   
-  loadTasks(list_Id: number):void{
-    console.log(this.tasks)
-    this.taskService.getTasks(list_Id).subscribe(
-      (tasks)=>{
-        this.tasks[list_Id]=tasks
-      }
-    )
-    console.log(this.tasks)
+  loadTasks(list_Id: number): void {
+    this.taskService.getTasks(list_Id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(tasks => {
+        this.tasks[list_Id] = tasks;
+      });
   }
   onTaskToggle(task: Task, list_Id: number):void{
     this.taskService.updateTask(task).subscribe(()=>{
