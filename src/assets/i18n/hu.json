@@ -1,75 +1,74 @@
 {
-    "General": {
-      "Welcome": "Üdvözöljük a mi kis alkalmazásunkban",
-      "Logout": "Kijelentkezés",
-      "Back": "Vissza"
-    },
-    "Language": {
-      "EN": "Angol",
-      "HU": "Magyar"
-    },
-    "Auth": {
-      "Register": "Regisztráció",
-      "Login": "Bejelentkezés",
-      "RegisterHeader": "Regisztráció",
-      "LogInHeader": "Bejelentkezés",
-      "Email": "E-mail",
-      "Password": "Jelszó",
-      "Username": "Felhasználónév",
-      "RegistrationSuccess": "Sikeres regisztráció",
-      "RegistrationFailure": "A regisztráció sikertelen",
-      "LoginFailure": "A bejelentkezés sikertelen"
-    },
+  "Buttons": {
+    "Register": "Regisztráció",
+    "Login": "Bejelentkezés",
+    "Logout": "Kijelentkezés",
+    "Back": "Vissza",
+    "AddTask": "Feladat hozzáadása",
+    "EditTask": "Feladat szerkesztése",
+    "DeleteTask": "Feladat törlése",
+    "ToggleCompletion": "Befejezés be/ki",
+    "AddTaskList": "Feladatlista hozzáadása",
+    "EditTaskList": "Feladatlista szerkesztése",
+    "DeleteTaskList": "Feladatlista törlése",
+    "ShowTaskList":"Feladatlista megjelenítése",
+    "HideTaskList":"Feladatlista elrejtése",
+    "SwitchToOverseer": "Váltás Felügyelő nézetre"
+  },
+  "Snackbars": {
+    "RegistrationSuccess": "Sikeres regisztráció",
+    "RegistrationFailure": "A regisztráció sikertelen",
+    "LoginFailure": "A bejelentkezés sikertelen",
+    "OperationSuccess": "A művelet sikeresen befejeződött",
+    "OperationFailure": "A művelet nem sikerült, próbálja újra"
+  },
+  "Languages": {
+    "EN": "Angol",
+    "HU": "Magyar"
+  },
+  "Texts": {
     "Pages": {
       "Entry": {
-        "Title": "Welcome to our application",
-        "Subtitle": "To do, or not to do"
+        "Title": "Üdvözöljük az alkalmazásunkban",
+        "Subtitle": "Tenni, vagy nem tenni"
       },
       "Homepage": {
         "Title": "Főoldal",
-        "YourTaskLists": "A teendő listáid",
-        "AddTaskList": "Teendő lista hozzáadása",
-        "SwitchToOverseer": "Switch to Overseer View"
+        "YourTaskLists": "Feladatlistáid"
+      },
+      "Overseer": {
+        "DailyMotivationals": "Napi motivációk",
+        "UserManagement": "Felhasználókezelés"
       }
     },
-    "Task": {
-      "AddTask": "Teendő hozzáadása",
-      "EditTask": "Teendő szerkesztése",
-      "DeleteTask": "Teendő törlése",
-      "ToggleCompletion": "Kész",
-      "TaskCompleted": "Teendő kész",
-      "Priority": "Prioritás",
-      "High": "Magas",
-      "Medium": "Közepes",
-      "Low": "Alacsony",
-      "DueDate": "Időpont",
-      "CreationDate": "Készítés időpontja",
-      "UpdatedAt": "Frissítés időpontja",
-      "Description": "Leírás",
-      "Title": "Cím"
-    },
-    "TaskList": {
-      "AddTaskList": "Teendő lista hozzáadása",
-      "EditTaskList": "Teendő lista szerkesztése",
-      "DeleteTaskList": "Teendő lista törlése",
-      "Description": "Leírás",
-      "Color": "Szín"
-    },
-    "Dialogs": {
+    "Components": {
+      "AuthForm": {
+        "Email": "E-mail",
+        "Password": "Jelszó",
+        "Username": "Felhasználónév",
+        "RegisterHeader": "Regisztráció",
+        "LogInHeader": "Bejelentkezés"
+      },
+      "Task": {
+        "TaskCompleted": "Feladat teljesítve",
+        "Title": "Cím",
+        "Description": "Leírás",
+        "Priority": "Prioritás",
+        "High": "Magas",
+        "Medium": "Közepes",
+        "Low": "Alacsony",
+        "DueDate": "Határidő",
+        "CreationDate": "Létrehozás dátuma",
+        "UpdatedAt": "Frissítve"
+      },
+      "TaskList": {
+        "Description": "Leírás",
+        "Color": "Szín"
+      },
       "ConfirmDelete": {
-        "Title": "törlés megerősítése",
-        "Message": "Biztos hogy törölni szeretné?"
+        "Title": "Törlés megerősítése",
+        "Message": "Biztosan törölni szeretné?"
       }
-    },
-    "Overseer": {
-      "DailyMotivationals": "Daily Motivationals",
-      "AddMotivational": "Add Motivational",
-      "Remove": "Remove",
-      "UserManagement": "User Management"
-    },
-    "Feedback": {
-      "OperationSuccess": "Operation completed successfully",
-      "OperationFailure": "Operation failed, please try again"
     }
   }
-  
+}

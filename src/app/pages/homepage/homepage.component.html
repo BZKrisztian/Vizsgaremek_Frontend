@@ -8,8 +8,13 @@
   <div *ngIf="hasExpiredTasks" class="task-alert">
     <p>You have expired task(s)!</p>
   </div>
+
   
-  <h1>{{'Pages.Homepage.Title' | translate}}</h1>
-  <h4>{{'Pages.Homepage.YourTaskLists' | translate}}</h4>
-  <app-task-list (taskListGotUpdate)="check4TasksDueToday()"></app-task-list>
+  <h1>{{'Texts.Pages.Homepage.Title' | translate}}</h1>
+  <h4>{{'Texts.Pages.Homepage.YourTaskLists' | translate}}</h4>
+  <button (click)="toggleTaskListsVisibility()">
+    {{ (showTaskLists ? 'Buttons.HideTaskList' : 'Buttons.ShowTaskList') | translate }}
+  </button>
+
+  <app-task-list (taskListGotUpdate)="check4TasksDueToday()" *ngIf="showTaskLists"></app-task-list>
 </div>

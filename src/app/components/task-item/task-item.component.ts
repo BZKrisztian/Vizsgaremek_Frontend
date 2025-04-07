@@ -7,13 +7,14 @@ import {
 } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-item',
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.css'],
   imports: [
-    CommonModule
+    CommonModule, TranslateModule
   ],
 })
 export class TaskItemComponent {

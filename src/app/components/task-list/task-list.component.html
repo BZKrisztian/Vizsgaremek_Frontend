@@ -2,15 +2,15 @@
   <!-- Started over from scratch, got too confused -->
 <div class="task-list">
   
-    <button (click)="openTaskListDialog4Add()">{{'TaskList.AddTaskList' | translate}}</button>
+    <button (click)="openTaskListDialog4Add()">{{'Buttons.AddTaskList' | translate}}</button>
   
     <div *ngFor="let list of taskLists" [style.background]="list.color || '#fff'">
       <h4>{{list.list_Title}}</h4>
       <p>{{list.list_Description}}</p>
-      <button (click)="onTaskListDeletion(list.list_Id)">{{'TaskList.DeleteTaskList' | translate}}</button>
-      <button (click)="openTaskListDialog4Edit(list)">{{'TaskList.EditTaskList' | translate}}</button>
+      <button (click)="onTaskListDeletion(list.list_Id)">{{'Buttons.DeleteTaskList' | translate}}</button>
+      <button (click)="openTaskListDialog4Edit(list)">{{'Buttons.EditTaskList' | translate}}</button>
   
-      <button (click)="openTaskDialog4Add(list.list_Id)">{{'TaskList.AddTask' | translate}}</button>
+      <button (click)="openTaskDialog4Add(list.list_Id)">{{'Buttons.AddTask' | translate}}</button>
       <input
       type="text"
       placeholder="Search for tasks"

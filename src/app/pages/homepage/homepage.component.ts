@@ -22,6 +22,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   hasTasksDue4Today: boolean = false;
   hasExpiredTasks: boolean = false;
+  showTaskLists: boolean = true;
 
   currentUsername: string = '';
 
@@ -32,6 +33,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    const savedToggle = localStorage.getItem('showTaskLists');
+    if(savedToggle !== null){
+      this.showTaskLists = savedToggle === 'true';
+    }
+
     this.check4TasksDueToday();
 
     const currentUser = this.authService.getCurrentUser();
@@ -74,4 +80,10 @@ export class HomepageComponent implements OnInit, OnDestroy {
         });
       });
   }
+
+  toggleTaskListsVisibility():void{
+    this.showTaskLists = !this.showTaskLists;
+    localStorage.setItem('showTaskLists', String(this.showTaskLists));
+  }
+
 }

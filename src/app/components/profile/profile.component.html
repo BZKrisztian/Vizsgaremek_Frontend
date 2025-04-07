@@ -1,0 +1,33 @@
+<div class="profile-container">
+  <h2>My Profile</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <label>Username:</label>
+    <input formControlName="userName" type="text" />
+    <small *ngIf="profileForm.get('userName')?.invalid && profileForm.get('userName')?.touched">
+      Username must be at least 6 characters.
+    </small>
+
+    <label>Email:</label>
+    <input formControlName="email" type="email" />
+    <small *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+      Please enter a valid email.
+    </small>
+
+    <label>New Password (optional):</label>
+    <input formControlName="password" type="password" />
+
+    <label>Confirm Password:</label>
+    <input formControlName="confirmPassword" type="password" />
+    <small *ngIf="profileForm.errors?.['mismatch']">
+      Passwords do not match.
+    </small>
+
+    <button type="submit" [disabled]="profileForm.invalid || !profileForm.dirty">Update Profile</button>
+
+    <hr>
+    <button type="button" (click)="onClickDeleteAccount()" class="delete-account-button">
+      Delete My Account
+    </button>
+
+  </form>
+</div>

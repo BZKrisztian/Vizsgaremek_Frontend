@@ -30,6 +30,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,11 +54,11 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     TaskListComponent,
     TaskItemComponent,
+    UserlistComponent,
 
     HomepageComponent,
     EntryComponent,
     OverseerComponent,
-
     RegisterComponent,
     LogInComponent,
     VerifyEmailComponent,
