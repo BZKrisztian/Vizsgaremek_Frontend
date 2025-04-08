@@ -6,7 +6,8 @@
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
-  overflow-x: hidden;
+  overflow-x: visible; /* Let children scroll independently */
+  box-sizing: border-box;
 }
 
 .userlist-container input {
@@ -23,12 +24,19 @@
 .scrollable-table {
   overflow-x: auto;
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Core table layout */
 table {
   width: 100%;
-  border-collapse: collapse;
   min-width: 600px;
+  max-width: 100%;
+  border-collapse: collapse;
+  box-sizing: border-box;
 }
 
 th, td {
@@ -61,40 +69,42 @@ td .action-buttons button {
   text-overflow: ellipsis;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
+/* Mobile Styles */
+@media (max-width: 600px) {
+  .userlist-container {
+    padding: 1rem;
+    overflow-x: visible; /* Let scrollable-table manage it */
+  }
+
+  .scrollable-table {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    /* No negative margins, no viewport width hacks */
+    /* We stay within the container boundaries */
+  }
+
   table {
+    min-width: 600px; /* Keep this so wide tables can scroll */
     font-size: 14px;
-    min-width: unset;
   }
 
   th, td {
-    padding: 6px;
     font-size: 13px;
-  }
-
-  .userlist-container input {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  th:nth-child(1),
-  td:nth-child(1) {
-    display: none; /* Hide ID column */
-  }
-
-  th, td {
-    font-size: 12px;
     padding: 6px 8px;
-    max-width: 130px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    max-width: unset;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
+
 
   td .action-buttons button {
     font-size: 12px;
     padding: 5px 8px;
   }
 }
+

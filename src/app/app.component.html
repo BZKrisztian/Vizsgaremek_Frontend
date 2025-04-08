@@ -1,12 +1,12 @@
 <header class="main-header">
-  <!-- LEFT ZONE: Back Button -->
+  <!-- LEFT ZONE: Back Button + Logout -->
   <div class="header-left">
     <button *ngIf="showBackButton" (click)="goBack()">Back</button>
+    <button *ngIf="LogInCheck()" (click)="logoutFromSite()">Log Out</button>
   </div>
 
-  <!-- RIGHT ZONE: Auth & Language -->
+  <!-- RIGHT ZONE: Nav & Language -->
   <div class="header-right">
-    <button *ngIf="LogInCheck()" (click)="logoutFromSite()">Log Out</button>
     <button *ngIf="LogInCheck() && currentRoute.includes('profile')" routerLink="/homepage">Back to Homepage</button>
 
     <button *ngIf="AdminCheck()" (click)="switchPage()">
@@ -19,5 +19,4 @@
   </div>
 </header>
 
-<!-- Routed page views -->
 <router-outlet></router-outlet>
