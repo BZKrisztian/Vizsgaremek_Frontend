@@ -1,43 +1,100 @@
 .userlist-container {
-    width: 80%;
-    margin: auto;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
-    overflow-x: auto;
-  }
-  
-  /* Responsive table layout */
+  width: 95%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
+  overflow-x: hidden;
+}
+
+.userlist-container input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.scrollable-table {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 250px;
+}
+
+thead {
+  background-color: #f0f0f0;
+}
+
+/* Force clean action buttons layout */
+td .action-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+td .action-buttons button {
+  white-space: nowrap;
+  padding: 6px 10px;
+  font-size: 13px;
+  min-width: 70px;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
   table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+    font-size: 14px;
+    min-width: unset;
   }
-  
+
   th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    word-break: break-word;
+    padding: 6px;
+    font-size: 13px;
   }
-  
-  thead {
-    background-color: #f0f0f0;
+
+  .userlist-container input {
+    font-size: 0.95rem;
   }
-  
-  .scrollable-table {
-    overflow-x: auto;
+}
+
+@media (max-width: 480px) {
+  th:nth-child(1),
+  td:nth-child(1) {
+    display: none; /* Hide ID column */
   }
-  
-  /* Ensure mobile compatibility */
-  @media (max-width: 768px) {
-    table {
-      font-size: 14px;
-    }
-  
-    th, td {
-      padding: 6px;
-    }
+
+  th, td {
+    font-size: 12px;
+    padding: 6px 8px;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  
+
+  td .action-buttons button {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}

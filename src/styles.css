@@ -1,61 +1,52 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Container example */
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  /* Responsive rules */
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-    .header, .footer {
-      text-align: center;
-    }
-  }
+:root {
+  --header-height: 60px;
+  --default-gap: 1rem;
+  --max-content-width: 1200px;
+}
 
+/* Reset and global styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 html, body {
-    height: 100vh;
-    background: url('/assets/images/wp1933959-pixel-art-wallpapers.jpg') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
+  height: 100vh;
+  background: url('/assets/images/wp1933959-pixel-art-wallpapers.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 button {
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: #3498db;
-    color: white;
-    transition: background 0.3s;
-}
-button:hover{
-    opacity: 0.8;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  transition: background 0.3s;
 }
 
-.scrollable{
-    overflow-y: auto;
-    overflow-x: hidden;
+button:hover {
+  opacity: 0.8;
 }
 
-/* This will ensure that any Angular Material overlay will be
- on top of modal dialogs instead of behind */
- .cdk-overlay-container {
+.scrollable {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Angular Material and overlay tweaks */
+.cdk-overlay-container {
   z-index: 1200 !important;
   position: fixed !important;
 }
@@ -65,6 +56,5 @@ button:hover{
 }
 
 .mat-datepicker-content {
-  z-index: 2110 !important;
+  z-index: 2200 !important;
 }
-/* experiment for now, Could be deleted later */

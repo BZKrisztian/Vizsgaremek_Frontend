@@ -1,52 +1,44 @@
 <div class="task-list-container">
-  <!-- Started over from scratch, got too confused -->
-<div class="task-list">
-  
-    <button (click)="openTaskListDialog4Add()">{{'Buttons.AddTaskList' | translate}}</button>
-  
-    <div *ngFor="let list of taskLists" [style.background]="list.color || '#fff'">
-      <h4>{{list.list_Title}}</h4>
-      <p>{{list.list_Description}}</p>
-      <button (click)="onTaskListDeletion(list.list_Id)">{{'Buttons.DeleteTaskList' | translate}}</button>
-      <button (click)="openTaskListDialog4Edit(list)">{{'Buttons.EditTaskList' | translate}}</button>
-  
-      <button (click)="openTaskDialog4Add(list.list_Id)">{{'Buttons.AddTask' | translate}}</button>
-      <input
-      type="text"
-      placeholder="Search for tasks"
-      [(ngModel)]="searchTerms[list.list_Id]"
-      />
-      <div
-      *ngFor="let task of tasks[list.list_Id]
-        | sortbypriority
-        | duedate
-        | completionstatus
-        | taskFilter:searchTerms[list.list_Id]"
-      >
+  <div class="task-list">
+    <button (click)="openTaskListDialog4Add()">{{ 'Buttons.AddTaskList' | translate }}</button>
+
+    <div *ngFor="let list of taskLists" class="list-box" [style.background]="list.color || '#fff'">
+      <h4>{{ list.list_Title }}</h4>
+      <p>{{ list.list_Description }}</p>
+
+      <div class="list-buttons">
+        <button (click)="onTaskListDeletion(list.list_Id)">{{ 'Buttons.DeleteTaskList' | translate }}</button>
+        <button (click)="openTaskListDialog4Edit(list)">{{ 'Buttons.EditTaskList' | translate }}</button>
+        <button (click)="openTaskDialog4Add(list.list_Id)">{{ 'Buttons.AddTask' | translate }}</button>
+        <input type="text" placeholder="Search for tasks" [(ngModel)]="searchTerms[list.list_Id]" />
+      </div>
+
+      <div class="task-wrapper">
         <app-task-item
+          *ngFor="let task of tasks[list.list_Id]
+            | sortbypriority
+            | duedate
+            | completionstatus
+            | taskFilter:searchTerms[list.list_Id]"
           [task]="task"
-          (updatedTask)="onTaskToggle(task,list.list_Id)"
-          (deletedTask)="onTaskDeletion(list.list_Id,task.task_Id)"
+          (updatedTask)="onTaskToggle(task, list.list_Id)"
+          (deletedTask)="onTaskDeletion(list.list_Id, task.task_Id)"
           (editTask)="openTaskDialog4Edit(task)">
         </app-task-item>
       </div>
     </div>
-  
 
-    <app-taskdialog
-      *ngIf="showTaskDialog"
+    <app-taskdialog *ngIf="showTaskDialog"
       [task]="currentEditingTask"
       [taskListId]="currentTaskListId"
       (save)="onTaskDialogSave($event)"
       (cancel)="closeTaskDialog()">
     </app-taskdialog>
-    <app-tasklistdialog
-      *ngIf="showTaskListDialog"
+
+    <app-tasklistdialog *ngIf="showTaskListDialog"
       [taskList]="currentEditingTaskList"
       (save)="onTaskListDialogSave($event)"
       (cancel)="closeTaskListDialog()">
     </app-tasklistdialog>
-  
-</div>
-
+  </div>
 </div>

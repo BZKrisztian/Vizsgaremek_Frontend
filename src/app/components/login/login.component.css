@@ -1,3 +1,15 @@
+:host {
+  display: block;
+  margin-top: var(--header-height);
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -7,7 +19,7 @@
   border-radius: 15px;
   color: white;
   font-size: 1.1rem;
-  width: 100%;
+  width: 95%;
   max-width: 500px;
 }
 
@@ -21,7 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.4rem;
+  gap: 0.6rem;
 }
 
 .login-form input {
@@ -36,6 +48,8 @@
 .login-form small {
   color: red;
   font-size: 0.8rem;
+  min-height: 1.2em;
+  display: block;
 }
 
 .login-form button {

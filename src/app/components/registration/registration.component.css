@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 .registration-form {
   display: flex;
   flex-direction: column;
@@ -7,8 +11,14 @@
   border-radius: 15px;
   color: white;
   font-size: 1.1rem;
+
   width: 100%;
   max-width: 500px;
+  min-width: 280px;
+
+  /* Artificially sized to handle full validation state */
+  min-height: 540px;
+  box-sizing: border-box;
 }
 
 .registration-form h1 {
@@ -21,7 +31,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.4rem;
+  gap: 0.6rem;
+  width: 100%;
 }
 
 .registration-form input {
@@ -31,11 +42,22 @@
   border: none;
   border-bottom: 3px solid rgb(162, 162, 255);
   width: 100%;
+  box-sizing: border-box;
 }
 
 .registration-form small {
-  color: red;
+  display: block;
   font-size: 0.8rem;
+  color: red;
+
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .registration-form button {
@@ -53,4 +75,15 @@
 
 .registration-form button:hover {
   background-color: #27ae60;
+}
+
+.form-field {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }

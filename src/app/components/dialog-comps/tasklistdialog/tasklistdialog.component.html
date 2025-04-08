@@ -1,7 +1,7 @@
 <div class="tasklistdialog-container">
-  <h3 *ngIf="taskList; else addMode">{{ 'TaskList.EditTaskList' | translate }}</h3>
+  <h3 *ngIf="taskList; else addMode">{{ 'Buttons.EditTaskList' | translate }}</h3>
   <ng-template #addMode>
-    <h3>{{ 'TaskList.AddTaskList' | translate }}</h3>
+    <h3>{{ 'Buttons.AddTaskList' | translate }}</h3>
   </ng-template>
   <form (ngSubmit)="onSave()">
     <label for="listTitle">Title: </label>

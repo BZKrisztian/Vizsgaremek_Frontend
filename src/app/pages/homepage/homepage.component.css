@@ -1,6 +1,6 @@
 :host {
   display: block;
-  margin-top: 60px; /* push below fixed header */
+  margin-top: var(--header-height);
 }
 
 .homepage {
@@ -26,15 +26,45 @@
   text-shadow: 1px 1px 3px black;
 }
 
-
 .task-alert {
-    background-color: #ffcccc;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid red;
-    border-radius: 5px;
-    color: #900;
-    font-weight: bold;
-    text-align: center;
+  background-color: #ffcccc;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid red;
+  border-radius: 5px;
+  color: #900;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* TASK LIST AREA */
+.task-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.homepage button {
+  margin-bottom: 1rem;
+}
+
+
+@media (max-width: 600px) {
+  .task-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
   }
-  
+
+  .task-list {
+    flex: 1 0 95%;
+    max-width: 500px;
+  }
+
+  app-task-item {
+    width: 100%;
+  }
+}
