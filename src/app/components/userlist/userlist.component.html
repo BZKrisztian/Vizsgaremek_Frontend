@@ -43,6 +43,7 @@
           <th>Username</th>
           <th>Email</th>
           <th>Creation Date</th>
+          <th>Last Updated</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -52,6 +53,7 @@
           <td>{{user.userName}}</td>
           <td>{{user.email}}</td>
           <td>{{user.acc_CR_D | date:'short'}}</td>
+          <td>{{user.acc_UP_D | date:'short'}}</td>
           <td>
             <div class="action-buttons">
               <button (click)="deleteUser(user.user_Id)">Delete</button>

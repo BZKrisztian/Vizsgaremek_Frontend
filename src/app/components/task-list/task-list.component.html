@@ -10,7 +10,7 @@
         <button (click)="onTaskListDeletion(list.list_Id)">{{ 'Buttons.DeleteTaskList' | translate }}</button>
         <button (click)="openTaskListDialog4Edit(list)">{{ 'Buttons.EditTaskList' | translate }}</button>
         <button (click)="openTaskDialog4Add(list.list_Id)">{{ 'Buttons.AddTask' | translate }}</button>
-        <input type="text" placeholder="Search for tasks" [(ngModel)]="searchTerms[list.list_Id]" />
+        <input type="text" [placeholder]="'Placeholders.SearchTasks' | translate" [(ngModel)]="searchTerms[list.list_Id]" />
       </div>
 
       <div class="task-wrapper">

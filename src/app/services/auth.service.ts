@@ -81,6 +81,8 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('Language');
+    localStorage.removeItem('showTaskLists');
     this.currentUser_BSub.next(null);
   }
 

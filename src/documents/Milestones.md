@@ -9,18 +9,13 @@ INTEGRATION:
 	- Keep sql dump file up to date
 
 PRIMARY:
-	- Full responsivity! (its gonna be me i think...)
-	- Mobile app/port?? (may the divines above have mercy on me...)
-	- Switch from http to https? (I dont even know how...)
-
-	- 2D array to view user's tasklists on overseer table??( 3D to view tasks?? )
+	- {{ SCRAPPED }} 2D array to view user's tasklists on overseer table??( 3D to view tasks?? )
 		- IF implemented: how to ensure it does not bloat the page in case we have too many users
 
 SECONDARY:
-	- configure the datepicker's overlay to not be behind the modal dialog component when it pops up
-	- ability to choose wallpaper (homepage/overseer only, set only to local session for now, dont save setting to backend)
-	- Hungarian language support ( finish making the files / implement when all features are set )
-	- include update date for users at the overseer page
+	- {{ Files given and more or less in place, FINISH }} Hungarian language support ( finish making the files / implement when all features are set )
+	- Fix language setting to work on refresh
+	- {{ SCRAPPED }} ability to choose wallpaper (homepage/overseer only, set only to local session for now, dont save setting to backend)
 
 
 
@@ -47,6 +42,9 @@ COMPLEX / Future implementations:
 	- Shared tasklists/tasks
 
 SOLVED:
+	- include update date for users at the overseer page
+	- configure the datepicker's overlay to not be behind the modal dialog component when it pops up
+	- Full responsivity! (its gonna be me i think...)
 	- button to hide all tasklists(so that they may gaze upon the background?)
 	- Cut up the my-profile page to adhere to structure
 		- My-profile -> static 'page', merely hosts component
