@@ -7,25 +7,36 @@
 }
 
 .task-list {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 15px;
-  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.4);
-  padding: 15px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.35);
+  padding: 20px;
   min-width: 320px;
   max-width: 95vw;
   flex: 1 1 330px;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
   overflow: auto;
-  color: black; /* Ensure task list text is visible */
+  color: black;
 }
 
 .list-box {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  color: black; /* Ensure list content like title & description are visible */
+  color: black;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.list-box h4 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .list-buttons {
@@ -41,6 +52,23 @@
   padding: 6px 10px;
 }
 
+.list-buttons input[type="text"] {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 250px;
+}
+
+.list-buttons input[type="text"]:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
 .task-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -48,6 +76,7 @@
   justify-content: flex-start;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
   .task-list-container {
     flex-direction: column;
@@ -57,9 +86,9 @@
   .task-list {
     width: 100%;
     max-width: 100%;
-    min-width: unset;         /* Remove desktop constraint */
-    flex: 1 1 auto;           /* Allow it to shrink/grow as needed */
-    overflow: visible !important; /* Force overflow to behave normally */
+    min-width: unset;
+    flex: 1 1 auto;
+    overflow: visible !important;
   }
 
   .list-buttons {
@@ -76,5 +105,3 @@
     width: 100%;
   }
 }
-
-

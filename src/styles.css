@@ -12,20 +12,17 @@
   font-family: 'Roboto', sans-serif;
 }
 
-html {
-  min-height: 100%;
-  height: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
+html, body {
+  height: 100vh;
+  background: url('/assets/images/wp1933959-pixel-art-wallpapers.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
-  min-height: 100vh;
-  height: auto;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background: url('/assets/images/wp1933959-pixel-art-wallpapers.jpg') no-repeat center center fixed;
-  background-size: cover;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 button {

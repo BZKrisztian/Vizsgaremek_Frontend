@@ -13,10 +13,10 @@
       Please enter a valid email.
     </small>
 
-    <label>New Password (optional):</label>
+    <label>New Password:</label>
     <input formControlName="password" type="password" />
 
-    <label>Confirm Password:</label>
+    <label>New Password(Confirmation):</label>
     <input formControlName="confirmPassword" type="password" />
     <small *ngIf="profileForm.errors?.['mismatch']">
       Passwords do not match.
