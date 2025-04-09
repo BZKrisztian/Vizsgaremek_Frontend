@@ -22,8 +22,9 @@ export class AppComponent {
     private router: Router,
     private location: Location
   ) {
+    const savedLang = localStorage.getItem('Language') || 'en';
     translate.setDefaultLang('en');
-    translate.use('en');
+    translate.use(savedLang);
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

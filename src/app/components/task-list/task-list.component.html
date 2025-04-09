@@ -1,6 +1,6 @@
 <div class="task-list-container">
   <div class="task-list">
-    <button (click)="openTaskListDialog4Add()">{{ 'Buttons.AddTaskList' | translate }}</button>
+    <button (click)="openTaskListDialog4Add()" id="add-list-button">{{ 'Buttons.AddTaskList' | translate }}</button>
 
     <div *ngFor="let list of taskLists" class="list-box" [style.background]="list.color || '#fff'">
       <h4>{{ list.list_Title }}</h4>

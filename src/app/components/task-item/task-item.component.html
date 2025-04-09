@@ -6,12 +6,20 @@
     'priority-low': task.task_Priority === 'low'
     }">
   <h4 [class.task-completed]="task.task_Status">{{task.task_Title}}</h4>
-  <p>{{task.task_Description}}</p>
+  <p *ngIf="task.task_Description">{{task.task_Description}}</p>
   <p>Priority: {{task.task_Priority}}</p>
-  <p>Due Date: {{task.due_Date | date: 'dd/MM/yyyy'}}</p>
+  <p *ngIf="task.due_Date">Due Date: {{task.due_Date | date: 'dd/MM/yyyy'}}</p>
   <p>Created: {{task.creation_Date| date:'short'}}</p>
   <p>Updated at: {{task.update_Date| date:'short'}}</p>
-  <button (click)="completionToggle()">{{'Buttons.ToggleCompletion' | translate}}</button>
-  <button (click)="edit()">{{'Buttons.EditTask' | translate}}</button>
-  <button (click)="delete()">{{'Buttons.DeleteTask' | translate}}</button>
+  <div class="task-buttons">
+    <button (click)="completionToggle()" [title]="'Buttons.ToggleCompletion' | translate">
+      <span class="material-icons">check_circle</span>
+    </button>
+    <button (click)="edit()" [title]="'Buttons.EditTask' | translate">
+      <span class="material-icons">edit</span>
+    </button>
+    <button (click)="delete()" [title]="'Buttons.DeleteTask' | translate">
+      <span class="material-icons">delete</span>
+    </button>
+  </div>
 </div>

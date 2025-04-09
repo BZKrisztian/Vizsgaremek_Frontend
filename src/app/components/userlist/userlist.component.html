@@ -6,9 +6,10 @@
     [(ngModel)]="searchTerm"
   />
 
+  <!-- Admins Table -->
   <div class="admin-users scrollable-table">
     <h4>Admin List</h4>
-    <p *ngIf="errorMessage">{{errorMessage}}</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
     <table>
       <thead>
         <tr>
@@ -21,10 +22,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of filteredAdmins()">
-          <td>{{user.user_Id}}</td>
-          <td>{{user.userName}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.acc_CR_D | date:'short'}}</td>
+          <td>{{ user.user_Id }}</td>
+          <td>{{ user.userName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.acc_CR_D | date:'short' }}</td>
           <td>
             <button (click)="toggleAdminState(user.user_Id)">Demote</button>
           </td>
@@ -33,9 +34,15 @@
     </table>
   </div>
 
-  <div class="regular-users scrollable-table">
+  <!-- Load Button -->
+  <div *ngIf="!usersLoaded" class="load-users-wrapper">
+    <button (click)="loadRegularUsers()">Load Regular Users</button>
+  </div>
+
+  <!-- Regular Users Table -->
+  <div class="regular-users scrollable-table" *ngIf="usersLoaded">
     <h4>User List</h4>
-    <p *ngIf="errorMessage">{{errorMessage}}</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
     <table>
       <thead>
         <tr>
@@ -49,11 +56,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of filteredRegularUsers()">
-          <td>{{user.user_Id}}</td>
-          <td>{{user.userName}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.acc_CR_D | date:'short'}}</td>
-          <td>{{user.acc_UP_D | date:'short'}}</td>
+          <td>{{ user.user_Id }}</td>
+          <td>{{ user.userName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.acc_CR_D | date:'short' }}</td>
+          <td>{{ user.acc_UP_D | date:'short' }}</td>
           <td>
             <div class="action-buttons">
               <button (click)="deleteUser(user.user_Id)">Delete</button>

@@ -9,23 +9,24 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-userlist',
   templateUrl: './userlist.component.html',
   styleUrls: ['./userlist.component.css'],
-  imports: [
-    CommonModule, FormsModule
-  ]
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class UserlistComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  regularUsers: User[] = []
-  adminUsers: User[] = []
-  errorMessage: string = ''
-  searchTerm: string = ''
+  regularUsers: User[] = [];
+  adminUsers: User[] = [];
 
-  constructor(private authService: AuthService) { }
+  searchTerm: string = '';
+  errorMessage: string = '';
+  usersLoaded: boolean = false;
 
-  ngOnInit():void{
-    this.loadUsers()
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.loadAdmins();
   }
 
   ngOnDestroy(): void {
@@ -33,20 +34,49 @@ export class UserlistComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadUsers(): void {
+  loadAdmins(): void {
     this.authService.getUsers()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (users) => {
-          this.regularUsers = users.filter(user => !user.isAdmin);
+        next: users => {
           this.adminUsers = users.filter(user => user.isAdmin);
         },
-        error: (err) => {
-          this.errorMessage = "Could not load users.";
-          console.log(err);
+        error: err => {
+          this.errorMessage = "Could not load admins.";
         }
       });
   }
+
+  loadRegularUsers(): void {
+    this.authService.getUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: users => {
+          this.regularUsers = users.filter(user => !user.isAdmin);
+          this.usersLoaded = true;
+        },
+        error: err => {
+          this.errorMessage = "Could not load users.";
+        }
+      });
+  }
+
+  refreshAllUsers(): void {
+    this.authService.getUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: users => {
+          this.adminUsers = users.filter(user => user.isAdmin);
+          if (this.usersLoaded) {
+            this.regularUsers = users.filter(user => !user.isAdmin);
+          }
+        },
+        error: err => {
+          this.errorMessage = "Could not refresh users.";
+        }
+      });
+  }
+
 
   deleteUser(user_Id: number): void {
     if (confirm("Are you sure you want to delete this user?")) {
@@ -55,10 +85,10 @@ export class UserlistComponent implements OnInit, OnDestroy {
         .subscribe({
           next: () => {
             this.regularUsers = this.regularUsers.filter(user => user.user_Id !== user_Id);
+            this.refreshAllUsers();
           },
-          error: (err) => {
+          error: err => {
             this.errorMessage = "Could not delete user.";
-            console.log(err);
           }
         });
     }
@@ -68,8 +98,7 @@ export class UserlistComponent implements OnInit, OnDestroy {
     const user = [...this.regularUsers, ...this.adminUsers].find(u => u.user_Id === user_Id);
     if (!user) return;
 
-    const isCurrentlyAdmin = user.isAdmin;
-    const action = isCurrentlyAdmin ? 'demote' : 'promote';
+    const action = user.isAdmin ? 'demote' : 'promote';
     const confirmed = confirm(`Are you sure you want to ${action} this user?`);
 
     if (!confirmed) return;
@@ -78,7 +107,7 @@ export class UserlistComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.loadUsers();
+          this.refreshAllUsers();
           const currentUser = this.authService.getCurrentUser();
           if (currentUser?.user_Id === user_Id) {
             this.authService.refreshCurrentUser();
@@ -86,10 +115,10 @@ export class UserlistComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           this.errorMessage = err.error?.message || "Could not toggle admin state.";
-          console.log(err);
         }
       });
   }
+
 
   filteredAdmins(): User[] {
     return this.adminUsers.filter(user => this.matchesSearchTerm(user));
@@ -101,8 +130,6 @@ export class UserlistComponent implements OnInit, OnDestroy {
 
   private matchesSearchTerm(user: User): boolean {
     const term = this.searchTerm.toLowerCase();
-    return user.userName.toLowerCase().includes(term) ||
-           user.email.toLowerCase().includes(term);
+    return user.userName.toLowerCase().includes(term) || user.email.toLowerCase().includes(term);
   }
-
 }

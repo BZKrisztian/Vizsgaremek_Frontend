@@ -1,3 +1,6 @@
+<button (click)="toggleTaskListsVisibility()" class="tasklist-toggle">
+  {{ (showTaskLists ? 'Buttons.HideTaskList' : 'Buttons.ShowTaskList') | translate }}
+</button>
 <div class="homepage">
   <div class="user-greeting">
     <h2>Welcome, {{currentUsername}} :D</h2>
@@ -12,9 +15,6 @@
   
   <h1>{{'Texts.Pages.Homepage.Title' | translate}}</h1>
   <h4>{{'Texts.Pages.Homepage.YourTaskLists' | translate}}</h4>
-  <button (click)="toggleTaskListsVisibility()">
-    {{ (showTaskLists ? 'Buttons.HideTaskList' : 'Buttons.ShowTaskList') | translate }}
-  </button>
 
   <app-task-list (taskListGotUpdate)="check4TasksDueToday()" *ngIf="showTaskLists"></app-task-list>
 </div>

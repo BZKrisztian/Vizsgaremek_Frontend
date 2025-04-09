@@ -25,6 +25,37 @@ body {
   font-family: Arial, sans-serif;
 }
 
+h1, h2, h3 {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+h2, h3 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  padding-left: 0.75rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+label {
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+
+
+
+
 button {
   padding: 10px 20px;
   border: none;
@@ -44,6 +75,9 @@ button:hover {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+
+
 
 /* Angular Material and overlay tweaks */
 /* Ensure modal dialog is below */
