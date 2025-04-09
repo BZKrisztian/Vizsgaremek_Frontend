@@ -173,18 +173,20 @@ PROBLEMS/THINGS TO FIX/REPORT(?):
 	- 
 
 # DOCUMENTS:
+Documentation Structure:
 Official documentation ( contains everything / finalised ):
 	- 1. Introduction ( What the app is and why we chose it )
 	- 2. User documentation ( How to use it, in layman's terms )
+		- Include pictures and all possibilities
 	- 3. Dev documentation ( Explanation of everything )
 		- Used technologies ( Angular/Typescript, C#, SQL )
-		- Used IDE's ( VsCode, Visual Studio, XAMPP )
-		- Thorough description of all parts of the project ( mainly, the methods )
-			- Frontend = Components(+Pages/Dialogs), Services, Guards
-			- Backend = Endpoints, Models
-				- Database = Structure, Table names/stored data
+		- Used IDE's ( VsCode, XAMPP )
+		- Thorough description of all parts of the project ( Including ALL methods' explanation )
+			- Frontend = Models / Services / Guards / Interceptor(s) / Pipes / Components (Static 'Pages' + Components)
+			- Backend = Config / Controllers / Middleware / Models / Routes / App.js
+				- Database = Structure( +screenshot ), Table names/stored data + database.sql
 	- 4. Tests ( Insomnia, Postman )
-		- Awaited response of functions
+		- Awaited response of endpoints
 	- 5. Summary
 		- Possibilities for future development
 

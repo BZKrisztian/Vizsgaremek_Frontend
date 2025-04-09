@@ -46,15 +46,21 @@ button:hover {
 }
 
 /* Angular Material and overlay tweaks */
+/* Ensure modal dialog is below */
+.taskdialog-container {
+  z-index: 2200; /* already defined */
+}
+
+/* Angular Material overlay hierarchy */
 .cdk-overlay-container {
-  z-index: 1200 !important;
+  z-index: 2500 !important;  /* ⬆️ must be above modal */
   position: fixed !important;
 }
 
 .cdk-overlay-pane {
-  z-index: 2100 !important;
+  z-index: 2550 !important;  /* ⬆️ pane inside container */
 }
 
 .mat-datepicker-content {
-  z-index: 2200 !important;
+  z-index: 2600 !important;  /* ⬆️ actual calendar box */
 }
