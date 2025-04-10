@@ -21,6 +21,10 @@
 .task-item h4 {
   font-size: 1.05rem;
   margin: 0;
+
+  word-break: break-word;         /* ⬅️ core fix */
+  overflow-wrap: anywhere;        /* ⬅️ handle unbroken words */
+  white-space: normal;            /* ⬅️ allow wrapping */
 }
 
 .task-item p {
@@ -29,6 +33,10 @@
   font-size: 0.82rem;
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+  word-break: break-word;         /* ⬅️ core fix */
+  overflow-wrap: anywhere;        /* ⬅️ handle unbroken words */
+  white-space: normal;            /* ⬅️ allow wrapping */
 }
 
 .task-item p:last-of-type {

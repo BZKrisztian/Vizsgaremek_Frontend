@@ -5,16 +5,24 @@
   </ng-template>
   <form (ngSubmit)="onSave()">
     <label for="listTitle">Title: </label>
-    <input type="text" name="Title" id="listTitle" required
+    <input type="text" name="Title" id="listTitle" required maxlength="50"
       [(ngModel)]="localTaskList.list_Title">
+      <small class="character-count">
+        {{50 - (localTaskList.list_Title.length || 0)}} characters left
+      </small>
 
     <label for="listDescription">Description: </label>
-    <textarea name="Description" id="listDescription"
+    <textarea name="Description" id="listDescription" maxlength="200"
       [(ngModel)]="localTaskList.list_Description"></textarea>
+      <small class="character-count">
+        {{200 - (localTaskList.list_Description?.length || 0)}} characters left
+      </small>
 
-      <label for="listColor">Color: </label>
-      <input type="color" name="color" id="listColor"
-      [(ngModel)]="localTaskList.color" [value]="localTaskList.color">
+      <div class="color-field-wrapper">
+        <label for="listColor">Color: </label>
+        <input type="color" name="color" id="listColor"
+        [(ngModel)]="localTaskList.color" [value]="localTaskList.color">
+      </div>
 
     <div class="modal-buttons">
       <button type="submit">Save</button>

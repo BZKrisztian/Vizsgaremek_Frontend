@@ -15,7 +15,7 @@
     <button (click)="completionToggle()" [title]="'Buttons.ToggleCompletion' | translate">
       <span class="material-icons">check_circle</span>
     </button>
-    <button (click)="edit()" [title]="'Buttons.EditTask' | translate">
+    <button (click)="edit()" [title]="'Buttons.EditTask' | translate" [disabled]="task.task_Status">
       <span class="material-icons">edit</span>
     </button>
     <button (click)="delete()" [title]="'Buttons.DeleteTask' | translate">

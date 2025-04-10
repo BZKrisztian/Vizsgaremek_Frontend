@@ -18,6 +18,9 @@ html, body {
   background-size: cover;
   display: flex;
   flex-direction: column;
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 body {

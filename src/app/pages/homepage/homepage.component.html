@@ -1,6 +1,9 @@
-<button (click)="toggleTaskListsVisibility()" class="tasklist-toggle">
-  {{ (showTaskLists ? 'Buttons.HideTaskList' : 'Buttons.ShowTaskList') | translate }}
+<button class="tasklist-toggle" (click)="toggleTaskListsVisibility()" title="{{ showTaskLists ? 'Hide homepage content' : 'Show homepage content' }}">
+  <span class="material-icons">
+    {{ showTaskLists ? 'visibility_off' : 'visibility' }}
+  </span>
 </button>
+
 <div class="homepage">
   <div class="user-greeting">
     <h2>Welcome, {{currentUsername}} :D</h2>

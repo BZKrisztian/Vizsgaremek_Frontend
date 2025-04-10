@@ -34,6 +34,14 @@ export class UserlistComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  isRootAdmin(): boolean {
+    const current = this.authService.getCurrentUser();
+    return (
+      current?.email?.trim().toLowerCase() === this.authService.getRootAdminEmail().trim().toLowerCase()
+    );
+  }
+  
+
   loadAdmins(): void {
     this.authService.getUsers()
       .pipe(takeUntil(this.destroy$))

@@ -21,6 +21,10 @@ export class AuthService {
     this.currentUser$ = this.currentUser_BSub.asObservable();
   }
 
+  getRootAdminEmail():string{
+    return environment.rootAdminEmail
+  }
+
   //getter 4 comps+guards / returns current user
   getCurrentUser(): User|null {
     return this.currentUser_BSub.value;

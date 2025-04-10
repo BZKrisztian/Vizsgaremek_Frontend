@@ -4,21 +4,37 @@
 }
 
 .tasklist-toggle {
-  padding: 10px 1rem;
+  padding: 0.5rem 1rem;
   margin-top: var(--header-height);
   display: flex;
   justify-content: flex-start;
+  max-width: 100%;
+  overflow: hidden;
 }
+
 .tasklist-toggle button {
   background-color: #f39c12;
   color: white;
-  font-weight: bold;
   border: none;
-  padding: 10px 20px;
+  padding: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 36px;
+  height: 36px;
+  min-width: unset;
+  max-width: 100%;
+  box-sizing: border-box;
 }
+.tasklist-toggle .material-icons {
+  font-size: 20px;
+  line-height: 1;
+}
+
 .tasklist-toggle button:hover {
   background-color: #e67e22;
 }
@@ -57,19 +73,18 @@
   text-align: center;
 }
 
-/* TASK LIST AREA */
 .task-list-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
   padding: 1rem;
-  overflow-x: auto;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .homepage button {
   margin-bottom: 1rem;
 }
-
 
 @media (max-width: 600px) {
   .task-list-container {
@@ -86,5 +101,9 @@
 
   app-task-item {
     width: 100%;
+  }
+
+  .tasklist-toggle {
+    margin-top: 110px; /* accommodate header wrapping */
   }
 }

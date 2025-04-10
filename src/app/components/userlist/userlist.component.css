@@ -8,6 +8,7 @@
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.3);
   overflow-x: visible; /* Let children scroll independently */
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .userlist-container input {
@@ -22,12 +23,17 @@
 }
 
 .scrollable-table {
+  max-height: 60vh; /* adjust as needed */
+  overflow-y: auto;
   overflow-x: auto;
-  margin-bottom: 2rem;
   padding-bottom: 1rem;
+  margin-bottom: 2rem;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+
   -webkit-overflow-scrolling: touch;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 /* Core table layout */
