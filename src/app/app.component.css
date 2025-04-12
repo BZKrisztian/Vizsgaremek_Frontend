@@ -26,11 +26,10 @@
 .header-left,
 .header-right {
   display: flex;
-  flex-wrap: wrap;        /* Allow multiple rows */
+  flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
 }
-
 
 /* BUTTON BASE STYLE (DESKTOP DEFAULT) */
 .main-header button {
@@ -43,11 +42,9 @@
   cursor: pointer;
   transition: background 0.3s ease;
   white-space: nowrap;
-
-  /* Smart responsiveness */
-  flex: 1 1 auto;         /* ← Expand equally */
-  min-width: 80px;        /* ← Never get too tiny */
-  max-width: 100%;        /* ← Respect parent container */
+  flex: 1 1 auto;
+  min-width: 80px;
+  max-width: 100%;
   text-align: center;
   box-sizing: border-box;
 }
@@ -57,7 +54,7 @@
   opacity: 0.85;
 }
 
-/* LANGUAGE BUTTONS (last two) */
+/* LANGUAGE BUTTONS */
 .header-right button:nth-last-child(-n+2) {
   padding: 6px 12px;
   font-size: 14px;
@@ -67,16 +64,31 @@
   text-align: center;
 }
 
+/* WALLPAPER SELECTOR */
+.wallpaper-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-
+.wallpaper-selector select {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  max-width: 160px;
+}
 
 /* MOBILE STYLES */
 @media (max-width: 600px) {
   .main-header {
-    height: auto;              /* Allow it to grow with content */
-    padding: 10px;             /* More spacing for wrapping content */
-    align-items: flex-start;   /* Don't vertically squash rows */
-    flex-direction: column;    /* Stack content vertically if needed */
+    height: auto;
+    padding: 10px;
+    align-items: flex-start;
+    flex-direction: column;
     gap: 8px;
   }
 
@@ -105,8 +117,9 @@
     padding: 5px 8px;
     border-radius: 15px;
   }
+
+  .wallpaper-selector select {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
 }
-
-
-
-

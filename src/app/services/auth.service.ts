@@ -25,10 +25,10 @@ export class AuthService {
     return environment.rootAdminEmail
   }
 
-  //getter 4 comps+guards / returns current user
   getCurrentUser(): User|null {
     return this.currentUser_BSub.value;
   }
+
   refreshCurrentUser():void{
     this.http.get<User>(`${this.apiURL}/users/me`).subscribe({
       next:(user)=>{
@@ -36,67 +36,68 @@ export class AuthService {
         this.currentUser_BSub.next(user);
       },
       error:(err)=>{
-        console.error('COuld not refresh user state', err)
+        if (environment.production === false) {
+          console.error('Could not refresh user state', err)
+        }
       }
     })
   }
 
-  // post request for backend
   register(userData: User): Observable<any> {
     return this.http.post<any>(`${this.apiURL}/register`, userData)
-    // frontend part of sending email to user when successfully registered
     .pipe(
       tap((res)=>{
-        if(res && res.emailNotifSent){
-          console.log(res, "email notification sent");
+        if(res?.emailNotifSent && !environment.production){
+          console.log("Email notification sent.");
         }
       })
     );
   }
-  // post request for backend ==> if token is received, it is saved to localstorage,
-  // and current user is set by looking at the response
+
   login(credentials:{email:string,password:string}):Observable<any>{
     return this.http.post<any>(`${this.apiURL}/login`,credentials).pipe(
       tap((res)=>{
-        if(res&&res.token){
+        if(res?.token){
           localStorage.setItem('authToken',res.token);
           localStorage.setItem('currentUser',JSON.stringify(res.user));
           this.currentUser_BSub.next(res.user);
         }
       }),
       catchError((error: HttpErrorResponse)=>{
-        if(error.status === 401){
-          console.log(error)
+        if(error.status === 401 && !environment.production){
           console.warn("Token expired or invalid. Logging out...")
-          this.logout();
-        }throw error
+        }
+        this.logout();
+        throw error
       })
     )
   }
-  // gets token from localstorage
+
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
-  // checks if token is present, IF yes = logged in
+
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
-  // clears localstorage, resets/nullifies behaviour subject
+
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('currentUser');
     localStorage.removeItem('Language');
     localStorage.removeItem('showTaskLists');
+    localStorage.removeItem('selectedWallpaper');
     this.currentUser_BSub.next(null);
   }
 
-  //(C)R(U)D of Users for Overseer (includes admins, partitioned at userlist component)
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(`${this.apiURL}/users`)
   }
+
   deleteUser(user_Id: number):Observable<void>{
     return this.http.delete<void>(`${this.apiURL}/users/${user_Id}`)
   }
+
   harakiri():Observable<void>{
     return this.http.delete<void>(`${this.apiURL}/users/self`)
   }
@@ -108,6 +109,4 @@ export class AuthService {
   updateSelf(data: {userName:string, email:string, password?:string}){
     return this.http.patch<any>(`${this.apiURL}/users/profile`, data)
   }
-
-
 }

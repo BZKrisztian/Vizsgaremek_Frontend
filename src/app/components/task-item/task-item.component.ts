@@ -23,7 +23,14 @@ export class TaskItemComponent {
   @Output() deletedTask = new EventEmitter<number>();
   @Output() editTask = new EventEmitter<Task>();
 
+  showDates: boolean = false;
+
   constructor() {}
+
+
+  toggleViewDate():void{
+    this.showDates = !this.showDates;
+  }
 
   completionToggle():void {
     this.task.task_Status = !this.task.task_Status;

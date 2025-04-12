@@ -10,7 +10,7 @@
     <label for="taskDesc">Description:</label>
     <textarea id="taskDesc" [(ngModel)]="localTask.task_Description" name="description" maxlength="300"></textarea>
     <small class="character-count">
-      {{200 - (localTask.task_Description?.length || 0)}} characters left
+      {{300 - (localTask.task_Description?.length || 0)}} characters left
     </small>
 
     <mat-form-field appearance="fill">

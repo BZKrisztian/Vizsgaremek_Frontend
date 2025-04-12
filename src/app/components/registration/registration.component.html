@@ -3,38 +3,41 @@
 
   <div class="form-field">
     <label for="registration-username">Username</label>
-    <input id="registration-username" formControlName="username" type="text" maxlength="50" />
-    <small *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
-      Minimum 6 characters required
-    </small>
+    <input id="registration-username"
+           formControlName="username"
+           type="text"
+           maxlength="50"
+           placeholder="Min 6 characters"
+    />
   </div>
-
+  
   <div class="form-field">
     <label for="registration-email">Email</label>
-    <input id="registration-email" formControlName="email" type="email" />
-    <small *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
-      Please enter a valid email.
-    </small>
+    <input id="registration-email"
+           formControlName="email"
+           type="email"
+           placeholder="e.g.: user@example.com"
+    />
   </div>
-
+  
   <div class="form-field">
     <label for="registration-password">Password</label>
-    <input id="registration-password" formControlName="password" type="password" />
-    <small *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
-      At least 8 characters, including 1 number and 1 uppercase letter
-    </small>
+    <input id="registration-password"
+           formControlName="password"
+           type="password"
+           placeholder="Min 8 chars, 1 uppercase, 1 number"
+    />
   </div>
-
+  
   <div class="form-field">
     <label for="registration-confirmPassword">Confirm Password</label>
-    <input id="registration-confirmPassword" formControlName="confirmPassword" type="password" />
-    <small *ngIf="registrationForm.get('confirmPassword')?.hasError('required') && registrationForm.get('confirmPassword')?.touched">
-      Confirm Password is required.
-    </small>
-    <small *ngIf="registrationForm.errors?.['mismatch'] && registrationForm.get('confirmPassword')?.touched">
-      Passwords must match.
-    </small>
+    <input id="registration-confirmPassword"
+           formControlName="confirmPassword"
+           type="password"
+           placeholder="Repeat password"
+    />
   </div>
+  
 
   <button type="submit" [disabled]="registrationForm.invalid">Register</button>
 </form>

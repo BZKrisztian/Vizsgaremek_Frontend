@@ -45,26 +45,6 @@
   box-sizing: border-box;
 }
 
-.registration-form small {
-  display: block;
-  font-size: 0.8rem;
-  color: red;
-
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-
-  padding-right: 0.25rem;
-
-  line-height: 1.2;
-  min-height: 1.2rem;
-}
-
 .registration-form button {
   align-self: center;
   padding: 10px 20px;

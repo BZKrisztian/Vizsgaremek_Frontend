@@ -4,14 +4,25 @@
     'priority-high': task.task_Priority === 'high',
     'priority-medium': task.task_Priority === 'medium',
     'priority-low': task.task_Priority === 'low'
-    }">
-  <h4 [class.task-completed]="task.task_Status">{{task.task_Title}}</h4>
-  <p *ngIf="task.task_Description">{{task.task_Description}}</p>
-  <p>Priority: {{task.task_Priority}}</p>
-  <p *ngIf="task.due_Date">Due Date: {{task.due_Date | date: 'dd/MM/yyyy'}}</p>
-  <p>Created: {{task.creation_Date| date:'short'}}</p>
-  <p>Updated at: {{task.update_Date| date:'short'}}</p>
+  }">
+  
+  <h4 [class.task-completed]="task.task_Status">{{ task.task_Title }}</h4>
+  <p *ngIf="task.task_Description">{{ task.task_Description }}</p>
+  <p>{{ 'Texts.Components.Task.Priority' | translate }}: {{ task.task_Priority }}</p>
+  <p *ngIf="task.due_Date">
+    {{ 'Texts.Components.Task.DueDate' | translate }}: {{ task.due_Date | date: 'dd/MM/yyyy' }}
+  </p>
+  <div *ngIf="showDates" class="metadata-fields">
+    <p>{{ 'Texts.Components.Task.CreationDate' | translate }}: {{ task.creation_Date | date: 'short' }}</p>
+    <p>{{ 'Texts.Components.Task.UpdatedAt' | translate }}: {{ task.update_Date | date: 'short' }}</p>
+  </div>
+
+  
+  
   <div class="task-buttons">
+    <button (click)="toggleViewDate()" class="material-icons" [title]="showDates ? 'HideDates' : 'ShowDates'">
+      {{ showDates ? 'visibility_off' : 'visibility' }}
+    </button>
     <button (click)="completionToggle()" [title]="'Buttons.ToggleCompletion' | translate">
       <span class="material-icons">check_circle</span>
     </button>

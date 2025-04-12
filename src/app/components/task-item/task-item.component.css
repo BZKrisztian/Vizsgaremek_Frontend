@@ -98,7 +98,7 @@
 
 /* Responsive: Maintain mobile layout */
 @media (max-width: 600px) {
-  .task-item {
+  .task-item .metadata-fields {
     max-width: 100%;
     width: 100%;
     flex: 1 1 100%;
@@ -108,6 +108,6 @@
 
   .task-buttons button {
     font-size: 0.9rem;
-    padding: 8px;
+    padding: 4px;
   }
 }
