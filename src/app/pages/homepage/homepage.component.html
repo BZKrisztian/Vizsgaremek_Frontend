@@ -1,23 +1,28 @@
-<button class="tasklist-toggle" (click)="toggleTaskListsVisibility()" title="{{ showTaskLists ? 'Hide homepage content' : 'Show homepage content' }}">
+<button
+  class="tasklist-toggle"
+  (click)="toggleTaskListsVisibility()"
+  title="{{
+    showHomepageContent ? 'Hide homepage content' : 'Show homepage content'
+  }}"
+>
   <span class="material-icons">
-    {{ showTaskLists ? 'visibility_off' : 'visibility' }}
+    {{ showHomepageContent ? "visibility_off" : "visibility" }}
   </span>
 </button>
 
-<div class="homepage">
+<div class="homepage" *ngIf="showHomepageContent">
   <div class="user-greeting">
-    <h2>Welcome, {{currentUsername}} :D</h2>
+    <h2>Welcome, {{ currentUsername }} :D</h2>
   </div>
   <div *ngIf="hasTasksDue4Today" class="task-alert">
-    <p>You have task(s) due today!</p>
+    <p>{{ 'Texts.Messages.TaskDueToday' | translate }}</p>
   </div>
   <div *ngIf="hasExpiredTasks" class="task-alert">
-    <p>You have expired task(s)!</p>
+    <p>{{ 'Texts.Messages.TaskExpired' | translate }}</p>
   </div>
 
-  
-  <h1>{{'Texts.Pages.Homepage.Title' | translate}}</h1>
-  <h4>{{'Texts.Pages.Homepage.YourTaskLists' | translate}}</h4>
+  <h1>{{ "Texts.Pages.Homepage.Title" | translate }}</h1>
+  <h4>{{ "Texts.Pages.Homepage.YourTaskLists" | translate }}</h4>
 
-  <app-task-list (taskListGotUpdate)="check4TasksDueToday()" *ngIf="showTaskLists"></app-task-list>
+  <app-task-list (taskListGotUpdate)="check4TasksDueToday()"></app-task-list>
 </div>

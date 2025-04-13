@@ -3,96 +3,56 @@
     "Register": "Regisztráció",
     "Login": "Bejelentkezés",
     "Logout": "Kijelentkezés",
-    "Back": "Vissza",
+    "AddTaskList": "Lista hozzáadása",
+    "DeleteTaskList": "Lista törlése",
+    "EditTaskList": "Lista szerkesztése",
     "AddTask": "Feladat hozzáadása",
-    "EditTask": "Feladat szerkesztése",
-    "DeleteTask": "Feladat törlése",
-    "ToggleCompletion": "Befejezettség váltása",
-    "AddTaskList": "Feladatlista hozzáadása",
-    "EditTaskList": "Feladatlista szerkesztése",
-    "DeleteTaskList": "Feladatlista törlése",
-    "ShowTaskList": "Feladatlista megjelenítése",
-    "HideTaskList": "Feladatlista elrejtése",
-    "SwitchToOverseer": "Váltás admin nézetre"
-  },
-  "Snackbars": {
-    "RegistrationSuccess": "Sikeres regisztráció",
-    "RegistrationFailure": "A regisztráció sikertelen",
-    "LoginFailure": "A bejelentkezés sikertelen",
-    "OperationSuccess": "Művelet sikeresen végrehajtva",
-    "OperationFailure": "Hiba történt, próbálja újra"
-  },
-  "Languages": {
-    "EN": "Angol",
-    "HU": "Magyar"
+    "EditTask": "Szerkesztés",
+    "DeleteTask": "Törlés",
+    "ToggleCompletion": "Befejezés váltása",
+    "Save": "Mentés",
+    "Cancel": "Mégse",
+    "GoToHomepage": "Vissza a főoldalra",
+    "GoToOverseer": "Felügyelő oldalra",
+    "MyProfile": "Profilom",
+    "Back": "Vissza"
   },
   "Texts": {
     "Pages": {
-      "Entry": {
-        "Title": "Üdvözöljük alkalmazásunkban",
-        "Subtitle": "Megtenni vagy nem megtenni"
-      },
       "Homepage": {
-        "Title": "Főoldal",
-        "YourTaskLists": "Saját feladatlisták"
+        "Title": "A Te Teendőid Központja",
+        "YourTaskLists": "Feladatlistáid"
       },
       "Overseer": {
-        "DailyMotivationals": "Napi motivációk",
-        "UserManagement": "Felhasználók kezelése"
+        "Title": "Felügyelő Vezérlőpult",
+        "UserManagement": "Felhasználókezelés"
+      },
+      "Entry": {
+        "Welcome": "Üdvözlünk az alkalmazásban!",
+        "Title": "Teendő vagy nem teendő"
+      },
+      "Profile": {
+        "Title": "Profilom",
+        "DeleteAccount": "Fiók törlése"
       }
     },
-    "Components": {
-      "AuthForm": {
-        "Email": "E-mail",
-        "Password": "Jelszó",
-        "Username": "Felhasználónév",
-        "RegisterHeader": "Regisztráció",
-        "LogInHeader": "Bejelentkezés",
-        "Confirm": "Megerősítés"
-      },
-      "Task": {
-        "TaskCompleted": "Feladat befejezve",
-        "Title": "Cím",
-        "Description": "Leírás",
-        "Priority": "Prioritás",
-        "High": "Magas",
-        "Medium": "Közepes",
-        "Low": "Alacsony",
-        "DueDate": "Határidő",
-        "CreationDate": "Létrehozás dátuma",
-        "UpdatedAt": "Frissítve"
-      },
-      "TaskList": {
-        "Description": "Leírás",
-        "Color": "Szín"
-      },
-      "ConfirmDelete": {
-        "Title": "Törlés megerősítése",
-        "Message": "Biztosan törölni szeretné?"
-      }
+    "Messages": {
+      "TaskDueToday": "Ma esedékes feladatod van!",
+      "TaskExpired": "Lejárt feladatod van!"
     }
   },
-  "Placeholders": {
-    "SearchTasks": "Keresés a feladatok között...",
-    "EnterTitle": "Add meg a címet...",
-    "EnterDescription": "Add meg a leírást...",
-    "EnterEmail": "Add meg az e-mail címed...",
-    "EnterPassword": "Add meg a jelszavad...",
-    "EnterUsername": "Add meg a felhasználóneved..."
-  },
-  "Errors": {
-    "RequiredField": "Ez a mező kötelező",
-    "InvalidEmail": "Érvénytelen e-mail cím",
-    "PasswordTooShort": "A jelszónak legalább 6 karakter hosszúnak kell lennie",
-    "UsernameTooShort": "A felhasználónévnek legalább 3 karakter hosszúnak kell lennie",
-    "PasswordsMustMatch": "A jelszavaknak egyezniük kell"
-  },
-  "Messages": {
-    "NoTasksFound": "Nem találhatók feladatok",
-    "NoTaskLists": "Nincsenek feladatlisták",
-    "NoUsersFound": "Nem találhatók felhasználók",
-    "ConfirmLogout": "Biztosan ki szeretnél jelentkezni?",
-    "TaskDueToday": "Mai határidejű feladat!",
-    "TaskOverdue": "Lejárt határidejű feladat!"
+  "Snackbars": {
+    "RegistrationSuccess": "Sikeres regisztráció, ellenőrizd az emailed :D",
+    "RegistrationFailEmailUsed": "Ez az email már használatban van. Válassz másikat.",
+    "RegistrationFailUsernameUsed": "Ez a felhasználónév már foglalt. Válassz másikat.",
+    "RegistrationMismatch": "A jelszavak nem egyeznek.",
+    "LoginSuccess": "Sikeres bejelentkezés!",
+    "LoginFail": "Sikertelen bejelentkezés. Ellenőrizd az adataidat.",
+    "ProfileUpdateSuccess": "Profil sikeresen frissítve",
+    "ProfileUpdateFail": "Profil frissítése sikertelen",
+    "DeleteAccountSuccess": "Fiók sikeresen törölve",
+    "DeleteAccountFail": "Fiók törlése sikertelen.",
+    "UserDeleteFail": "Nem sikerült törölni a felhasználót.",
+    "UserToggleFail": "Nem sikerült admin állapotot váltani."
   }
 }

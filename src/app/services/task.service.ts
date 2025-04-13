@@ -44,5 +44,10 @@ export class TaskService {
      return this.http.delete<void>(`${this.apiUrl}/tasklists/${list_Id}`);
    }
 
+   getTasklistsForAdmin(userId: number): Observable<TaskList[]> {
+    return this.http.get<TaskList[]>(`${this.apiUrl}/users/admin/users/${userId}/tasklists`);
+  }
+  
+
 
 }

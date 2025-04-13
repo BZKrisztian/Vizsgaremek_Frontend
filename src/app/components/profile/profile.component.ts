@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,8 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./profile.component.css'],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
@@ -60,9 +62,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.profileForm.invalid) return;
-
+  
     const { userName, email, password } = this.profileForm.value;
-
+  
     this.authService.updateSelf({ userName, email, password })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -71,11 +73,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.authService.refreshCurrentUser();
         },
         error: (err) => {
-          const message = err.error?.message || 'Profile update failed';
+          let message = 'Profile update failed';
+          const backendMsg = err.error?.message;
+  
+          if (backendMsg === 'Username already in use') {
+            message = 'The username is already taken. Please choose another.';
+          } else if (backendMsg === 'Email already in use') {
+            message = 'The email is already in use. Please choose another one.';
+          } else if (backendMsg === 'New password must differ from the old one') {
+            message = 'New password must be different from the current one.';
+          }
+  
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
   }
+  
 
   onClickDeleteAccount(): void {
     if (!confirm("Are you sure you want to delete your account?")) return;

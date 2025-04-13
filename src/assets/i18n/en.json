@@ -2,97 +2,57 @@
   "Buttons": {
     "Register": "Register",
     "Login": "Login",
-    "Logout": "Logout",
-    "Back": "Back",
-    "AddTask": "Add Task",
-    "EditTask": "Edit Task",
-    "DeleteTask": "Delete Task",
-    "ToggleCompletion": "Toggle Completion",
+    "Logout": "Log Out",
     "AddTaskList": "Add Task List",
-    "EditTaskList": "Edit Task List",
     "DeleteTaskList": "Delete Task List",
-    "ShowTaskList": "Show Task List",
-    "HideTaskList": "Hide Task List",
-    "SwitchToOverseer": "Switch to Overseer View"
-  },
-  "Snackbars": {
-    "RegistrationSuccess": "Registration successful",
-    "RegistrationFailure": "Registration failed",
-    "LoginFailure": "Login failed",
-    "OperationSuccess": "Operation completed successfully",
-    "OperationFailure": "Operation failed, please try again"
-  },
-  "Languages": {
-    "EN": "English",
-    "HU": "Hungarian"
+    "EditTaskList": "Edit Task List",
+    "AddTask": "Add Task",
+    "EditTask": "Edit",
+    "DeleteTask": "Delete",
+    "ToggleCompletion": "Toggle Completion",
+    "Save": "Save",
+    "Cancel": "Cancel",
+    "GoToHomepage": "Go to Homepage",
+    "GoToOverseer": "Go to Overseer",
+    "MyProfile": "My Profile",
+    "Back": "Back"
   },
   "Texts": {
     "Pages": {
-      "Entry": {
-        "Title": "Welcome to our application",
-        "Subtitle": "To do, or not to do"
-      },
       "Homepage": {
-        "Title": "Homepage",
+        "Title": "Your To-Do Dashboard",
         "YourTaskLists": "Your Task Lists"
       },
       "Overseer": {
-        "DailyMotivationals": "Daily Motivationals",
+        "Title": "Overseer Dashboard",
         "UserManagement": "User Management"
+      },
+      "Entry": {
+        "Welcome": "Welcome to our Application!",
+        "Title": "To-Do, or not To-Do"
+      },
+      "Profile": {
+        "Title": "My Profile",
+        "DeleteAccount": "Delete My Account"
       }
     },
-    "Components": {
-      "AuthForm": {
-        "Email": "E-mail",
-        "Password": "Password",
-        "Username": "Username",
-        "RegisterHeader": "Register",
-        "LogInHeader": "Log In",
-        "Confirm": "Confirm"
-      },
-      "Task": {
-        "TaskCompleted": "Task Completed",
-        "Title": "Title",
-        "Description": "Description",
-        "Priority": "Priority",
-        "High": "High",
-        "Medium": "Medium",
-        "Low": "Low",
-        "DueDate": "Due Date",
-        "CreationDate": "Creation Date",
-        "UpdatedAt": "Updated at"
-      },
-      "TaskList": {
-        "Description": "Description",
-        "Color": "Color"
-      },
-      "ConfirmDelete": {
-        "Title": "Confirm Delete",
-        "Message": "Are you sure you want to delete this?"
-      }
+    "Messages": {
+      "TaskDueToday": "You have task(s) due today!",
+      "TaskExpired": "You have expired task(s)!"
     }
   },
-  "Placeholders": {
-    "SearchTasks": "Search tasks...",
-    "EnterTitle": "Enter a title...",
-    "EnterDescription": "Enter a description...",
-    "EnterEmail": "Enter your email...",
-    "EnterPassword": "Enter your password...",
-    "EnterUsername": "Enter your username..."
-  },
-  "Errors": {
-    "RequiredField": "This field is required",
-    "InvalidEmail": "Invalid email address",
-    "PasswordTooShort": "Password must be at least 6 characters",
-    "UsernameTooShort": "Username must be at least 3 characters",
-    "PasswordsMustMatch": "Passwords must match"
-  },
-  "Messages": {
-    "NoTasksFound": "No tasks found",
-    "NoTaskLists": "No task lists available",
-    "NoUsersFound": "No users found",
-    "ConfirmLogout": "Are you sure you want to log out?",
-    "TaskDueToday": "Task due today!",
-    "TaskOverdue": "Task is overdue!"
+  "Snackbars": {
+    "RegistrationSuccess": "Registration successful, please check your email :D",
+    "RegistrationFailEmailUsed": "The email is already in use. Please choose another one.",
+    "RegistrationFailUsernameUsed": "The username is already taken. Please choose another.",
+    "RegistrationMismatch": "Passwords do not match.",
+    "LoginSuccess": "Login successful!",
+    "LoginFail": "Login failed. Check your credentials.",
+    "ProfileUpdateSuccess": "Profile updated successfully",
+    "ProfileUpdateFail": "Profile update failed",
+    "DeleteAccountSuccess": "Account deleted successfully",
+    "DeleteAccountFail": "Failed to delete account.",
+    "UserDeleteFail": "Could not delete user.",
+    "UserToggleFail": "Could not toggle admin state."
   }
 }

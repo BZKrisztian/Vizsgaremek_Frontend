@@ -1,5 +1,5 @@
 <div class="profile-container">
-  <h2>My Profile</h2>
+  <h2>{{ 'Texts.Pages.Profile.Title' | translate }}</h2>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <label>Username:</label>
     <input formControlName="userName" type="text" />
@@ -26,7 +26,7 @@
 
     <hr>
     <button type="button" (click)="onClickDeleteAccount()" class="delete-account-button">
-      Delete My Account
+      {{ 'Texts.Pages.Profile.DeleteAccount' | translate }}
     </button>
 
   </form>

@@ -1,0 +1,44 @@
+.inspect-dialog-container {
+    max-width: 600px;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .inspect-tasklist {
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+  }
+  
+  .list-desc {
+    font-style: italic;
+    margin-top: -0.5rem;
+    margin-bottom: 0.75rem;
+    color: #555;
+  }
+  
+  .inspect-task {
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border-left: 3px solid #aaa;
+    margin-bottom: 0.5rem;
+  }
+  
+  .task-title {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+  }
+  
+  .task-desc {
+    margin-left: 0.5rem;
+    color: #333;
+  }
+  
+  .task-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.25rem;
+  }
+  

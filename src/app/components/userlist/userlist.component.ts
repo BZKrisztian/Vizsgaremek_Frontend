@@ -4,6 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { InspectUserDialogComponent } from '../dialog-comps/inspectuserdialog/inspectuserdialog.component';
 
 @Component({
   selector: 'app-userlist',
@@ -23,7 +25,7 @@ export class UserlistComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   usersLoaded: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadAdmins();
@@ -125,6 +127,12 @@ export class UserlistComponent implements OnInit, OnDestroy {
           this.errorMessage = err.error?.message || "Could not toggle admin state.";
         }
       });
+  }
+
+  inspectUser(userId: number): void {
+    this.dialog.open(InspectUserDialogComponent, {
+      data: { userId }
+    });
   }
 
 

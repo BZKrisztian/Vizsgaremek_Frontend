@@ -64,38 +64,50 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.registrationForm.valid) {
-      const newUser: User = {
-        user_Id: 0,
-        userName: this.registrationForm.value.username,
-        email: this.registrationForm.value.email,
-        password: this.registrationForm.value.password,
-        acc_CR_D: new Date(),
-        acc_UP_D: new Date(),
-        isAdmin: false,
-        isEmailVerified: false
-      };
-      this.authservice.register(newUser)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.snackBar.open('Registration successful, please check your email :D', 'Close', { duration: 3000 });
-            this.registrationForm.reset();
-            setTimeout(() => {
-              this.router.navigate(['/entry']);
-            });
-          },
-          error: (err) => {
-            let message = 'Registration failed';
-            if (err.error?.message === 'Email already in use') {
-              message = 'The email is already in use. Please choose another one.';
-            } else if (err.error?.message === 'Username is already in use') {
-              message = 'The username is already taken. Please choose another.';
-            }
-            this.snackBar.open(message, 'Close', { duration: 3000 });
-          }
-        });
+    if (this.registrationForm.invalid) {
+      if (this.registrationForm.errors?.['mismatch']) {
+        this.snackBar.open('Passwords do not match.', 'Close', { duration: 3000 });
+      } else {
+        this.snackBar.open('Please complete the form correctly.', 'Close', { duration: 3000 });
+      }
+      return;
     }
+  
+    const newUser: User = {
+      user_Id: 0,
+      userName: this.registrationForm.value.username,
+      email: this.registrationForm.value.email,
+      password: this.registrationForm.value.password,
+      acc_CR_D: new Date(),
+      acc_UP_D: new Date(),
+      isAdmin: false,
+      isEmailVerified: false
+    };
+  
+    this.authservice.register(newUser)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.snackBar.open('Registration successful, please check your email :D', 'Close', { duration: 3000 });
+          this.registrationForm.reset();
+          setTimeout(() => this.router.navigate(['/entry']));
+        },
+        error: (err) => {
+          let message = 'Registration failed';
+          const backendMsg = err.error?.message;
+  
+          if (backendMsg === 'Email already in use') {
+            message = 'The email is already in use. Please choose another one.';
+          } else if (backendMsg === 'Username is already in use') {
+            message = 'The username is already taken. Please choose another.';
+          } else if (backendMsg === 'Password must be at least 8 characters with one uppercase letter and one number.') {
+            message = backendMsg;
+          }
+  
+          this.snackBar.open(message, 'Close', { duration: 3000 });
+        }
+      });
   }
-
+  
+  
 }

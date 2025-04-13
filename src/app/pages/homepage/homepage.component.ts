@@ -22,7 +22,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   hasTasksDue4Today: boolean = false;
   hasExpiredTasks: boolean = false;
-  showTaskLists: boolean = true;
+  showHomepageContent: boolean = true;
 
   currentUsername: string = '';
 
@@ -33,9 +33,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const savedToggle = localStorage.getItem('showTaskLists');
-    if(savedToggle !== null){
-      this.showTaskLists = savedToggle === 'true';
+    const savedToggle = localStorage.getItem('showHomepageContent');
+    if (savedToggle !== null) {
+      this.showHomepageContent = savedToggle === 'true';
     }
 
     this.check4TasksDueToday();
@@ -57,14 +57,16 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.hasTasksDue4Today = false;
     this.hasExpiredTasks = false;
 
-    this.taskService.getTaskLists()
+    this.taskService
+      .getTaskLists()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(lists => {
-        lists.forEach(list => {
-          this.taskService.getTasks(list.list_Id)
+      .subscribe((lists) => {
+        lists.forEach((list) => {
+          this.taskService
+            .getTasks(list.list_Id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe(tasks => {
-              tasks.forEach(task => {
+            .subscribe((tasks) => {
+              tasks.forEach((task) => {
                 if (task.task_Status === false && task.due_Date) {
                   const dueDate = new Date(task.due_Date);
                   dueDate.setHours(0, 0, 0, 0);
@@ -81,9 +83,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
       });
   }
 
-  toggleTaskListsVisibility():void{
-    this.showTaskLists = !this.showTaskLists;
-    localStorage.setItem('showTaskLists', String(this.showTaskLists));
+  toggleTaskListsVisibility(): void {
+    this.showHomepageContent = !this.showHomepageContent;
+    localStorage.setItem(
+      'showHomepageContent',
+      String(this.showHomepageContent)
+    );
   }
-
 }
