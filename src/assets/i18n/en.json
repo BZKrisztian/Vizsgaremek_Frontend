@@ -2,57 +2,89 @@
   "Buttons": {
     "Register": "Register",
     "Login": "Login",
-    "Logout": "Log Out",
-    "AddTaskList": "Add Task List",
-    "DeleteTaskList": "Delete Task List",
-    "EditTaskList": "Edit Task List",
-    "AddTask": "Add Task",
-    "EditTask": "Edit",
-    "DeleteTask": "Delete",
-    "ToggleCompletion": "Toggle Completion",
+    "LogOut": "Log Out",
+    "Back": "Back",
+    "BackToHomepage": "Back to Homepage",
+    "MyProfile": "My Profile",
+    "LoadRegularUsers": "Load Regular Users",
     "Save": "Save",
     "Cancel": "Cancel",
-    "GoToHomepage": "Go to Homepage",
-    "GoToOverseer": "Go to Overseer",
-    "MyProfile": "My Profile",
-    "Back": "Back"
+    "Delete": "Delete",
+    "Demote": "Demote",
+    "Promote": "Promote",
+    "Inspect": "Inspect",
+    "UpdateProfile": "Update Profile",
+    "DeleteAccount": "Delete Account",
+    "Yes": "Yes",
+    "No": "No",
+    "GoToLogin": "Go To Login"
   },
   "Texts": {
     "Pages": {
-      "Homepage": {
-        "Title": "Your To-Do Dashboard",
-        "YourTaskLists": "Your Task Lists"
-      },
-      "Overseer": {
-        "Title": "Overseer Dashboard",
-        "UserManagement": "User Management"
-      },
       "Entry": {
         "Welcome": "Welcome to our Application!",
         "Title": "To-Do, or not To-Do"
       },
+      "LogIn": {
+        "EmailLabel": "Email",
+        "PasswordLabel": "Password"
+      },
+      "Register": {
+        "UsernameLabel": "Username",
+        "EmailLabel": "Email",
+        "PasswordLabel": "Password",
+        "ConfirmPasswordLabel": "Confirm Password"
+      },
       "Profile": {
-        "Title": "My Profile",
-        "DeleteAccount": "Delete My Account"
+      },
+      "Overseer": {
+        "Title": "User Management",
+        "AdminList": "Admin List",
+        "UserList": "User List"
+      },
+      "VerifyEmail": {
+        "Success": "Email verified successfully",
+        "Failure": "Token not found"
+      },
+      "Homepage": {
+        "YourTaskLists": "Your Task Lists",
+        "TaskDueToday": "You have tasks due today.",
+        "TaskExpired": "You have overdue tasks."
       }
     },
-    "Messages": {
-      "TaskDueToday": "You have task(s) due today!",
-      "TaskExpired": "You have expired task(s)!"
+    "Components": {
+      "TaskItem": {
+        "Priority": "Priority",
+        "DueDate": "Due Date",
+        "CreationDate": "Created",
+        "UpdatedAt": "Updated",
+        "ToggleCompletion": "Toggle Completion"
+      },
+      "TaskList": {
+        "AddTask": "Add Task",
+        "EditTaskList": "Edit Task List",
+        "DeleteTaskList": "Delete Task List",
+        "SearchTasks": "Search Tasks"
+      },
+      "Userlist": {
+        "SearchUsers": "Search by username or email"
+      }
     }
   },
   "Snackbars": {
-    "RegistrationSuccess": "Registration successful, please check your email :D",
-    "RegistrationFailEmailUsed": "The email is already in use. Please choose another one.",
-    "RegistrationFailUsernameUsed": "The username is already taken. Please choose another.",
-    "RegistrationMismatch": "Passwords do not match.",
-    "LoginSuccess": "Login successful!",
-    "LoginFail": "Login failed. Check your credentials.",
-    "ProfileUpdateSuccess": "Profile updated successfully",
-    "ProfileUpdateFail": "Profile update failed",
-    "DeleteAccountSuccess": "Account deleted successfully",
-    "DeleteAccountFail": "Failed to delete account.",
-    "UserDeleteFail": "Could not delete user.",
-    "UserToggleFail": "Could not toggle admin state."
+  },
+  "Placeholders": {
+    "EmailExample": "e.g.: user@example.com",
+    "RepeatPassword": "Repeat password",
+    "UsernameHint": "Min 6 characters",
+    "PasswordHint": "Min 8 chars, 1 uppercase, 1 number"
+  },
+  "Errors": {
+    "EmailInvalid": "Please enter a valid email.",
+    "PasswordRequired": "Password is required."
+  },
+  "Languages": {
+    "EN": "EN",
+    "HU": "HU"
   }
 }

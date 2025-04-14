@@ -51,7 +51,7 @@
           <th>Email</th>
           <th>Creation Date</th>
           <th>Last Updated</th>
-          <th *ngIf="isRootAdmin()">Actions</th>
+          <th *ngIf="isRootAdmin() || isAdmin()">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -61,11 +61,11 @@
           <td>{{ user.email }}</td>
           <td>{{ user.acc_CR_D | date:'short' }}</td>
           <td>{{ user.acc_UP_D | date:'short' }}</td>
-          <td *ngIf="isRootAdmin()">
+          <td *ngIf="isRootAdmin() || isAdmin()">
             <div class="action-buttons">
-              <button (click)="deleteUser(user.user_Id)">Delete</button>
-              <button (click)="toggleAdminState(user.user_Id)">Promote</button>
-              <button (click)="inspectUser(user.user_Id)">Inspect</button>
+              <button *ngIf="isRootAdmin()" (click)="deleteUser(user.user_Id)">Delete</button>
+              <button *ngIf="isRootAdmin()" (click)="toggleAdminState(user.user_Id)">Promote</button>
+              <button *ngIf="isAdmin()" (click)="inspectUser(user.user_Id)">Inspect</button>
             </div>
           </td>
         </tr>

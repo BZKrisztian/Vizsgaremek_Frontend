@@ -10,6 +10,17 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+    const savedWallpaper = localStorage.getItem('selectedWallpaper');
+    if(savedWallpaper){
+    document.body.style.backgroundImage = `url('assets/images/${savedWallpaper}')`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
+    }
+  </script>
+  <!-- this script is here to load the wallpaper before Angular renders the root component,
+   avoiding an accidental flash of the original wallpaper that occurs if the user refreshes the page -->
 </head>
 <body>
   <app-root></app-root>

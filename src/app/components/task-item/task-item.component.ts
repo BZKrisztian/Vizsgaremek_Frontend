@@ -38,6 +38,16 @@ export class TaskItemComponent {
     this.updatedTask.emit(this.task);
   }
 
+  get isExpired(): boolean {
+    if (!this.task.due_Date || this.task.task_Status) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const due = new Date(this.task.due_Date);
+    due.setHours(0, 0, 0, 0);
+    return due < today;
+  }
+  
+
   edit():void{
     this.editTask.emit(this.task);
   }

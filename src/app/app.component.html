@@ -10,7 +10,7 @@
 
     <!-- Wallpaper Switcher -->
     <div *ngIf="LogInCheck()" class="wallpaper-selector">
-      <select [value]="selectedWallpaper" (change)="handleWallpaperChange($event)">
+      <select [(ngModel)]="selectedWallpaper" (change)="handleWallpaperChange($event)">
         <option *ngFor="let wp of wallpapers" [value]="wp.file">{{ wp.name }}</option>
       </select>
     </div>

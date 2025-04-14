@@ -91,7 +91,9 @@ export class AppComponent {
 
   logoutFromSite(): void {
     this.authService.logout();
-    this.router.navigate(['/entry']);
+    this.router.navigate(['/entry']).then(
+      ()=>{location.reload()}
+    );
   }
 
   goBack(): void {

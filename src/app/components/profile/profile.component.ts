@@ -22,8 +22,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  profileForm!: FormGroup
-  userId: number = 0
+  profileForm!: FormGroup;
+  userId: number = 0;
 
   constructor(
     private FormB: FormBuilder,
@@ -31,28 +31,30 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private http: HttpClient,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
-    const user = this.authService.getCurrentUser()
-    if(!user)
-      return
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
 
-    this.userId = user.user_Id
+    this.userId = user.user_Id;
 
     this.profileForm = this.FormB.group({
       userName: [user.userName, [Validators.required, Validators.minLength(6)]],
       email: [user.email, [Validators.required, Validators.email]],
-      password: [''],
+      password: ['', [
+        Validators.minLength(8),
+        Validators.pattern('^(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$')
+      ]],
       confirmPassword: ['']
-    }, {validators: this.passwordsMustMatch})
+    }, { validators: this.passwordsMustMatch });
   }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  
   passwordsMustMatch(group: FormGroup) {
     const passW = group.get('password')?.value;
     const confPassW = group.get('confirmPassword')?.value;
@@ -62,9 +64,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.profileForm.invalid) return;
-  
+
     const { userName, email, password } = this.profileForm.value;
-  
+
     this.authService.updateSelf({ userName, email, password })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -75,7 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         error: (err) => {
           let message = 'Profile update failed';
           const backendMsg = err.error?.message;
-  
+
           if (backendMsg === 'Username already in use') {
             message = 'The username is already taken. Please choose another.';
           } else if (backendMsg === 'Email already in use') {
@@ -83,12 +85,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
           } else if (backendMsg === 'New password must differ from the old one') {
             message = 'New password must be different from the current one.';
           }
-  
+
           this.snackBar.open(message, 'Close', { duration: 3000 });
         }
       });
   }
-  
 
   onClickDeleteAccount(): void {
     if (!confirm("Are you sure you want to delete your account?")) return;
@@ -109,6 +110,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
       });
   }
-
 
 }

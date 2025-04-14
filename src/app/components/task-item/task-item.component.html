@@ -1,10 +1,13 @@
-<div class="task-item" [style.background]="task.color || 'transparent'"
-  [ngClass]="{
-    'completed': task.task_Status,
-    'priority-high': task.task_Priority === 'high',
-    'priority-medium': task.task_Priority === 'medium',
-    'priority-low': task.task_Priority === 'low'
-  }">
+<div
+  class="task-item"
+  [class.completed]="task.task_Status"
+  [class.priority-high]="task.task_Priority === 'high'"
+  [class.priority-medium]="task.task_Priority === 'medium'"
+  [class.priority-low]="task.task_Priority === 'low'"
+  [class.expired]="isExpired"
+  [style.background]="task.color || 'transparent'"
+>
+
   
   <h4 [class.task-completed]="task.task_Status">{{ task.task_Title }}</h4>
   <p *ngIf="task.task_Description">{{ task.task_Description }}</p>
