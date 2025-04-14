@@ -1,8 +1,8 @@
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
-  <h1>Register</h1>
+  <h1>{{ 'Buttons.Register' | translate }}</h1>
 
   <div class="form-field">
-    <label for="registration-username">Username</label>
+    <label for="registration-username">{{ 'Texts.Pages.Register.UsernameLabel' | translate }}</label>
     <input id="registration-username"
            formControlName="username"
            type="text"
@@ -21,7 +21,7 @@
   </div>
   
   <div class="form-field">
-    <label for="registration-password">Password</label>
+    <label for="registration-password">{{ 'Texts.Pages.Register.PasswordLabel' | translate }}</label>
     <input id="registration-password"
            formControlName="password"
            type="password"
@@ -30,7 +30,7 @@
   </div>
   
   <div class="form-field">
-    <label for="registration-confirmPassword">Confirm Password</label>
+    <label for="registration-confirmPassword">{{ 'Texts.Pages.Register.ConfirmPasswordLabel' | translate }}</label>
     <input id="registration-confirmPassword"
            formControlName="confirmPassword"
            type="password"
@@ -39,5 +39,5 @@
   </div>
   
 
-  <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+  <button type="submit" [disabled]="registrationForm.invalid">{{ 'Buttons.Register' | translate }}</button>
 </form>

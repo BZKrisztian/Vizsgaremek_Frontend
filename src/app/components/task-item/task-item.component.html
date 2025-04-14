@@ -11,13 +11,13 @@
   
   <h4 [class.task-completed]="task.task_Status">{{ task.task_Title }}</h4>
   <p *ngIf="task.task_Description">{{ task.task_Description }}</p>
-  <p>{{ 'Texts.Components.Task.Priority' | translate }}: {{ task.task_Priority }}</p>
+  <p>{{ 'Texts.Components.TaskItem.Priority' | translate }}: {{ task.task_Priority }}</p>
   <p *ngIf="task.due_Date">
-    {{ 'Texts.Components.Task.DueDate' | translate }}: {{ task.due_Date | date: 'dd/MM/yyyy' }}
+    {{ 'Texts.Components.TaskItem.DueDate' | translate }}: {{ task.due_Date | date: 'dd/MM/yyyy' }}
   </p>
   <div *ngIf="showDates" class="metadata-fields">
-    <p>{{ 'Texts.Components.Task.CreationDate' | translate }}: {{ task.creation_Date | date: 'short' }}</p>
-    <p>{{ 'Texts.Components.Task.UpdatedAt' | translate }}: {{ task.update_Date | date: 'short' }}</p>
+    <p>{{ 'Texts.Components.TaskItem.CreationDate' | translate }}: {{ task.creation_Date | date: 'short' }}</p>
+    <p>{{ 'Texts.Components.TaskItem.UpdatedAt' | translate }}: {{ task.update_Date | date: 'short' }}</p>
   </div>
 
   
@@ -26,7 +26,7 @@
     <button (click)="toggleViewDate()" class="material-icons" [title]="showDates ? 'HideDates' : 'ShowDates'">
       {{ showDates ? 'visibility_off' : 'visibility' }}
     </button>
-    <button (click)="completionToggle()" [title]="'Buttons.ToggleCompletion' | translate">
+    <button (click)="completionToggle()" [title]="'Texts.Components.TaskItem.ToggleCompletion' | translate">
       <span class="material-icons">check_circle</span>
     </button>
     <button (click)="edit()" [title]="'Buttons.EditTask' | translate" [disabled]="task.task_Status">

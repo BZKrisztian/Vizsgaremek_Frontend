@@ -4,13 +4,14 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { subscribeOn } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-verify-email',
   templateUrl: './verify-email.component.html',
   styleUrls: ['./verify-email.component.css'],
   imports:[
-    CommonModule, RouterModule
+    CommonModule, RouterModule, TranslateModule
   ]
 })
 export class VerifyEmailComponent implements OnInit {

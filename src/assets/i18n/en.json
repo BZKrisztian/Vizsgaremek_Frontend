@@ -5,6 +5,8 @@
     "LogOut": "Log Out",
     "Back": "Back",
     "BackToHomepage": "Back to Homepage",
+    "GoToOverseer": "Go to Overseer",
+    "GoToHomepage": "Go to Homepage",
     "MyProfile": "My Profile",
     "LoadRegularUsers": "Load Regular Users",
     "Save": "Save",
@@ -17,7 +19,14 @@
     "DeleteAccount": "Delete Account",
     "Yes": "Yes",
     "No": "No",
-    "GoToLogin": "Go To Login"
+    "GoToLogin": "Go To Login",
+    "EditTask": "Edit Task",
+    "AddTask": "Add Task",
+    "DeleteTask": "Delete Task",
+    "ToggleCompletion": "Toggle Completion",
+    "AddTaskList": "Add Task List",
+    "DeleteTaskList": "Delete Task List",
+    "EditTaskList": "Edit Task List"
   },
   "Texts": {
     "Pages": {
@@ -36,9 +45,11 @@
         "ConfirmPasswordLabel": "Confirm Password"
       },
       "Profile": {
+        "ProfileTitle": "Profile"
       },
       "Overseer": {
-        "Title": "User Management",
+        "Title": "Overseer Panel",
+        "UserManagement": "User Management",
         "AdminList": "Admin List",
         "UserList": "User List"
       },
@@ -48,31 +59,48 @@
       },
       "Homepage": {
         "YourTaskLists": "Your Task Lists",
+        "Greeting": "Welcome, ",
         "TaskDueToday": "You have tasks due today.",
-        "TaskExpired": "You have overdue tasks."
+        "TaskExpired": "You have overdue tasks.",
+        "HideLists": "Hide Task Lists",
+        "ShowLists": "Show Task Lists"
       }
     },
     "Components": {
       "TaskItem": {
+        "Title": "Title",
+        "Description": "Description",
+        "CharactersLeft": "{{count}} characters left",
         "Priority": "Priority",
         "DueDate": "Due Date",
         "CreationDate": "Created",
         "UpdatedAt": "Updated",
-        "ToggleCompletion": "Toggle Completion"
+        "ToggleCompletion": "Toggle Completion",
+        "Low": "Low",
+        "Medium": "Medium",
+        "High": "High",
+        "Color": "Color"
       },
       "TaskList": {
-        "AddTask": "Add Task",
-        "EditTaskList": "Edit Task List",
-        "DeleteTaskList": "Delete Task List",
-        "SearchTasks": "Search Tasks"
+        "AddTitle": "Add Task List",
+        "EditTitle": "Edit Task List",
+        "TitleLabel": "Title",
+        "DescriptionLabel": "Description"
       },
       "Userlist": {
-        "SearchUsers": "Search by username or email"
+        "SearchUsers": "Search users",
+        "Table": {
+          "ID": "ID",
+          "Username": "Username",
+          "Email": "Email",
+          "CreationDate": "Creation Date",
+          "UpdatedAt": "Last Updated",
+          "Actions": "Actions"
+        }
       }
     }
   },
-  "Snackbars": {
-  },
+  "Snackbars": {},
   "Placeholders": {
     "EmailExample": "e.g.: user@example.com",
     "RepeatPassword": "Repeat password",
@@ -81,7 +109,10 @@
   },
   "Errors": {
     "EmailInvalid": "Please enter a valid email.",
-    "PasswordRequired": "Password is required."
+    "PasswordRequired": "Password is required.",
+    "PasswordMismatch": "Passwords do not match.",
+    "LoadUsers": "Could not load users.",
+    "LoadAdmins": "Could not load admins."
   },
   "Languages": {
     "EN": "EN",

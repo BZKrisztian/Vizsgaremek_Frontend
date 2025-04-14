@@ -6,13 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { InspectUserDialogComponent } from '../dialog-comps/inspectuserdialog/inspectuserdialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-userlist',
   templateUrl: './userlist.component.html',
   styleUrls: ['./userlist.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, TranslateModule]
 })
 export class UserlistComponent implements OnInit, OnDestroy {
 

@@ -2,57 +2,120 @@
   "Buttons": {
     "Register": "Regisztráció",
     "Login": "Bejelentkezés",
-    "Logout": "Kijelentkezés",
-    "AddTaskList": "Lista hozzáadása",
-    "DeleteTaskList": "Lista törlése",
-    "EditTaskList": "Lista szerkesztése",
-    "AddTask": "Feladat hozzáadása",
-    "EditTask": "Szerkesztés",
-    "DeleteTask": "Törlés",
-    "ToggleCompletion": "Befejezés váltása",
+    "LogOut": "Kijelentkezés",
+    "Back": "Vissza",
+    "BackToHomepage": "Vissza a főoldalra",
+    "GoToOverseer": "Tovább az Admin Panelre",
+    "GoToHomepage": "Tovább a főoldalra",
+    "MyProfile": "Profilom",
+    "LoadRegularUsers": "Normál felhasználók betöltése",
     "Save": "Mentés",
     "Cancel": "Mégse",
-    "GoToHomepage": "Vissza a főoldalra",
-    "GoToOverseer": "Felügyelő oldalra",
-    "MyProfile": "Profilom",
-    "Back": "Vissza"
+    "Delete": "Törlés",
+    "Demote": "Lefokozás",
+    "Promote": "Előléptetés",
+    "Inspect": "Megtekintés",
+    "UpdateProfile": "Profil frissítése",
+    "DeleteAccount": "Fiók törlése",
+    "Yes": "Igen",
+    "No": "Nem",
+    "GoToLogin": "Tovább a bejelentkezéshez",
+    "EditTask": "Feladat szerkesztése",
+    "AddTask": "Feladat hozzáadása",
+    "DeleteTask": "Feladat törlése",
+    "ToggleCompletion": "Befejezettség váltása",
+    "AddTaskList": "Feladatlista hozzáadása",
+    "DeleteTaskList": "Feladatlista törlése",
+    "EditTaskList": "Feladatlista szerkesztése"
   },
   "Texts": {
     "Pages": {
-      "Homepage": {
-        "Title": "A Te Teendőid Központja",
-        "YourTaskLists": "Feladatlistáid"
-      },
-      "Overseer": {
-        "Title": "Felügyelő Vezérlőpult",
-        "UserManagement": "Felhasználókezelés"
-      },
       "Entry": {
-        "Welcome": "Üdvözlünk az alkalmazásban!",
+        "Welcome": "Üdvözöljük alkalmazásunkban!",
         "Title": "Teendő vagy nem teendő"
       },
+      "LogIn": {
+        "EmailLabel": "Email",
+        "PasswordLabel": "Jelszó"
+      },
+      "Register": {
+        "UsernameLabel": "Felhasználónév",
+        "EmailLabel": "Email",
+        "PasswordLabel": "Jelszó",
+        "ConfirmPasswordLabel": "Jelszó megerősítése"
+      },
       "Profile": {
-        "Title": "Profilom",
-        "DeleteAccount": "Fiók törlése"
+        "ProfileTitle": "Profil"
+      },
+      "Overseer": {
+        "Title": "Admin Panel",
+        "UserManagement": "Felhasználókezelés",
+        "AdminList": "Admin lista",
+        "UserList": "Felhasználó lista"
+      },
+      "VerifyEmail": {
+        "Success": "Email sikeresen megerősítve",
+        "Failure": "Token nem található"
+      },
+      "Homepage": {
+        "YourTaskLists": "Feladatlistáid",
+        "Greeting": "Üdvözlünk, ",
+        "TaskDueToday": "Ma esedékes feladataid vannak.",
+        "TaskExpired": "Lejárt feladataid vannak.",
+        "HideLists": "Feladatlisták elrejtése",
+        "ShowLists": "Feladatlisták megjelenítése"
       }
     },
-    "Messages": {
-      "TaskDueToday": "Ma esedékes feladatod van!",
-      "TaskExpired": "Lejárt feladatod van!"
+    "Components": {
+      "TaskItem": {
+        "Title": "Cím",
+        "Description": "Leírás",
+        "CharactersLeft": "{{count}} karakter maradt",
+        "Priority": "Prioritás",
+        "DueDate": "Határidő",
+        "CreationDate": "Létrehozva",
+        "UpdatedAt": "Frissítve",
+        "ToggleCompletion": "Befejezettség váltása",
+        "Low": "Alacsony",
+        "Medium": "Közepes",
+        "High": "Magas",
+        "Color": "Szín"
+      },
+      "TaskList": {
+        "AddTitle": "Feladatlista hozzáadása",
+        "EditTitle": "Feladatlista szerkesztése",
+        "TitleLabel": "Cím",
+        "DescriptionLabel": "Leírás"
+      },
+      "Userlist": {
+        "SearchUsers": "Felhasználók keresése",
+        "Table": {
+          "ID": "Azonosító",
+          "Username": "Felhasználónév",
+          "Email": "Email",
+          "CreationDate": "Létrehozás dátuma",
+          "UpdatedAt": "Utoljára frissítve",
+          "Actions": "Műveletek"
+        }
+      }
     }
   },
-  "Snackbars": {
-    "RegistrationSuccess": "Sikeres regisztráció, ellenőrizd az emailed :D",
-    "RegistrationFailEmailUsed": "Ez az email már használatban van. Válassz másikat.",
-    "RegistrationFailUsernameUsed": "Ez a felhasználónév már foglalt. Válassz másikat.",
-    "RegistrationMismatch": "A jelszavak nem egyeznek.",
-    "LoginSuccess": "Sikeres bejelentkezés!",
-    "LoginFail": "Sikertelen bejelentkezés. Ellenőrizd az adataidat.",
-    "ProfileUpdateSuccess": "Profil sikeresen frissítve",
-    "ProfileUpdateFail": "Profil frissítése sikertelen",
-    "DeleteAccountSuccess": "Fiók sikeresen törölve",
-    "DeleteAccountFail": "Fiók törlése sikertelen.",
-    "UserDeleteFail": "Nem sikerült törölni a felhasználót.",
-    "UserToggleFail": "Nem sikerült admin állapotot váltani."
+  "Snackbars": {},
+  "Placeholders": {
+    "EmailExample": "pl.: felhasznalo@pelda.hu",
+    "RepeatPassword": "Jelszó ismétlése",
+    "UsernameHint": "Legalább 6 karakter",
+    "PasswordHint": "Legalább 8 karakter, 1 nagybetű, 1 szám"
+  },
+  "Errors": {
+    "EmailInvalid": "Kérjük, érvényes email címet adjon meg.",
+    "PasswordRequired": "A jelszó megadása kötelező.",
+    "PasswordMismatch": "A jelszavak nem egyeznek.",
+    "LoadUsers": "Nem sikerült betölteni a felhasználókat.",
+    "LoadAdmins": "Nem sikerült betölteni az adminokat."
+  },
+  "Languages": {
+    "EN": "EN",
+    "HU": "HU"
   }
 }

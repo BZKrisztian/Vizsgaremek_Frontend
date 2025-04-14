@@ -1,21 +1,21 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-  <h1>Login</h1>
+  <h1>{{ 'Buttons.Login' | translate }}</h1>
 
   <div>
     <label for="login-email">Email</label>
     <input id="login-email" formControlName="email" type="email" />
     <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-      Please enter a valid email.
+      {{ 'Errors.EmailInvalid' | translate }}
     </small>
   </div>
 
   <div>
-    <label for="login-password">Password</label>
+    <label for="login-password">{{ 'Texts.Pages.LogIn.PasswordLabel' | translate }}</label>
     <input id="login-password" formControlName="password" type="password" />
     <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-      Password is required.
+      {{ 'Errors.PasswordRequired' | translate }}
     </small>
   </div>
 
-  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  <button type="submit" [disabled]="loginForm.invalid">{{ 'Buttons.Login' | translate }}</button>
 </form>

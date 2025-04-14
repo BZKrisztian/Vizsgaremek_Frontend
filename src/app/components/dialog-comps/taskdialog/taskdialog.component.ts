@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-taskdialog',
@@ -14,7 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   styleUrls: ['./taskdialog.component.css'],
   imports:[
     CommonModule,ReactiveFormsModule,FormsModule,
-    MatFormFieldModule,MatInputModule,MatDatepickerModule,MatNativeDateModule]
+    MatFormFieldModule,MatInputModule,MatDatepickerModule,MatNativeDateModule, TranslateModule]
 })
 export class TaskdialogComponent implements OnInit {
 

@@ -1,23 +1,23 @@
 <div class="userlist-container">
-  <h3>Search Users</h3>
+  <h3>{{ 'Texts.Components.Userlist.SearchUsers' | translate }}</h3>
   <input
     type="text"
-    placeholder="Search by username or email"
+    [placeholder]="'Texts.Components.Userlist.SearchUsers' | translate"
     [(ngModel)]="searchTerm"
   />
 
   <!-- Admins Table -->
   <div class="admin-users scrollable-table">
-    <h4>Admin List</h4>
-    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    <h4>{{ 'Texts.Pages.Overseer.AdminList' | translate }}</h4>
+    <p *ngIf="errorMessage">{{ 'Errors.LoadAdmins' | translate }}</p>
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Creation Date</th>
-          <th *ngIf="isRootAdmin()">Actions</th>
+          <th>{{ 'Texts.Components.Userlist.Table.ID' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.Username' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.Email' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.CreationDate' | translate }}</th>
+          <th *ngIf="isRootAdmin()">{{ 'Texts.Components.Userlist.Table.Actions' | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +27,9 @@
           <td>{{ user.email }}</td>
           <td>{{ user.acc_CR_D | date:'short' }}</td>
           <td *ngIf="isRootAdmin()">
-            <button (click)="toggleAdminState(user.user_Id)">Demote</button>
+            <button (click)="toggleAdminState(user.user_Id)">
+              {{ 'Buttons.Demote' | translate }}
+            </button>
           </td>
         </tr>
       </tbody>
@@ -36,22 +38,26 @@
 
   <!-- Load Button -->
   <div *ngIf="!usersLoaded" class="load-users-wrapper">
-    <button (click)="loadRegularUsers()">Load Regular Users</button>
+    <button (click)="loadRegularUsers()">
+      {{ 'Buttons.LoadRegularUsers' | translate }}
+    </button>
   </div>
 
   <!-- Regular Users Table -->
   <div class="regular-users scrollable-table" *ngIf="usersLoaded">
-    <h4>User List</h4>
-    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    <h4>{{ 'Texts.Pages.Overseer.UserList' | translate }}</h4>
+    <p *ngIf="errorMessage">{{ 'Errors.LoadUsers' | translate }}</p>
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Creation Date</th>
-          <th>Last Updated</th>
-          <th *ngIf="isRootAdmin() || isAdmin()">Actions</th>
+          <th>{{ 'Texts.Components.Userlist.Table.ID' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.Username' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.Email' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.CreationDate' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.UpdatedAt' | translate }}</th>
+          <th *ngIf="isRootAdmin() || isAdmin()">
+            {{ 'Texts.Components.Userlist.Table.Actions' | translate }}
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -63,9 +69,15 @@
           <td>{{ user.acc_UP_D | date:'short' }}</td>
           <td *ngIf="isRootAdmin() || isAdmin()">
             <div class="action-buttons">
-              <button *ngIf="isRootAdmin()" (click)="deleteUser(user.user_Id)">Delete</button>
-              <button *ngIf="isRootAdmin()" (click)="toggleAdminState(user.user_Id)">Promote</button>
-              <button *ngIf="isAdmin()" (click)="inspectUser(user.user_Id)">Inspect</button>
+              <button *ngIf="isRootAdmin()" (click)="deleteUser(user.user_Id)">
+                {{ 'Buttons.Delete' | translate }}
+              </button>
+              <button *ngIf="isRootAdmin()" (click)="toggleAdminState(user.user_Id)">
+                {{ 'Buttons.Promote' | translate }}
+              </button>
+              <button *ngIf="isAdmin()" (click)="inspectUser(user.user_Id)">
+                {{ 'Buttons.Inspect' | translate }}
+              </button>
             </div>
           </td>
         </tr>

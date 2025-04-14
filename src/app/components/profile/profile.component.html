@@ -1,33 +1,34 @@
 <div class="profile-container">
-  <h2>{{ 'Texts.Pages.Profile.Title' | translate }}</h2>
+  <h2>{{ 'Texts.Pages.Profile.ProfileTitle' | translate }}</h2>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <label>Username:</label>
+    <label>{{ 'Texts.Pages.Register.UsernameLabel' | translate }}</label>
     <input formControlName="userName" type="text" />
     <small *ngIf="profileForm.get('userName')?.invalid && profileForm.get('userName')?.touched">
-      Username must be at least 6 characters.
+      {{ 'Placeholders.UsernameHint' | translate }}
     </small>
 
-    <label>Email:</label>
+    <label>{{ 'Texts.Pages.Register.EmailLabel' | translate }}</label>
     <input formControlName="email" type="email" />
     <small *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
-      Please enter a valid email.
+      {{ 'Errors.EmailInvalid' | translate }}
     </small>
 
-    <label>New Password:</label>
+    <label>{{ 'Texts.Pages.Register.PasswordLabel' | translate }}</label>
     <input formControlName="password" type="password" />
 
-    <label>New Password(Confirmation):</label>
+    <label>{{ 'Texts.Pages.Register.ConfirmPasswordLabel' | translate }}</label>
     <input formControlName="confirmPassword" type="password" />
     <small *ngIf="profileForm.errors?.['mismatch']">
-      Passwords do not match.
+      {{ 'Errors.PasswordMismatch' | translate }}
     </small>
 
-    <button type="submit" [disabled]="profileForm.invalid || !profileForm.dirty">Update Profile</button>
-
-    <hr>
-    <button type="button" (click)="onClickDeleteAccount()" class="delete-account-button">
-      {{ 'Texts.Pages.Profile.DeleteAccount' | translate }}
+    <button type="submit" [disabled]="profileForm.invalid || !profileForm.dirty">
+      {{ 'Buttons.UpdateProfile' | translate }}
     </button>
 
+    <hr />
+    <button type="button" (click)="onClickDeleteAccount()" class="delete-account-button">
+      {{ 'Buttons.DeleteAccount' | translate }}
+    </button>
   </form>
 </div>

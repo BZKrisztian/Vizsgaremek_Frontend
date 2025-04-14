@@ -1,13 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirmdeldialog',
   templateUrl: './confirmdeldialog.component.html',
   styleUrls: ['./confirmdeldialog.component.css'],
   imports: [
-    MatDialogModule]
+    MatDialogModule, TranslateModule]
 })
 export class ConfirmdeldialogComponent implements OnInit {
 

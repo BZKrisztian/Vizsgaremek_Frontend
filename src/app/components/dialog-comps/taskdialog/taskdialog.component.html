@@ -1,20 +1,20 @@
 <div class="taskdialog-container">
   <form (ngSubmit)="onSave()">
-    
-    <label for="taskTitle">Title:</label>
+
+    <label for="taskTitle">{{ 'Texts.Components.TaskItem.Title' | translate }}</label>
     <input id="taskTitle" type="text" [(ngModel)]="localTask.task_Title" name="title" required maxlength="50" />
     <small class="character-count">
-      {{50 - (localTask.task_Title.length || 0)}} characters left
+      {{ 'Texts.Components.TaskItem.CharactersLeft' | translate:{count: 50 - (localTask.task_Title.length || 0)} }}
     </small>
 
-    <label for="taskDesc">Description:</label>
+    <label for="taskDesc">{{ 'Texts.Components.TaskItem.Description' | translate }}</label>
     <textarea id="taskDesc" [(ngModel)]="localTask.task_Description" name="description" maxlength="300"></textarea>
     <small class="character-count">
-      {{300 - (localTask.task_Description?.length || 0)}} characters left
+      {{ 'Texts.Components.TaskItem.CharactersLeft' | translate:{count: 300 - (localTask.task_Description?.length || 0)} }}
     </small>
 
     <mat-form-field appearance="fill">
-      <mat-label>Due Date</mat-label>
+      <mat-label>{{ 'Texts.Components.TaskItem.DueDate' | translate }}</mat-label>
       <input
         matInput
         [matDatepicker]="picker"
@@ -27,19 +27,19 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <label for="priority">Priority:</label>
+    <label for="priority">{{ 'Texts.Components.TaskItem.Priority' | translate }}</label>
     <select id="priority" [(ngModel)]="localTask.task_Priority" name="priority" required>
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
+      <option value="low">{{ 'Texts.Components.TaskItem.Low' | translate }}</option>
+      <option value="medium">{{ 'Texts.Components.TaskItem.Medium' | translate }}</option>
+      <option value="high">{{ 'Texts.Components.TaskItem.High' | translate }}</option>
     </select>
 
     <div class="color-field-wrapper">
-      <label for="color">Color:</label>
+      <label for="color">{{ 'Texts.Components.TaskItem.Color' | translate }}</label>
       <input id="color" type="color" [(ngModel)]="localTask.color" name="color" />
     </div>
 
-    <button type="submit">Save</button>
-    <button type="button" (click)="onCancel()">Cancel</button>
+    <button type="submit">{{ 'Buttons.Save' | translate }}</button>
+    <button type="button" (click)="onCancel()">{{ 'Buttons.Cancel' | translate }}</button>
   </form>
 </div>
