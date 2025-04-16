@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -28,7 +28,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private formBuilderReg: FormBuilder,
     private authservice: AuthService,
     private snackBar: MatSnackBar,
-    private router: Router) {}
+    private router: Router,
+    private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.registrationForm = this.formBuilderReg.group(
@@ -66,9 +67,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.registrationForm.invalid) {
       if (this.registrationForm.errors?.['mismatch']) {
-        this.snackBar.open('Passwords do not match.', 'Close', { duration: 3000 });
+        this.translate.get('Errors.PasswordMismatch').subscribe(msg => {
+          this.snackBar.open(msg, 'Close', { duration: 3000 });
+        });  
       } else {
-        this.snackBar.open('Please complete the form correctly.', 'Close', { duration: 3000 });
+        this.translate.get('Errors.InvalidForm').subscribe(msg => {
+          this.snackBar.open(msg, 'Close', { duration: 3000 });
+        });        
       }
       return;
     }
@@ -88,23 +93,27 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.snackBar.open('Registration successful, please check your email :D', 'Close', { duration: 3000 });
+          this.translate.get('Snackbars.RegistrationSuccess').subscribe(msg => {
+            this.snackBar.open(msg, 'Close', { duration: 3000 });
+          });          
           this.registrationForm.reset();
           setTimeout(() => this.router.navigate(['/entry']));
         },
         error: (err) => {
-          let message = 'Registration failed';
           const backendMsg = err.error?.message;
-  
+          let key = 'Errors.Generic';
+        
           if (backendMsg === 'Email already in use') {
-            message = 'The email is already in use. Please choose another one.';
+            key = 'Errors.EmailInUse';
           } else if (backendMsg === 'Username is already in use') {
-            message = 'The username is already taken. Please choose another.';
+            key = 'Errors.UsernameInUse';
           } else if (backendMsg === 'Password must be at least 8 characters with one uppercase letter and one number.') {
-            message = backendMsg;
+            key = 'Errors.InvalidPassword';
           }
-  
-          this.snackBar.open(message, 'Close', { duration: 3000 });
+        
+          this.translate.get(key).subscribe(msg => {
+            this.snackBar.open(msg, 'Close', { duration: 3000 });
+          });
         }
       });
   }

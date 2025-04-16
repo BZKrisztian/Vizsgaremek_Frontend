@@ -14,11 +14,11 @@ export class AppComponent {
   title = 'frontend';
 
   wallpapers = [
-    { name: 'City', file: 'city.jpg' },
-    {name: 'City - 2', file: 'city2.png'},
-    {name: 'Monastery', file: 'monastery.jpg'},
-    {name: 'Shore', file: 'shore.jpg'},
-    {name: 'Waterfall', file: 'waterfall.jpg'},
+    { nameKey: 'Wallpapers.City', file: 'city.jpg' },
+    { nameKey: 'Wallpapers.City2', file: 'city2.png' },
+    { nameKey: 'Wallpapers.Monastery', file: 'monastery.jpg' },
+    { nameKey: 'Wallpapers.Shore', file: 'shore.jpg' },
+    { nameKey: 'Wallpapers.Waterfall', file: 'waterfall.jpg' }
   ];
   selectedWallpaper: string = 'city.jpg';
 

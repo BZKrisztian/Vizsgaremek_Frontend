@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +30,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -92,14 +93,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onClickDeleteAccount(): void {
-    if (!confirm("Are you sure you want to delete your account?")) return;
-    if (!confirm("This action cannot be undone. Are you sure?")) return;
+    if (!confirm(this.translate.instant('Confirm.DeleteAccountStep1'))) return;
+    if (!confirm(this.translate.instant('Confirm.DeleteAccountStep2'))) return;    
 
     this.authService.harakiri()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.snackBar.open("Account deleted successfully", "Close", { duration: 3000 });
+          this.translate.get('Snackbars.AccountDeleted').subscribe(msg => {
+            this.snackBar.open(msg, 'Close', { duration: 3000 });
+          });          
           this.authService.logout();
           this.router.navigate(['/entry']);
         },

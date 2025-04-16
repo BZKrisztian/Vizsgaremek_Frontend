@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -28,7 +28,8 @@ import { Subject, takeUntil } from 'rxjs';
       private formbuilderLg: FormBuilder,
       private authService: AuthService,
       private router: Router,
-      private snackBar: MatSnackBar
+      private snackBar: MatSnackBar,
+      private translate: TranslateService
     ) {}
   
     ngOnInit(): void {
@@ -44,7 +45,9 @@ import { Subject, takeUntil } from 'rxjs';
   
     onSubmit(): void {
       if (this.loginForm.invalid) {
-        this.snackBar.open('Please fill in your email and password.', 'Close', { duration: 3000 });
+        this.translate.get('Errors.LoginMissingFields').subscribe(msg => {
+          this.snackBar.open(msg, 'Close', { duration: 3000 });
+        });        
         return;
       }
   
@@ -52,7 +55,9 @@ import { Subject, takeUntil } from 'rxjs';
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (res) => {
-            this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+            this.translate.get('Snackbars.LoginSuccess').subscribe(msg => {
+              this.snackBar.open(msg, 'Close', { duration: 3000 });
+            });            
             if (res.user && res.user.isAdmin) {
               this.router.navigate(['/overseer']);
             } else {
@@ -60,8 +65,18 @@ import { Subject, takeUntil } from 'rxjs';
             }
           },
           error: (err) => {
-            const message = err.error?.message || 'Login failed. Check your credentials.';
-            this.snackBar.open(message, 'Close', { duration: 3000 });
+            const fallback = 'Snackbars.LoginFailed';
+            let key = fallback;
+            const backendMsg = err.error?.message;
+
+            if (backendMsg === 'Invalid credentials') {
+              key = 'Snackbars.LoginFailed';
+            }
+
+            this.translate.get(key).subscribe(msg => {
+              this.snackBar.open(msg, 'Close', { duration: 3000 });
+            });
+
             this.loginForm.reset();
           }
         });

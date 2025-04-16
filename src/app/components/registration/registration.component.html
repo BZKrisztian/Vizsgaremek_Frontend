@@ -7,7 +7,7 @@
            formControlName="username"
            type="text"
            maxlength="50"
-           placeholder="Min 6 characters"
+           [placeholder]="'Placeholders.UsernameHint' | translate"
     />
   </div>
   
@@ -16,7 +16,7 @@
     <input id="registration-email"
            formControlName="email"
            type="email"
-           placeholder="e.g.: user@example.com"
+           [placeholder]="'Placeholders.EmailExample' | translate"
     />
   </div>
   
@@ -25,7 +25,7 @@
     <input id="registration-password"
            formControlName="password"
            type="password"
-           placeholder="Min 8 chars, 1 uppercase, 1 number"
+           [placeholder]="'Placeholders.PasswordHint' | translate"
     />
   </div>
   
@@ -34,7 +34,7 @@
     <input id="registration-confirmPassword"
            formControlName="confirmPassword"
            type="password"
-           placeholder="Repeat password"
+           [placeholder]="'Placeholders.RepeatPassword' | translate"
     />
   </div>
   

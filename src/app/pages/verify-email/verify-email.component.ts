@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { subscribeOn } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import {TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-verify-email',
@@ -22,18 +22,19 @@ export class VerifyEmailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router) { }
+    private router: Router,
+    private translate: TranslateService) { }
 
   ngOnInit():void{
     const token = this.route.snapshot.queryParamMap.get("token")
     if(token){
       this.http.get(`${environment.apiUrl}/verify-email?token=${token}`).subscribe({
         next: ()=>{
-          this.message = "Email verified successfully"
+          this.translate.get('Texts.Pages.VerifyEmail.Success').subscribe(msg => this.message = msg);
           this.success = true
         },
         error:()=>{
-          this.message = "Email verification failed. Token may be invalid or expired."
+          this.translate.get('Texts.Pages.VerifyEmail.Failure').subscribe(msg => this.message = msg);
         }
       })
     }else{

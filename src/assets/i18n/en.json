@@ -100,19 +100,42 @@
       }
     }
   },
-  "Snackbars": {},
+  "Snackbars": {
+    "RegistrationSuccess": "Registration successful, please check your email :D",
+    "LoginSuccess": "Login successful!",
+    "LoginFailed": "Login failed. Check your credentials.",
+    "AccountDeleted": "Account deleted successfully"
+  },
   "Placeholders": {
     "EmailExample": "e.g.: user@example.com",
     "RepeatPassword": "Repeat password",
     "UsernameHint": "Min 6 characters",
-    "PasswordHint": "Min 8 chars, 1 uppercase, 1 number"
+    "PasswordHint": "Min 8 chars, 1 uppercase, 1 number",
+    "SearchTasks": "Search tasks"
   },
   "Errors": {
     "EmailInvalid": "Please enter a valid email.",
     "PasswordRequired": "Password is required.",
     "PasswordMismatch": "Passwords do not match.",
     "LoadUsers": "Could not load users.",
-    "LoadAdmins": "Could not load admins."
+    "LoadAdmins": "Could not load admins.",
+    "EmailInUse": "The email is already in use. Please choose another one.",
+    "UsernameInUse": "The username is already taken. Please choose another.",
+    "InvalidPassword": "Password must be at least 8 characters with one uppercase letter and one number.",
+    "Generic": "Registration failed.",
+    "InvalidForm": "Please complete the form correctly.",
+    "LoginMissingFields": "Please fill in your email and password."
+  },
+  "Confirm": {
+    "DeleteAccountStep1": "Are you sure you want to delete your account?",
+    "DeleteAccountStep2": "This action cannot be undone. Are you sure?"
+  },
+  "Wallpapers": {
+    "City": "City",
+    "City2": "City - 2",
+    "Monastery": "Monastery",
+    "Shore": "Shore",
+    "Waterfall": "Waterfall"
   },
   "Languages": {
     "EN": "EN",
