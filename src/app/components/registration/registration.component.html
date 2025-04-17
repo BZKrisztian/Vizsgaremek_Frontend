@@ -7,37 +7,33 @@
            formControlName="username"
            type="text"
            maxlength="50"
-           [placeholder]="'Placeholders.UsernameHint' | translate"
-    />
+           [placeholder]="'Placeholders.UsernameHint' | translate" />
   </div>
-  
+
   <div class="form-field">
-    <label for="registration-email">Email</label>
+    <label for="registration-email">{{ 'Texts.Pages.Register.EmailLabel' | translate }}</label>
     <input id="registration-email"
            formControlName="email"
            type="email"
-           [placeholder]="'Placeholders.EmailExample' | translate"
-    />
+           [placeholder]="'Placeholders.EmailExample' | translate" />
   </div>
-  
+
   <div class="form-field">
     <label for="registration-password">{{ 'Texts.Pages.Register.PasswordLabel' | translate }}</label>
     <input id="registration-password"
            formControlName="password"
            type="password"
-           [placeholder]="'Placeholders.PasswordHint' | translate"
-    />
+           [placeholder]="'Placeholders.PasswordHint' | translate" />
   </div>
-  
+
   <div class="form-field">
     <label for="registration-confirmPassword">{{ 'Texts.Pages.Register.ConfirmPasswordLabel' | translate }}</label>
     <input id="registration-confirmPassword"
            formControlName="confirmPassword"
            type="password"
-           [placeholder]="'Placeholders.RepeatPassword' | translate"
-    />
+           [placeholder]="'Placeholders.RepeatPassword' | translate" />
   </div>
-  
 
-  <button type="submit" [disabled]="registrationForm.invalid">{{ 'Buttons.Register' | translate }}</button>
+  <!-- No longer disables submit! -->
+  <button type="submit">{{ 'Buttons.Register' | translate }}</button>
 </form>

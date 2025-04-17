@@ -7,6 +7,7 @@
     "BackToHomepage": "Vissza a főoldalra",
     "GoToOverseer": "Felügyelő oldal",
     "GoToHomepage": "Főoldal",
+    "GoToEntry": "Vissza a főoldalra",
     "MyProfile": "Profilom",
     "LoadRegularUsers": "Felhasználók betöltése",
     "Save": "Mentés",
@@ -25,13 +26,16 @@
     "DeleteTask": "Feladat törlése",
     "ToggleCompletion": "Készültség váltása",
     "AddTaskList": "Lista hozzáadása",
+    "DeleteTitle": "biztosan törölni szeretnéd?",
     "DeleteTaskList": "Lista törlése",
-    "EditTaskList": "Lista szerkesztése"
+    "EditTaskList": "Lista szerkesztése",
+    "HideDates": "Dátumok elrejtése",
+    "ShowDates": "Dátumok mutatása"
   },
   "Texts": {
     "Pages": {
       "Entry": {
-        "Welcome": "Üdvözlünk az alkalmazásban!",
+        "Welcome": "Üdvözlünk a weboldalunkon!",
         "Title": "Teendő vagy nem teendő"
       },
       "LogIn": {
@@ -45,25 +49,28 @@
         "ConfirmPasswordLabel": "Jelszó megerősítése"
       },
       "Profile": {
-        "ProfileTitle": "Profil"
+        "ProfileTitle": "Profil",
+        "EmailLabel": "Email",
+        "PasswordLabel": "Új jelszó",
+        "ConfirmPasswordLabel":"Új jelszó megerősítése"
       },
       "Overseer": {
         "Title": "Felügyelő Panel",
-        "UserManagement": "Felhasználók kezelése",
         "AdminList": "Admin lista",
         "UserList": "Felhasználók listája"
       },
       "VerifyEmail": {
-        "Success": "Email sikeresen megerősítve",
-        "Failure": "Token nem található"
+        "Success": "Email sikeresen megerősítve.",
+        "Failure": "Token nem található.",
+        "Failure_2": "Email megerősítése sikertelen. Token nem található."
       },
       "Homepage": {
-        "YourTaskLists": "Feladataid listája",
+        "YourTaskLists": "Feladatlistáid",
         "Greeting": "Üdv, ",
         "TaskDueToday": "Mai napra van feladatod.",
         "TaskExpired": "Lejárt határidejű feladataid vannak.",
-        "HideLists": "Lista elrejtése",
-        "ShowLists": "Lista megjelenítése"
+        "HideHomepageContent": "Tartalom elrejtése",
+        "ShowHomepageContent": "Tartalom mutatása"
       }
     },
     "Components": {
@@ -75,7 +82,7 @@
         "DueDate": "Határidő",
         "CreationDate": "Létrehozva",
         "UpdatedAt": "Frissítve",
-        "ToggleCompletion": "Készültség váltása",
+        "ToggleCompletion": "Kész",
         "Low": "Alacsony",
         "Medium": "Közepes",
         "High": "Magas",
@@ -88,7 +95,7 @@
         "DescriptionLabel": "Leírás"
       },
       "Userlist": {
-        "SearchUsers": "Felhasználók keresése",
+        "SearchUsers": "Felhasználók keresése név vagy email alapján",
         "Table": {
           "ID": "Azonosító",
           "Username": "Felhasználónév",
@@ -104,13 +111,14 @@
     "RegistrationSuccess": "Sikeres regisztráció, kérjük ellenőrizd az emailed! :D",
     "LoginSuccess": "Sikeres bejelentkezés!",
     "LoginFailed": "Sikertelen bejelentkezés. Ellenőrizd az adataidat.",
-    "AccountDeleted": "A fiók sikeresen törölve"
+    "AccountDeleted": "A fiók sikeresen törölve",
+      "ProfileUpdated": "Profil sikeresen frissítve"
   },
   "Placeholders": {
     "EmailExample": "pl.: user@example.com",
-    "RepeatPassword": "Ismételd meg a jelszót",
+    "RepeatPassword": "Ismételd meg a jelszavad",
     "UsernameHint": "Legalább 6 karakter",
-    "PasswordHint": "Legalább 8 karakter, 1 nagybetű és 1 szám",
+    "PasswordHint": "Leg.: 8 kar., 1 nagybetű, 1 szám",
     "SearchTasks": "Feladat keresése"
   },
   "Errors": {
@@ -119,16 +127,31 @@
     "PasswordMismatch": "A jelszavak nem egyeznek.",
     "LoadUsers": "A felhasználók betöltése sikertelen.",
     "LoadAdmins": "Az adminok betöltése sikertelen.",
+    "RefreshUsers": "A felhasználók frissítése sikertelen.",
+    "DeleteUser": "A felhasználó törlése sikertelen.",
+    "ToggleAdmin": "Nem sikerült módosítani az admin jogosultságot.",
     "EmailInUse": "Ez az email már használatban van.",
     "UsernameInUse": "Ez a felhasználónév már foglalt.",
     "InvalidPassword": "A jelszónak legalább 8 karakter hosszúnak kell lennie, tartalmazzon nagybetűt és számot.",
     "Generic": "Regisztráció sikertelen.",
     "InvalidForm": "Kérjük töltsd ki helyesen az űrlapot.",
-    "LoginMissingFields": "Add meg az email címet és a jelszót."
+    "LoginMissingFields": "Add meg az email címet és a jelszót.",
+    "PasswordMustDiffer": "Az új jelszónak különböznie kell a jelenlegitől.",
+    "CannotSelfToggleAdmin": "Nem módosíthatod a saját admin jogosultságod.",
+    "ProfileUpdateFail": "Profilod frissítése sikertelen.",
+    "NoChangesDetected": "Nem történt módosítás.",
+    "CannotSelfDeleteAdmin": "Admin fiókodat nem lehet saját magad által törölni, vedd fel a kapcsolatot egy Root-Adminnal.",
+    "CannotDeleteRootAdmin": "A root admin fiók nem törölhető.",
+    "OnlyRootCanDelete": "Csak a Root-Admin törölhet felhasználókat."
   },
   "Confirm": {
     "DeleteAccountStep1": "Biztosan törölni szeretnéd a fiókodat?",
-    "DeleteAccountStep2": "Ez a művelet nem vonható vissza. Biztos vagy benne?"
+    "DeleteAccountStep2": "Ez a művelet nem vonható vissza. Biztos vagy benne?",
+    "DeleteUser": "Biztosan törölni szeretnéd ezt a felhasználót?",
+    "PromoteUser": "Biztosan előlépteted ezt a felhasználót adminná?",
+    "DemoteUser": "Biztosan lefokozod ezt a felhasználót?",
+    "DeleteTitle": "Törlés megerősítése",
+    "DeleteTaskList": "Biztosan törölni szeretnéd ezt a feladatlistát?"
   },
   "Wallpapers": {
     "City": "Város",

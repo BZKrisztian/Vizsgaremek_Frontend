@@ -8,14 +8,14 @@
     <input type="text" name="Title" id="listTitle" required maxlength="50"
       [(ngModel)]="localTaskList.list_Title">
       <small class="character-count">
-        {{50 - (localTaskList.list_Title.length || 0)}} characters left
+        {{ 'Texts.Components.TaskItem.CharactersLeft' | translate:{count: 50 - (localTaskList.list_Title.length || 0)} }}
       </small>
 
     <label for="listDescription">{{ 'Texts.Components.TaskList.DescriptionLabel' | translate }}</label>
     <textarea name="Description" id="listDescription" maxlength="200"
       [(ngModel)]="localTaskList.list_Description"></textarea>
       <small class="character-count">
-        {{200 - (localTaskList.list_Description?.length || 0)}} characters left
+        {{ 'Texts.Components.TaskItem.CharactersLeft' | translate:{count: 200 - (localTaskList.list_Description?.length || 0)} }}
       </small>
 
       <div class="color-field-wrapper">

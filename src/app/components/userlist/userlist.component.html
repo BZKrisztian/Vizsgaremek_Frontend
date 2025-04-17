@@ -1,5 +1,4 @@
 <div class="userlist-container">
-  <h3>{{ 'Texts.Components.Userlist.SearchUsers' | translate }}</h3>
   <input
     type="text"
     [placeholder]="'Texts.Components.Userlist.SearchUsers' | translate"
@@ -9,7 +8,7 @@
   <!-- Admins Table -->
   <div class="admin-users scrollable-table">
     <h4>{{ 'Texts.Pages.Overseer.AdminList' | translate }}</h4>
-    <p *ngIf="errorMessage">{{ 'Errors.LoadAdmins' | translate }}</p>
+    <p *ngIf="errorMessage">{{ errorMessage | translate }}</p>
     <table>
       <thead>
         <tr>
@@ -17,6 +16,7 @@
           <th>{{ 'Texts.Components.Userlist.Table.Username' | translate }}</th>
           <th>{{ 'Texts.Components.Userlist.Table.Email' | translate }}</th>
           <th>{{ 'Texts.Components.Userlist.Table.CreationDate' | translate }}</th>
+          <th>{{ 'Texts.Components.Userlist.Table.UpdatedAt' | translate }}</th>
           <th *ngIf="isRootAdmin()">{{ 'Texts.Components.Userlist.Table.Actions' | translate }}</th>
         </tr>
       </thead>
@@ -26,6 +26,7 @@
           <td>{{ user.userName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.acc_CR_D | date:'short' }}</td>
+          <td>{{ user.acc_UP_D | date:'short' }}</td>
           <td *ngIf="isRootAdmin()">
             <button (click)="toggleAdminState(user.user_Id)">
               {{ 'Buttons.Demote' | translate }}
@@ -46,7 +47,6 @@
   <!-- Regular Users Table -->
   <div class="regular-users scrollable-table" *ngIf="usersLoaded">
     <h4>{{ 'Texts.Pages.Overseer.UserList' | translate }}</h4>
-    <p *ngIf="errorMessage">{{ 'Errors.LoadUsers' | translate }}</p>
     <table>
       <thead>
         <tr>

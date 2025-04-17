@@ -11,7 +11,15 @@
   
   <h4 [class.task-completed]="task.task_Status">{{ task.task_Title }}</h4>
   <p *ngIf="task.task_Description">{{ task.task_Description }}</p>
-  <p>{{ 'Texts.Components.TaskItem.Priority' | translate }}: {{ task.task_Priority }}</p>
+  <p>
+    {{ 'Texts.Components.TaskItem.Priority' | translate }} ||
+    <ng-container [ngSwitch]="task.task_Priority">
+      <span *ngSwitchCase="'low'">{{ 'Texts.Components.TaskItem.Low' | translate }}</span>
+      <span *ngSwitchCase="'medium'">{{ 'Texts.Components.TaskItem.Medium' | translate }}</span>
+      <span *ngSwitchCase="'high'">{{ 'Texts.Components.TaskItem.High' | translate }}</span>
+      <span *ngSwitchDefault>{{ task.task_Priority }}</span>
+    </ng-container>
+  </p>
   <p *ngIf="task.due_Date">
     {{ 'Texts.Components.TaskItem.DueDate' | translate }}: {{ task.due_Date | date: 'dd/MM/yyyy' }}
   </p>
@@ -20,10 +28,10 @@
     <p>{{ 'Texts.Components.TaskItem.UpdatedAt' | translate }}: {{ task.update_Date | date: 'short' }}</p>
   </div>
 
-  
+
   
   <div class="task-buttons">
-    <button (click)="toggleViewDate()" class="material-icons" [title]="showDates ? 'HideDates' : 'ShowDates'">
+    <button (click)="toggleViewDate()" class="material-icons" [title]="'Buttons.' + (showDates ? 'HideDates' : 'ShowDates') | translate">
       {{ showDates ? 'visibility_off' : 'visibility' }}
     </button>
     <button (click)="completionToggle()" [title]="'Texts.Components.TaskItem.ToggleCompletion' | translate">

@@ -4,17 +4,11 @@
   <div>
     <label for="login-email">Email</label>
     <input id="login-email" formControlName="email" type="email" />
-    <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-      {{ 'Errors.EmailInvalid' | translate }}
-    </small>
   </div>
 
   <div>
     <label for="login-password">{{ 'Texts.Pages.LogIn.PasswordLabel' | translate }}</label>
     <input id="login-password" formControlName="password" type="password" />
-    <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-      {{ 'Errors.PasswordRequired' | translate }}
-    </small>
   </div>
 
   <button type="submit" [disabled]="loginForm.invalid">{{ 'Buttons.Login' | translate }}</button>

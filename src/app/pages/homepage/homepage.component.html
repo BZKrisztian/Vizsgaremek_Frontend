@@ -1,9 +1,7 @@
 <button
   class="tasklist-toggle"
   (click)="toggleTaskListsVisibility()"
-  title="{{
-    showHomepageContent ? 'Hide homepage content' : 'Show homepage content'
-  }}">
+  [title]="'Texts.Pages.Homepage.' + (showHomepageContent ? 'HideHomepageContent' : 'ShowHomepageContent') | translate">
   <span class="material-icons">
     {{ showHomepageContent ? "visibility" : "visibility_off" }}
   </span>

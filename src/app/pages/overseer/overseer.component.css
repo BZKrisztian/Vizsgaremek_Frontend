@@ -1,4 +1,10 @@
 .overseer-dashboard {
     margin-top: calc(var(--header-height) + 3rem);
+}
 
+.overseer-dashboard h1 {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
 }

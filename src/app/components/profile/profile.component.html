@@ -1,5 +1,6 @@
 <div class="profile-container">
   <h2>{{ 'Texts.Pages.Profile.ProfileTitle' | translate }}</h2>
+
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <label>{{ 'Texts.Pages.Register.UsernameLabel' | translate }}</label>
     <input formControlName="userName" type="text" />
@@ -13,20 +14,21 @@
       {{ 'Errors.EmailInvalid' | translate }}
     </small>
 
-    <label>{{ 'Texts.Pages.Register.PasswordLabel' | translate }}</label>
-    <input formControlName="password" type="password" />
+    <label>{{ 'Texts.Pages.Profile.PasswordLabel' | translate }}</label>
+    <input formControlName="password" type="password" [placeholder]="'Placeholders.PasswordHint' | translate" />
 
-    <label>{{ 'Texts.Pages.Register.ConfirmPasswordLabel' | translate }}</label>
-    <input formControlName="confirmPassword" type="password" />
-    <small *ngIf="profileForm.errors?.['mismatch']">
+    <label>{{ 'Texts.Pages.Profile.ConfirmPasswordLabel' | translate }}</label>
+    <input formControlName="confirmPassword" type="password" [placeholder]="'Placeholders.RepeatPassword' | translate" />
+    <small *ngIf="profileForm.errors?.['mismatch'] && (profileForm.get('password')?.touched || profileForm.get('confirmPassword')?.touched)">
       {{ 'Errors.PasswordMismatch' | translate }}
     </small>
 
-    <button type="submit" [disabled]="profileForm.invalid || !profileForm.dirty">
+    <button type="submit">
       {{ 'Buttons.UpdateProfile' | translate }}
     </button>
 
     <hr />
+
     <button type="button" (click)="onClickDeleteAccount()" class="delete-account-button">
       {{ 'Buttons.DeleteAccount' | translate }}
     </button>

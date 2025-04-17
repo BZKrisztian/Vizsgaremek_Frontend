@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { InspectUserDialogComponent } from '../dialog-comps/inspectuserdialog/inspectuserdialog.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-userlist',
@@ -26,7 +26,11 @@ export class UserlistComponent implements OnInit, OnDestroy {
   errorMessage: string = '';
   usersLoaded: boolean = false;
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {}
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.loadAdmins();
@@ -47,7 +51,6 @@ export class UserlistComponent implements OnInit, OnDestroy {
       current?.email?.trim().toLowerCase() === this.authService.getRootAdminEmail().trim().toLowerCase()
     );
   }
-  
 
   loadAdmins(): void {
     this.authService.getUsers()
@@ -56,8 +59,10 @@ export class UserlistComponent implements OnInit, OnDestroy {
         next: users => {
           this.adminUsers = users.filter(user => user.isAdmin);
         },
-        error: err => {
-          this.errorMessage = "Could not load admins.";
+        error: () => {
+          this.translate.get('Errors.LoadAdmins').subscribe(msg => {
+            this.errorMessage = msg;
+          });
         }
       });
   }
@@ -70,8 +75,10 @@ export class UserlistComponent implements OnInit, OnDestroy {
           this.regularUsers = users.filter(user => !user.isAdmin);
           this.usersLoaded = true;
         },
-        error: err => {
-          this.errorMessage = "Could not load users.";
+        error: () => {
+          this.translate.get('Errors.LoadUsers').subscribe(msg => {
+            this.errorMessage = msg;
+          });
         }
       });
   }
@@ -86,37 +93,40 @@ export class UserlistComponent implements OnInit, OnDestroy {
             this.regularUsers = users.filter(user => !user.isAdmin);
           }
         },
-        error: err => {
-          this.errorMessage = "Could not refresh users.";
+        error: () => {
+          this.translate.get('Errors.RefreshUsers').subscribe(msg => {
+            this.errorMessage = msg;
+          });
         }
       });
   }
 
-
   deleteUser(user_Id: number): void {
-    if (confirm("Are you sure you want to delete this user?")) {
-      this.authService.deleteUser(user_Id)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.regularUsers = this.regularUsers.filter(user => user.user_Id !== user_Id);
-            this.refreshAllUsers();
-          },
-          error: err => {
-            this.errorMessage = "Could not delete user.";
-          }
-        });
-    }
+    const confirmMsg = this.translate.instant('Confirm.DeleteUser');
+    if (!confirm(confirmMsg)) return;
+
+    this.authService.deleteUser(user_Id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.regularUsers = this.regularUsers.filter(user => user.user_Id !== user_Id);
+          this.refreshAllUsers();
+        },
+        error: () => {
+          this.translate.get('Errors.DeleteUser').subscribe(msg => {
+            this.errorMessage = msg;
+          });
+        }
+      });
   }
 
   toggleAdminState(user_Id: number): void {
     const user = [...this.regularUsers, ...this.adminUsers].find(u => u.user_Id === user_Id);
     if (!user) return;
 
-    const action = user.isAdmin ? 'demote' : 'promote';
-    const confirmed = confirm(`Are you sure you want to ${action} this user?`);
-
-    if (!confirmed) return;
+    const actionKey = user.isAdmin ? 'Confirm.DemoteUser' : 'Confirm.PromoteUser';
+    const confirmMsg = this.translate.instant(actionKey);
+    if (!confirm(confirmMsg)) return;
 
     this.authService.toggleAdmin(user_Id)
       .pipe(takeUntil(this.destroy$))
@@ -129,7 +139,16 @@ export class UserlistComponent implements OnInit, OnDestroy {
           }
         },
         error: (err) => {
-          this.errorMessage = err.error?.message || "Could not toggle admin state.";
+          let key = 'Errors.ToggleAdmin';
+          const msg = err.error?.message;
+        
+          if (msg === 'You cannot change your own admin status') {
+            key = 'Errors.CannotSelfToggleAdmin';
+          }
+        
+          this.translate.get(key).subscribe(translated => {
+            this.errorMessage = translated;
+          });
         }
       });
   }
@@ -139,7 +158,6 @@ export class UserlistComponent implements OnInit, OnDestroy {
       data: { userId }
     });
   }
-
 
   filteredAdmins(): User[] {
     return this.adminUsers.filter(user => this.matchesSearchTerm(user));

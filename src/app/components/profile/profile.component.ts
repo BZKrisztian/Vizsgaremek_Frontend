@@ -19,9 +19,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-
   private destroy$ = new Subject<void>();
-
   profileForm!: FormGroup;
   userId: number = 0;
 
@@ -59,42 +57,74 @@ export class ProfileComponent implements OnInit, OnDestroy {
   passwordsMustMatch(group: FormGroup) {
     const passW = group.get('password')?.value;
     const confPassW = group.get('confirmPassword')?.value;
+
     if (!passW && !confPassW) return null;
     return passW === confPassW ? null : { mismatch: true };
   }
 
   onSubmit(): void {
-    if (this.profileForm.invalid) return;
+    const password = this.profileForm.get('password')?.value;
+    const confirm = this.profileForm.get('confirmPassword')?.value;
 
-    const { userName, email, password } = this.profileForm.value;
+    if (this.profileForm.invalid) {
+      if (this.profileForm.errors?.['mismatch'] && (password || confirm)) {
+        this.translate.get('Errors.PasswordMismatch').subscribe(msg => {
+          this.snackBar.open(msg, 'Close', { duration: 3000 });
+        });
+      } else {
+        this.translate.get('Errors.InvalidForm').subscribe(msg => {
+          this.snackBar.open(msg, 'Close', { duration: 3000 });
+        });
+      }
+      return;
+    }
 
-    this.authService.updateSelf({ userName, email, password })
+    const { userName, email } = this.profileForm.value;
+
+    const payload: any = {
+      userName: userName.trim(),
+      email: email.trim()
+    };
+
+    if (password && password.length > 0) {
+      payload.password = password;
+    }
+
+    this.authService.updateSelf(payload)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.snackBar.open('Profile updated successfully', 'Close', { duration: 3000 });
+          this.translate.get('Snackbars.ProfileUpdated').subscribe(msg => {
+            this.snackBar.open(msg, 'Close', { duration: 3000 });
+          });
           this.authService.refreshCurrentUser();
         },
         error: (err) => {
-          let message = 'Profile update failed';
-          const backendMsg = err.error?.message;
+          const backendMsg: string = err.error?.message?.toLowerCase().trim() || '';
+          let key = 'Errors.Generic';
 
-          if (backendMsg === 'Username already in use') {
-            message = 'The username is already taken. Please choose another.';
-          } else if (backendMsg === 'Email already in use') {
-            message = 'The email is already in use. Please choose another one.';
-          } else if (backendMsg === 'New password must differ from the old one') {
-            message = 'New password must be different from the current one.';
+          if (backendMsg.includes('username already in use')) {
+            key = 'Errors.UsernameInUse';
+          } else if (backendMsg.includes('email already in use')) {
+            key = 'Errors.EmailInUse';
+          } else if (backendMsg.includes('new password must differ')) {
+            key = 'Errors.PasswordMustDiffer';
+          } else if (backendMsg.includes('failed to update account')) {
+            key = 'Errors.ProfileUpdateFail';
+          } else if (backendMsg.includes('no changes detected')) {
+            key = 'Errors.NoChangesDetected';
           }
 
-          this.snackBar.open(message, 'Close', { duration: 3000 });
+          this.translate.get(key).subscribe(msg => {
+            this.snackBar.open(msg, 'Close', { duration: 3000 });
+          });
         }
       });
   }
 
   onClickDeleteAccount(): void {
     if (!confirm(this.translate.instant('Confirm.DeleteAccountStep1'))) return;
-    if (!confirm(this.translate.instant('Confirm.DeleteAccountStep2'))) return;    
+    if (!confirm(this.translate.instant('Confirm.DeleteAccountStep2'))) return;
 
     this.authService.harakiri()
       .pipe(takeUntil(this.destroy$))
@@ -102,16 +132,27 @@ export class ProfileComponent implements OnInit, OnDestroy {
         next: () => {
           this.translate.get('Snackbars.AccountDeleted').subscribe(msg => {
             this.snackBar.open(msg, 'Close', { duration: 3000 });
-          });          
+          });
           this.authService.logout();
           this.router.navigate(['/entry']);
         },
         error: (err) => {
-          console.error(err);
-          const message = err.error?.message || "Failed to delete account.";
-          this.snackBar.open(message, "Close", { duration: 3000 });
+          const backendMsg: string = err.error?.message?.toLowerCase().trim() || '';
+          let key = 'Errors.Generic';
+        
+          if (backendMsg.includes('admins cannot delete their own account')) {
+            key = 'Errors.CannotSelfDeleteAdmin';
+          } else if (backendMsg.includes('cannot delete the root admin')) {
+            key = 'Errors.CannotDeleteRootAdmin';
+          } else if (backendMsg.includes('only the root admin can delete users')) {
+            key = 'Errors.OnlyRootCanDelete';
+          }
+        
+          this.translate.get(key).subscribe(msg => {
+            this.snackBar.open(msg, 'Close', { duration: 6000 });
+          });
         }
+        
       });
   }
-
 }

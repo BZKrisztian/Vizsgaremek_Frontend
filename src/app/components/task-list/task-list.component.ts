@@ -12,46 +12,54 @@ import { TasklistdialogComponent } from "../dialog-comps/tasklistdialog/tasklist
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmdeldialogComponent } from '../dialog-comps/confirmdeldialog/confirmdeldialog.component';
 import { SortbypriorityPipe } from '../../pipes/sortbypriority.pipe';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DuedatePipe } from "../../pipes/duedate.pipe";
 import { CompletionstatusPipe } from "../../pipes/completionstatus.pipe";
 import { TaskFilterPipe } from '../../pipes/taskFilter.pipe';
-
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
-  imports: [TaskItemComponent, FormsModule, CommonModule,
-    TaskdialogComponent, TasklistdialogComponent, TranslateModule,
-    SortbypriorityPipe, DuedatePipe, CompletionstatusPipe, TaskFilterPipe],
+  imports: [
+    TaskItemComponent,
+    FormsModule,
+    CommonModule,
+    TaskdialogComponent,
+    TasklistdialogComponent,
+    TranslateModule,
+    SortbypriorityPipe,
+    DuedatePipe,
+    CompletionstatusPipe,
+    TaskFilterPipe
+  ],
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-
   private destroy$ = new Subject<void>();
 
-  searchTerms:{[listId:number]:string}={};
-
+  searchTerms: { [listId: number]: string } = {};
   @Output() taskListGotUpdate = new EventEmitter<void>();
 
   taskLists: TaskList[] = [];
-  tasks: {[taskList_Id: number]:Task[]}={};
+  tasks: { [taskList_Id: number]: Task[] } = {};
 
-  showTaskDialog: boolean = false
-  showTaskListDialog: boolean = false
-  currentEditingTask: Task | null = null
-  currentEditingTaskList: TaskList | null = null
-  currentTaskListId: number | null = null
+  showTaskDialog: boolean = false;
+  showTaskListDialog: boolean = false;
+  currentEditingTask: Task | null = null;
+  currentEditingTaskList: TaskList | null = null;
+  currentTaskListId: number | null = null;
 
   constructor(
     private taskService: TaskService,
     private dialog: MatDialog,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.loadTaskLists();
   }
-  ngOnDestroy():void{
+
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -69,7 +77,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
         });
       });
   }
-  
+
   loadTasks(list_Id: number): void {
     this.taskService.getTasks(list_Id)
       .pipe(takeUntil(this.destroy$))
@@ -77,110 +85,105 @@ export class TaskListComponent implements OnInit, OnDestroy {
         this.tasks[list_Id] = tasks;
       });
   }
-  onTaskToggle(task: Task, list_Id: number):void{
-    this.taskService.updateTask(task).subscribe(()=>{
-      this.loadTasks(list_Id)
-      this.taskListGotUpdate.emit()
-    })
+
+  onTaskToggle(task: Task, list_Id: number): void {
+    this.taskService.updateTask(task).subscribe(() => {
+      this.loadTasks(list_Id);
+      this.taskListGotUpdate.emit();
+    });
   }
 
-  // === Task Modal Methods ===
-  openTaskDialog4Edit(task:Task):void{
-    this.currentEditingTask=task;
-    this.showTaskDialog=true
+  openTaskDialog4Edit(task: Task): void {
+    this.currentEditingTask = task;
+    this.showTaskDialog = true;
   }
-  openTaskDialog4Add(taskList_Id: number):void{
-    this.currentEditingTask=null;
-    this.currentTaskListId=taskList_Id;
-    this.showTaskDialog=true
+
+  openTaskDialog4Add(taskList_Id: number): void {
+    this.currentEditingTask = null;
+    this.currentTaskListId = taskList_Id;
+    this.showTaskDialog = true;
   }
-  onTaskDialogSave(task: Task):void{
-    if(this.currentEditingTask){
-      this.taskService.updateTask(task).subscribe(
-        ()=>{
-          this.loadTasks(task.taskList_Id)
-          this.closeTaskDialog()
-          this.taskListGotUpdate.emit()
-        }
-      )
-    }else if(this.currentTaskListId){
+
+  onTaskDialogSave(task: Task): void {
+    if (this.currentEditingTask) {
+      this.taskService.updateTask(task).subscribe(() => {
+        this.loadTasks(task.taskList_Id);
+        this.closeTaskDialog();
+        this.taskListGotUpdate.emit();
+      });
+    } else if (this.currentTaskListId) {
       task.taskList_Id = this.currentTaskListId;
       task.creation_Date = new Date();
       task.update_Date = new Date();
-      this.taskService.addTask(task).subscribe(
-        ()=>{
-          this.loadTasks(task.taskList_Id)
-          this.closeTaskDialog()
-          this.taskListGotUpdate.emit()
-        }
-      )
+      this.taskService.addTask(task).subscribe(() => {
+        this.loadTasks(task.taskList_Id);
+        this.closeTaskDialog();
+        this.taskListGotUpdate.emit();
+      });
     }
   }
-  closeTaskDialog():void{
-    this.currentEditingTask=null;
-    this.currentTaskListId=null;
-    this.showTaskDialog=false
+
+  closeTaskDialog(): void {
+    this.currentEditingTask = null;
+    this.currentTaskListId = null;
+    this.showTaskDialog = false;
   }
 
-  // === TaskList Modal Methods ===
-  openTaskListDialog4Edit(tasklist:TaskList):void{
-    this.currentEditingTaskList=tasklist;
-    this.showTaskListDialog=true
+  openTaskListDialog4Edit(tasklist: TaskList): void {
+    this.currentEditingTaskList = tasklist;
+    this.showTaskListDialog = true;
   }
-  openTaskListDialog4Add():void{
-    this.currentEditingTaskList=null;
-    this.showTaskListDialog=true
+
+  openTaskListDialog4Add(): void {
+    this.currentEditingTaskList = null;
+    this.showTaskListDialog = true;
   }
-  onTaskListDialogSave(taskList:TaskList):void{
-    if(this.currentEditingTaskList){
+
+  onTaskListDialogSave(taskList: TaskList): void {
+    if (this.currentEditingTaskList) {
       taskList.update_Date = new Date();
-      this.taskService.updateTaskList(taskList).subscribe(
-        ()=>{
-          this.loadTaskLists()
-          this.closeTaskListDialog()
-        }
-      )
-    }else{
+      this.taskService.updateTaskList(taskList).subscribe(() => {
+        this.loadTaskLists();
+        this.closeTaskListDialog();
+      });
+    } else {
       taskList.creation_Date = new Date();
       taskList.update_Date = new Date();
-      this.taskService.addTaskList(taskList).subscribe(
-        ()=>{
-          this.loadTaskLists()
-          this.closeTaskListDialog()
+      this.taskService.addTaskList(taskList).subscribe(() => {
+        this.loadTaskLists();
+        this.closeTaskListDialog();
+      });
+    }
+  }
+
+  closeTaskListDialog(): void {
+    this.currentEditingTaskList = null;
+    this.showTaskListDialog = false;
+  }
+
+  onTaskDeletion(list_Id: number, task_Id: number): void {
+    this.taskService.deleteTask(task_Id).subscribe(() => {
+      this.tasks[list_Id] = this.tasks[list_Id].filter(task => task.task_Id !== task_Id);
+      this.taskListGotUpdate.emit();
+    });
+  }
+
+  onTaskListDeletion(list_Id: number): void {
+    this.translate.get(['Confirm.DeleteTitle', 'Confirm.DeleteTaskList']).subscribe(translations => {
+      const dialogRef = this.dialog.open(ConfirmdeldialogComponent, {
+        data: {
+          title: translations['Confirm.DeleteTitle'],
+          message: translations['Confirm.DeleteTaskList']
         }
-      )
-    }
-  }
-  closeTaskListDialog():void{
-    this.currentEditingTaskList=null;
-    this.showTaskListDialog=false
-  }
+      });
 
-
-  onTaskDeletion(list_Id: number,task_Id: number):void {
-    this.taskService.deleteTask(task_Id).subscribe(
-      ()=>{this.tasks[list_Id]=this.tasks[list_Id].filter(
-        (task)=>task.task_Id!=task_Id
-      )
-      this.taskListGotUpdate.emit()
-    }
-    )
+      dialogRef.afterClosed().subscribe(confirmed => {
+        if (confirmed) {
+          this.taskService.deleteTaskList(list_Id).subscribe(() => {
+            this.loadTaskLists();
+          });
+        }
+      });
+    });
   }
-  onTaskListDeletion(list_Id: number):void{
-    const dialogRef = this.dialog.open(ConfirmdeldialogComponent,{
-      data: {
-        title: 'Delete Task List',
-        message: 'Are you sure you want to delete this task list?'
-      }
-    })
-    dialogRef.afterClosed().subscribe(confirmed =>{
-      if(confirmed){
-        this.taskService.deleteTaskList(list_Id).subscribe(()=>{
-          this.loadTaskLists()
-        })
-      }
-    })
-  }
-
-
 }

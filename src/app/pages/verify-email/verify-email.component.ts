@@ -16,7 +16,7 @@ import {TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class VerifyEmailComponent implements OnInit {
 
-  message = "Verifying your email..."
+  message = ""
   success = false
 
   constructor(
@@ -38,7 +38,7 @@ export class VerifyEmailComponent implements OnInit {
         }
       })
     }else{
-      this.message = "Email verification failed. Token not found."
+      this.translate.get('Texts.Pages.VerifyEmail.Failure_2').subscribe(msg => this.message = msg);
     }
   }
 

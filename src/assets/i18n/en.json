@@ -7,6 +7,7 @@
     "BackToHomepage": "Back to Homepage",
     "GoToOverseer": "Go to Overseer",
     "GoToHomepage": "Go to Homepage",
+    "GoToEntry": "Go to Entry",
     "MyProfile": "My Profile",
     "LoadRegularUsers": "Load Regular Users",
     "Save": "Save",
@@ -23,15 +24,18 @@
     "EditTask": "Edit Task",
     "AddTask": "Add Task",
     "DeleteTask": "Delete Task",
-    "ToggleCompletion": "Toggle Completion",
+    "ToggleCompletion": "Complete",
     "AddTaskList": "Add Task List",
+    "DeleteTitle": "Confirm Deletion",
     "DeleteTaskList": "Delete Task List",
-    "EditTaskList": "Edit Task List"
+    "EditTaskList": "Edit Task List",
+    "HideDates": "Hide Dates",
+    "ShowDates": "Show Dates"
   },
   "Texts": {
     "Pages": {
       "Entry": {
-        "Welcome": "Welcome to our Application!",
+        "Welcome": "Welcome to our website!",
         "Title": "To-Do, or not To-Do"
       },
       "LogIn": {
@@ -45,25 +49,28 @@
         "ConfirmPasswordLabel": "Confirm Password"
       },
       "Profile": {
-        "ProfileTitle": "Profile"
+        "ProfileTitle": "Profile",
+        "EmailLabel": "Email",
+        "PasswordLabel": "New Password",
+        "ConfirmPasswordLabel":"Confirm new Password"
       },
       "Overseer": {
         "Title": "Overseer Panel",
-        "UserManagement": "User Management",
         "AdminList": "Admin List",
         "UserList": "User List"
       },
       "VerifyEmail": {
         "Success": "Email verified successfully",
-        "Failure": "Token not found"
+        "Failure": "Token not found",
+        "Failure_2": "Email verification failed. Token not found."
       },
       "Homepage": {
         "YourTaskLists": "Your Task Lists",
         "Greeting": "Welcome, ",
         "TaskDueToday": "You have tasks due today.",
         "TaskExpired": "You have overdue tasks.",
-        "HideLists": "Hide Task Lists",
-        "ShowLists": "Show Task Lists"
+        "HideHomepageContent": "Hide Task Lists",
+        "ShowHomepageContent": "Show Task Lists"
       }
     },
     "Components": {
@@ -75,7 +82,7 @@
         "DueDate": "Due Date",
         "CreationDate": "Created",
         "UpdatedAt": "Updated",
-        "ToggleCompletion": "Toggle Completion",
+        "ToggleCompletion": "Complete",
         "Low": "Low",
         "Medium": "Medium",
         "High": "High",
@@ -88,7 +95,7 @@
         "DescriptionLabel": "Description"
       },
       "Userlist": {
-        "SearchUsers": "Search users",
+        "SearchUsers":"Search users by username or email",
         "Table": {
           "ID": "ID",
           "Username": "Username",
@@ -104,7 +111,8 @@
     "RegistrationSuccess": "Registration successful, please check your email :D",
     "LoginSuccess": "Login successful!",
     "LoginFailed": "Login failed. Check your credentials.",
-    "AccountDeleted": "Account deleted successfully"
+    "AccountDeleted": "Account deleted successfully",
+    "ProfileUpdated": "Profile updated successfully"
   },
   "Placeholders": {
     "EmailExample": "e.g.: user@example.com",
@@ -119,16 +127,31 @@
     "PasswordMismatch": "Passwords do not match.",
     "LoadUsers": "Could not load users.",
     "LoadAdmins": "Could not load admins.",
+    "RefreshUsers": "Could not refresh users.",
+    "DeleteUser": "Could not delete user.",
+    "ToggleAdmin": "Could not toggle admin state.",
     "EmailInUse": "The email is already in use. Please choose another one.",
     "UsernameInUse": "The username is already taken. Please choose another.",
     "InvalidPassword": "Password must be at least 8 characters with one uppercase letter and one number.",
     "Generic": "Registration failed.",
     "InvalidForm": "Please complete the form correctly.",
-    "LoginMissingFields": "Please fill in your email and password."
+    "LoginMissingFields": "Please fill in your email and password.",
+    "PasswordMustDiffer": "New password must be different from the current one.",
+    "CannotSelfToggleAdmin": "You cannot toggle your own admin status.",
+    "ProfileUpdateFail": "Failed to update profile.",
+    "NoChangesDetected": "No changes detected.",
+    "CannotSelfDeleteAdmin": "You cannot delete your account as an admin, please contact a root-admin first.",
+    "CannotDeleteRootAdmin": "You cannot delete the root admin user.",
+    "OnlyRootCanDelete": "Only the Root-Admin can delete users."
   },
   "Confirm": {
     "DeleteAccountStep1": "Are you sure you want to delete your account?",
-    "DeleteAccountStep2": "This action cannot be undone. Are you sure?"
+    "DeleteAccountStep2": "This action cannot be undone. Are you sure?",
+    "DeleteUser": "Are you sure you want to delete this user?",
+    "PromoteUser": "Are you sure you want to promote this user?",
+    "DemoteUser": "Are you sure you want to demote this user?",
+    "DeleteTitle": "Confirm Deletion",
+    "DeleteTaskList": "Are you sure you want to delete this task list?"
   },
   "Wallpapers": {
     "City": "City",

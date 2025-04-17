@@ -62,6 +62,10 @@
   background-color: #27ae60;
 }
 
+.registration-form small{
+  color: red;
+}
+
 .form-field {
   width: 100%;
   max-width: 100%;
