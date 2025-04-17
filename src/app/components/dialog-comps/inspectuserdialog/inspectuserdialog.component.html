@@ -1,16 +1,18 @@
-<div *ngFor="let list of taskLists" class="inspect-tasklist">
-  <h3>{{ list.list_Title }}</h3>
-  <p *ngIf="list.list_Description" class="list-desc">{{ list.list_Description }}</p>
+<div class="inspect-scroll-container">
+  <div *ngFor="let list of taskLists" class="inspect-tasklist">
+    <h3>{{ list.list_Title }}</h3>
+    <p *ngIf="list.list_Description" class="list-desc">{{ list.list_Description }}</p>
 
-  <div *ngFor="let task of list.tasks || []" class="inspect-task">
-    <p class="task-title">
-      {{ task.task_Status ? '[x]' : '[ ]' }} <strong>{{ task.task_Title }}</strong>
-      <span *ngIf="task.task_Priority">({{ task.task_Priority }})</span>
-    </p>
-    <p *ngIf="task.task_Description" class="task-desc"> {{ task.task_Description }}</p>
-    <p *ngIf="task.due_Date"> Due: {{ task.due_Date | date: 'mediumDate' }}</p>
-    <p class="task-meta">
-       Created: {{ task.creation_Date | date: 'short' }} | Updated: {{ task.update_Date | date: 'short' }}
-    </p>
+    <div *ngFor="let task of list.tasks || []" class="inspect-task">
+      <p class="task-title">
+        {{ task.task_Status ? '[x]' : '[ ]' }} <strong>{{ task.task_Title }}</strong>
+        <span *ngIf="task.task_Priority">({{ task.task_Priority }})</span>
+      </p>
+      <p *ngIf="task.task_Description" class="task-desc"> {{ task.task_Description }}</p>
+      <p *ngIf="task.due_Date"> Due: {{ task.due_Date | date: 'mediumDate' }}</p>
+      <p class="task-meta">
+        Created: {{ task.creation_Date | date: 'short' }} | Updated: {{ task.update_Date | date: 'short' }}
+      </p>
+    </div>
   </div>
 </div>

@@ -3,6 +3,13 @@
     padding: 1rem;
     font-family: Arial, sans-serif;
   }
+
+  .inspect-scroll-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  
   
   .inspect-tasklist {
     padding: 0.75rem;

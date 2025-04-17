@@ -22,9 +22,9 @@
   font-size: 1.05rem;
   margin: 0;
 
-  word-break: break-word;         /* ⬅️ core fix */
-  overflow-wrap: anywhere;        /* ⬅️ handle unbroken words */
-  white-space: normal;            /* ⬅️ allow wrapping */
+  word-break: break-word;         /*  core fix */
+  overflow-wrap: anywhere;        /*  handle unbroken words */
+  white-space: normal;            /*  allow wrapping */
 }
 
 .task-item p {
@@ -34,9 +34,9 @@
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 
-  word-break: break-word;         /* ⬅️ core fix */
-  overflow-wrap: anywhere;        /* ⬅️ handle unbroken words */
-  white-space: normal;            /* ⬅️ allow wrapping */
+  word-break: break-word;         /*  core fix */
+  overflow-wrap: anywhere;        /*  handle unbroken words */
+  white-space: normal;            /*  allow wrapping */
 }
 
 .task-item p:last-of-type {
@@ -105,6 +105,14 @@
 
 /* Responsive: Maintain mobile layout */
 @media (max-width: 600px) {
+  .task-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   .task-item .metadata-fields {
     max-width: 100%;
     width: 100%;
@@ -118,3 +126,4 @@
     padding: 4px;
   }
 }
+
